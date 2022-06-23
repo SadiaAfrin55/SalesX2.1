@@ -11,11 +11,11 @@ part 'SurveyPredictionDataResponse.g.dart';
 class SurveyPredictionDataResponse{
 
 
-  String? status;
+  String? message;
   List<SurveyPredictionData>? surveyData;
 
 
-  SurveyPredictionDataResponse(this.status, this.surveyData);
+  SurveyPredictionDataResponse(this.message, this.surveyData);
 
   factory SurveyPredictionDataResponse.fromJson(Map<String,dynamic>json)=>
       _$SurveyPredictionDataResponseFromJson(json);

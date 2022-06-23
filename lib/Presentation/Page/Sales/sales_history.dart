@@ -138,8 +138,8 @@ class _SalesHistoryState extends State<SalesHistory> with TickerProviderStateMix
               actions: [
                 InkWell(
                   onTap: (){
-                    //Navigator.pushNamed(context, SALES_CHART);
-                    Navigator.pushNamed(context, COMMINGSOON);
+                    Navigator.pushNamed(context, SALES_CHART);
+                    //Navigator.pushNamed(context, COMMINGSOON);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 15),

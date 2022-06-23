@@ -61,8 +61,8 @@ class SaleRepository {
     return  SaleResponse.fromJson(raw);
   }
 
-  Future<SurveyPredictionDataResponse> getUserSalesSurveyPrediction(String userId) async{
-    final rawx=await SaleNetwork().getUserSalesSurveyPrediction(userId);
+  Future<SurveyPredictionDataResponse> getUserSalesSurveyPrediction(String userId,String year) async{
+    final rawx=await SaleNetwork().getUserSalesSurveyPrediction(userId,year);
     // logger.d(rawx);
     return SurveyPredictionDataResponse.fromJson(rawx);
   }

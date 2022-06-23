@@ -66,14 +66,14 @@ class SalesCubit extends Cubit<SalesState> {
     });
   }
 
-  void getUserSalesSurveyPrediction(String userId) {
-    SaleRepository().getUserSalesSurveyPrediction(userId).then((response){
-      // logger.d(response);
-      if(response!=null){
-        emit(GetSalesSurveyPradiction(surveyPredictionDataResponse:response));
-      }
-    });
-  }
+  // void getUserSalesSurveyPrediction(String userId) {
+  //   SaleRepository().getUserSalesSurveyPrediction(userId).then((response){
+  //     // logger.d(response);
+  //     if(response!=null){
+  //       emit(GetSalesSurveyPradiction(surveyPredictionDataResponse:response));
+  //     }
+  //   });
+  // }
 
   void getFoeUserSalesSurveyPrediction(String userId) {
     SaleRepository().getFoeUserSalesSurveyPrediction(userId).then((response){

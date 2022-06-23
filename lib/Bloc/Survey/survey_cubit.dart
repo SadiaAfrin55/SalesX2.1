@@ -51,9 +51,10 @@ class SurveyCubit extends Cubit<SurveyState> {
     });
   }
 
-  void getUserSurveyPrediction(String userId) {
-    SurveyRepository().getUserSurveyPrediction(userId).then((response){
-      // logger.d(response);
+  void getUserSurveyPrediction(String userId,String year) {
+    print("chartt call");
+    SurveyRepository().getUserSurveyPrediction(userId,year).then((response){
+      logger.d(response);
       if(response!=null){
         emit(GetSurveyPradiction(surveyPredictionDataResponse:response));
       }

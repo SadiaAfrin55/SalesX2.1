@@ -9,7 +9,7 @@ part of 'SurveyPredictionDataResponse.dart';
 SurveyPredictionDataResponse _$SurveyPredictionDataResponseFromJson(
         Map<String, dynamic> json) =>
     SurveyPredictionDataResponse(
-      json['status'] as String?,
+      json['message'] as String?,
       (json['surveyData'] as List<dynamic>?)
           ?.map((e) => SurveyPredictionData.fromJson(e as Map<String, dynamic>))
           .toList(),
@@ -18,6 +18,6 @@ SurveyPredictionDataResponse _$SurveyPredictionDataResponseFromJson(
 Map<String, dynamic> _$SurveyPredictionDataResponseToJson(
         SurveyPredictionDataResponse instance) =>
     <String, dynamic>{
-      'status': instance.status,
+      'message': instance.message,
       'surveyData': instance.surveyData,
     };

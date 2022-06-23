@@ -137,8 +137,8 @@ class _SurveyHistoryState extends State<SurveyHistory> with TickerProviderStateM
               actions: [
                 InkWell(
                   onTap: (){
-                    //Navigator.pushNamed(context, SURVEY_CHART);
-                    Navigator.pushNamed(context, COMMINGSOON);
+                    Navigator.pushNamed(context, SURVEY_CHART);
+                    //Navigator.pushNamed(context, COMMINGSOON);
                   },
                   child: Padding(
                     padding: const EdgeInsets.symmetric(horizontal: 25.0,vertical: 15),

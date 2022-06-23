@@ -9,11 +9,11 @@ part 'SurveyPredictionData.g.dart';
 class SurveyPredictionData{
 
 
-  String? day;
-  int? value;
+  String? month;
+  int? totalsurvey;
 
 
-  SurveyPredictionData(this.day, this.value);
+  SurveyPredictionData(this.month, this.totalsurvey);
 
   factory SurveyPredictionData.fromJson(Map<String,dynamic>json)=>
       _$SurveyPredictionDataFromJson(json);

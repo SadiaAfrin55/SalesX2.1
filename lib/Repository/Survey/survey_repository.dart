@@ -49,9 +49,9 @@ class SurveyRepository {
     return  SurveyResponse.fromJson(surveyRaw);
   }
 
-  Future<SurveyPredictionDataResponse> getUserSurveyPrediction(String userId)async {
-    final rawx=await SurveyNetwork().getUserSurveyPrediction(userId);
-    // logger.d(rawx);
+  Future<SurveyPredictionDataResponse> getUserSurveyPrediction(String userId,String year)async {
+    final rawx=await SurveyNetwork().getUserSurveyPrediction(userId,year);
+    logger.d(rawx);
     return SurveyPredictionDataResponse.fromJson(rawx);
   }
 

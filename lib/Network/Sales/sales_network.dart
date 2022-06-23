@@ -66,7 +66,7 @@ class SaleNetwork {
     }
   }
 
-  Future getUserSalesSurveyPrediction(String userId) async{
+  Future getUserSalesSurveyPrediction(String userId,String year) async{
     try{
       final response=await get(Uri.parse(BASE_URL+'sales/userSalesPradiction/'+userId));
       // logger.d(response.body);

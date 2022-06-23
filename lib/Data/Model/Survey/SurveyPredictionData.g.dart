@@ -9,13 +9,13 @@ part of 'SurveyPredictionData.dart';
 SurveyPredictionData _$SurveyPredictionDataFromJson(
         Map<String, dynamic> json) =>
     SurveyPredictionData(
-      json['day'] as String?,
-      json['value'] as int?,
+      json['month'] as String?,
+      json['totalsurvey'] as int?,
     );
 
 Map<String, dynamic> _$SurveyPredictionDataToJson(
         SurveyPredictionData instance) =>
     <String, dynamic>{
-      'day': instance.day,
-      'value': instance.value,
+      'month': instance.month,
+      'totalsurvey': instance.totalsurvey,
     };

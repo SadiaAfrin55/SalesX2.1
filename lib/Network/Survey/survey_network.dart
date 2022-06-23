@@ -72,9 +72,10 @@ class SurveyNetwork {
     }
   }
 
-  Future getUserSurveyPrediction(String userId) async{
+  Future getUserSurveyPrediction(String userId,String year) async{
+    print("charttt");
     try{
-      final response=await http.get(Uri.parse(BASE_URL+'survey/userSurveyPradiction/'+userId));
+      final response=await http.get(Uri.parse(BASE_URL+'survey/get-yearly-survey?userid='+userId+"&year="+year));
       // logger.d(response.body);
       return json.decode(response.body);
     }catch(e){
