@@ -98,6 +98,7 @@ class AppRouter {
                 ),
               ],
               child: LoginPage(),
+
             ));
       case FORGET_PASSWORD_PAGE:
         return MaterialPageRoute(

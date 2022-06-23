@@ -61,171 +61,164 @@ class _InventoryPageState extends State<InventoryPage> {
           Navigator.pushReplacement(context, PageTransition(MainScreen()));
         }
       },
-      child: BlocListener<ProductCubit, ProductState>(
-        listener: (context, state) {
-          if((state is allProducts)){
-            final data=state.loadAllProducts;
-            data!.product!.forEach((pro) {
-              setState(() {
-                items.add(DropdownMenuItem(
-                  child: Row(
-                    children: [
-                      Container(
-                        //height: 40,
-                        child: Column(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: [
-                            Flexible(
-                              child:  Container(
-                                padding:  const EdgeInsets.only(right: 13.0),
-                                child: Text(
-                                  pro.productName!,
-                                  overflow: TextOverflow.ellipsis,
-                                  style:  const TextStyle(
-                                    fontSize: 13.0,
-                                    fontFamily: 'Roboto',
-                                    color:  Color(0xFF212121),
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ],
-                        ),
-                      )
-                    ],
-                  ),
-                  value: pro,
-                ));
-              });
-            });
-          }
-        },
-        child: Scaffold(
+      child: Scaffold(
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: const Text('Inventory',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-                color: Colors.black,
-              ),
-            ),
-            leading: Padding(
-              padding: const EdgeInsets.symmetric(horizontal: 10.0),
-              child: IconButton(
-                onPressed: (){
-                  Navigator.pop(context);
-                },
-                icon: const Icon(Icons.arrow_back,color: Colors.black,size: 27,),
-              ),
-            ),
-            elevation: 0.5,
+            leading: BackButton(color: Colors.black,),
+            title: Text("Inventory Form",style: TextStyle(color: Colors.black),),
+            elevation: 0,
           ),
-          body: SizedBox(
-            height: MediaQuery.of(context).size.height,
-            child: Form(
-              key: _globalkey,
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  items.isEmpty
-                      ? const Center(child: Text("No item found"),)
-                      :
-                  Expanded(
-                    flex:2,
-                    child: Container(
-                      width: MediaQuery.of(context).size.width,
+          body: BlocListener<ProductCubit, ProductState>(
+            listener: (context, state) {
+              if((state is allProducts)){
+                final data=(state as allProducts).loadAllProducts;
+                data!.product!.forEach((pro) {
+                  setState(() {
+                    items.add(DropdownMenuItem(
+                      child: Row(
+                        children: [
+                          Container(
+                            height: 60,
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Flexible(
+                                  child: Container(
+                                    padding:  EdgeInsets.only(right: 13.0),
+                                    child:  Text(
+                                      pro.productName!,
+                                      overflow: TextOverflow.ellipsis,
+                                      style:  const TextStyle(
+                                        fontSize: 13.0,
+                                        fontFamily: 'Roboto',
+                                        color:  Color(0xFF212121),
+                                        fontWeight: FontWeight.bold,
+                                      ),
+                                    ),
+                                  ),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                      value: pro,
+                    ));
+                  });
+                });
 
-                      color:Colors.redAccent ,
-                      child: SearchChoices.single(
-                        displayClearIcon: false,
-                        menuBackgroundColor: Color(0xFFF5F7F8),
-                        searchInputDecoration: const InputDecoration(
-                          fillColor: Color(0xFFF5F7F8),
-                          contentPadding: EdgeInsets.symmetric(
-                              vertical: 20.0, horizontal: 12.0),
-                          border: OutlineInputBorder(
-                            borderRadius:
-                            BorderRadius.all(Radius.circular(10.0)),
-                          ),
+              }
+            },
+            child: BlocBuilder<ProductCubit, ProductState>(
+              builder: (context, state) {
+                if(!(state is allProducts)){
+                  return Center(child: CircularProgressIndicator(),);
+                }
+                return SingleChildScrollView(
+                  child: Container(
+                    height: MediaQuery.of(context).size.height*0.8,
+                    child: Padding(
+                      padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                      child: Form(
+                        key: _globalkey,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          children: [
+                            Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                items.isEmpty
+                                    ? const Center(child: Text("No item found"),)
+                                    : Container(
+                                  width: MediaQuery.of(context).size.width,
 
+                                  color:Color(0xFFF5F7F8) ,
+                                  child: SearchChoices.single(
+                                    displayClearIcon: false,
+                                    menuBackgroundColor: Color(0xFFF5F7F8),
+                                    searchInputDecoration:  const InputDecoration(
+                                      fillColor: Color(0xFFF5F7F8),
+                                      contentPadding: EdgeInsets.symmetric(
+                                          vertical: 20.0, horizontal: 12.0),
+                                      border: OutlineInputBorder(
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                      ),
+                                      enabledBorder: OutlineInputBorder(
+                                        borderSide: BorderSide(
+                                            color: Colors.black, width: 1.0),
+                                        borderRadius:
+                                        BorderRadius.all(Radius.circular(10.0)),
+                                      ),
+                                    ),
+                                    items: items,
+                                    value: selectedValueSingleMenu,
+                                    hint:'Select Product',
+                                    searchHint:'Enter Product Name',
+                                    onChanged: (value) {
+                                      print("object");
+                                      selectedValueSingleMenu = value;
+                                      print(value.toString());
+                                      setState(() {
+                                        selectedValueSingleMenu = value;
+                                        productId=selectedValueSingleMenu!.id!.toString();
+                                        print(productId);
+                                        print(value);
+                                      });
+                                    },
+                                    dialogBox: false,
+                                    isExpanded: true,
+                                    menuConstraints:
+                                    BoxConstraints.tight(Size.fromHeight(350)),
+                                  ),
+                                ),
+                                SizedBox(height: 14,),
+                                const Text('Quantity',style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color:Color(0xFF232C2E)
+                                ),),
+                                const SizedBox(height: 8,),
+                                InventoryTextfield(readOnly: false,controller: quantity,hintText: "Enter Quantity",),
+                              ],
+                            ),
+
+
+                            circular? const Center(child: CircularProgressIndicator()) :
+                            Container(
+                              margin: const EdgeInsets.symmetric(horizontal: 20),
+                              child: CustomButton(
+                                title: 'Add',
+                                onTap: (){
+                                  if (_globalkey.currentState!.validate()) {
+                                    setState(() {
+                                      validate = true;
+                                      circular = true;
+                                    });
+
+                                    print("product id: "+productId!);
+                                    print("quantity text: "+quantity.text);
+                                    print("storeid id: "+storeId!);
+                                    BlocProvider.of<InventoryCubit>(context).createInventory(
+                                        productId!,
+                                        quantity.text,
+                                        storeId!,
+                                        "token");
+                                  }},
+                              ),
+                            ),
+
+                          ],
                         ),
-                        items: items,
-                        value: selectedValueSingleMenu,
-                        hint:'Select Product',
-                        searchHint:'Enter Product Name',
-                        onChanged: (value) {
-                          print("object");
-                          selectedValueSingleMenu = value;
-                          print(value.toString());
-                          setState(() {
-                            selectedValueSingleMenu = value;
-                            productId=selectedValueSingleMenu!.id!.toString();
-                            print(productId);
-                            print(value);
-                          });
-                        },
-                        dialogBox: false,
-                        isExpanded: true,
-                        menuConstraints:
-                        BoxConstraints.tight(Size.fromHeight(350)),
                       ),
                     ),
                   ),
-
-
-                Expanded(
-                  flex: 2,
-                    child: Column(
-                      children: [
-                        const Text('Quantity',style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                            color:Color(0xFF232C2E)
-                        ),),
-                        const SizedBox(height: 8,),
-                        InventoryTextfield(readOnly: false,controller: quantity,hintText: "Enter Quantity",),
-                      ],
-                    )
-
-                ),
-
-
-                  circular? const Center(child: CircularProgressIndicator()) :
-                  Expanded(
-                    flex: 1,
-                    child: Container(
-                      margin: const EdgeInsets.symmetric(horizontal: 20),
-                      child: CustomButton(
-                        title: 'Add',
-                        onTap: (){
-                          if (_globalkey.currentState!.validate()) {
-                            setState(() {
-                              validate = true;
-                              circular = true;
-                            });
-
-                            print("product id: "+productId!);
-                            print("quantity text: "+quantity.text);
-                            print("storeid id: "+storeId!);
-                            BlocProvider.of<InventoryCubit>(context).createInventory(
-                                productId!,
-                                quantity.text,
-                                storeId!,
-                                "token");
-                          }},
-                      ),
-                    ),
-                  ),
-
-                ],
-              ),
+                );
+              },
             ),
-          ),
-        ),
+          )
       ),
     );
   }
