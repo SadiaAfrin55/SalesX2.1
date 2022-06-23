@@ -12,10 +12,10 @@ class SurveyPredictionDataResponse{
 
 
   String? message;
-  List<SurveyPredictionData>? surveyData;
+  List<SurveyPredictionData>? object;
 
 
-  SurveyPredictionDataResponse(this.message, this.surveyData);
+  SurveyPredictionDataResponse(this.message, this.object);
 
   factory SurveyPredictionDataResponse.fromJson(Map<String,dynamic>json)=>
       _$SurveyPredictionDataResponseFromJson(json);

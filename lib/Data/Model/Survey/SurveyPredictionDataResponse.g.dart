@@ -10,7 +10,7 @@ SurveyPredictionDataResponse _$SurveyPredictionDataResponseFromJson(
         Map<String, dynamic> json) =>
     SurveyPredictionDataResponse(
       json['message'] as String?,
-      (json['surveyData'] as List<dynamic>?)
+      (json['object'] as List<dynamic>?)
           ?.map((e) => SurveyPredictionData.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
@@ -19,5 +19,5 @@ Map<String, dynamic> _$SurveyPredictionDataResponseToJson(
         SurveyPredictionDataResponse instance) =>
     <String, dynamic>{
       'message': instance.message,
-      'surveyData': instance.surveyData,
+      'object': instance.object,
     };

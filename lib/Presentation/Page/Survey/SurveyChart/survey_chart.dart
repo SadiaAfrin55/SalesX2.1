@@ -27,7 +27,7 @@ class _SurveyChartState extends State<SurveyChart>{
   String? userId;
   String? year;
   var dateParse;
-  List<ChartData>? chartData ;
+  List<ChartData>? chartData=[];
 
   LocalDataGet _localDataGet = LocalDataGet();
 
@@ -50,7 +50,12 @@ class _SurveyChartState extends State<SurveyChart>{
     dateParse = DateTime.parse(date);
     year = dateParse.year.toString();
     getToken();
+
+
+
     super.initState();
+
+    // chartData!.add(ChartData("feb",93.0,Colors.red));
   }
 
   @override
@@ -61,11 +66,9 @@ class _SurveyChartState extends State<SurveyChart>{
         if(state is GetSurveyPradiction){
           final data=(state as GetSurveyPradiction).surveyPredictionDataResponse;
           setState(() {
-            chartData = [
-              ChartData(data!.surveyData![0].month.toString(), data.surveyData![0].totalsurvey!.toDouble(), Colors.primaries[Random().nextInt(Colors.primaries.length)]),
-              ChartData(data.surveyData![1].month.toString(), data.surveyData![1].totalsurvey!.toDouble(), Colors.primaries[Random().nextInt(Colors.primaries.length)]),
-            ];
-
+            data!.object!.forEach((element) {
+              chartData!.add(ChartData(element.month.toString(),element.totalsurvey!.toDouble(),Colors.blueAccent));
+            });
           });
         }
       },
