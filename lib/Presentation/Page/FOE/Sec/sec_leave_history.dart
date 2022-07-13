@@ -43,10 +43,10 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
       token = tokenx.get('token');
       print("leeeeelimmmmmm: " + linemanageId!);
       //BlocProvider.of<ListCubit>(context).loadSec(linemanagerid!);
-      BlocProvider.of<ListCubit>(context).loadSecdata(linemanageId!);
-      BlocProvider.of<LeaveCubit>(context).loadedApprovedLeave(linemanageId!,"accept",token!);
+      // BlocProvider.of<ListCubit>(context).loadSecdata(linemanageId!);
+      // BlocProvider.of<LeaveCubit>(context).loadedApprovedLeave(linemanageId!,"accept",token!);
       BlocProvider.of<LeaveCubit>(context).loadedPendingLeave(linemanageId!,"pending",token!);
-      BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanageId!,"reject",token!);
+      // BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanageId!,"reject",token!);
     });
   }
 

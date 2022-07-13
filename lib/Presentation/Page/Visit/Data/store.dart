@@ -16,6 +16,12 @@ class store{
 
   store(this.id, this.storename, this.storedmscode, this.createdAt);
 
+
+  @override
+  String toString() {
+    return 'store{id: $id, storename: $storename, storedmscode: $storedmscode, createdAt: $createdAt}';
+  }
+
   factory store.fromJson(Map<String,dynamic>json)=>
       _$storeFromJson(json);
   Map<String,dynamic>toJson()=>_$storeToJson(this);

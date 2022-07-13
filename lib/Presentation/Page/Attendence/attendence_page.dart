@@ -333,61 +333,45 @@ class _AttendencePageState extends State<AttendencePage> {
                                                   const SizedBox(
                                                     height: 16,
                                                   ),
-                                                  Container(
-                                                    width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                    child: _image == null
-                                                        ? circle
-                                                            ? Container()
-                                                            : InkWell(
-                                                                onTap: () {
-                                                                  setState(() {
-                                                                    //circle=true;
-                                                                    imageprocess =
-                                                                        true;
-                                                                    getImage();
-                                                                  });
-                                                                  //getImage();
-                                                                },
-                                                                child:
-                                                                    Container(
-                                                                  height: 54,
-                                                                  width: MediaQuery.of(
-                                                                          context)
-                                                                      .size
-                                                                      .width,
-                                                                  decoration:
-                                                                      BoxDecoration(
-                                                                    color: _image !=
-                                                                            null
-                                                                        ? Color(
-                                                                            0x88BFDCFC)
-                                                                        : Color(
-                                                                            0xFF0180F5),
-                                                                    borderRadius:
-                                                                        BorderRadius
-                                                                            .circular(6),
-                                                                  ),
-                                                                  child: Center(
-                                                                    child:
-                                                                        RichText(
-                                                                      text: TextSpan(
-                                                                          children: [
-                                                                            WidgetSpan(
-                                                                              child: Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.camera_enhance_sharp, size: 20, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
-                                                                            ),
-                                                                            TextSpan(
-                                                                                text: _image != null ? tr('Retake Photo') : tr("Take a photo"),
-                                                                                //text: tr("Take a photo"),
-                                                                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
-                                                                          ]),
-                                                                    ),
-                                                                  ),
-                                                                ))
-                                                        : Container(),
+                                                  InkWell(
+                                                    onTap: (){
+                                                      setState(() {
+                                                        //circle=true;
+                                                        imageprocess =
+                                                        true;
+                                                        getImage();
+                                                      });
+                                                    },
+                                                    child: Container(
+                                                      height: 54,
+                                                      width: MediaQuery.of(context).size.width,
+                                                      decoration: BoxDecoration(
+                                                        color: _image != null ? Color(0x88BFDCFC) : Color(0xFF0180F5),
+                                                        borderRadius: BorderRadius.circular(6),
+                                                      ),
+                                                      child: Center(
+                                                        child:
+                                                        RichText(
+                                                          text: TextSpan(
+                                                              children: [
+                                                                WidgetSpan(
+                                                                  child: Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.camera_enhance_sharp, size: 20, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
+                                                                ),
+                                                                TextSpan(
+                                                                    text: _image != null ? tr('Retake Photo') : tr("Take a photo"),
+                                                                    //text: tr("Take a photo"),
+                                                                    style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
+                                                              ]),
+                                                        ),
+                                                      ),
+                                                    ),
                                                   ),
+
+
+
+
+
+
                                                   const SizedBox(
                                                     height: 8,
                                                   ),

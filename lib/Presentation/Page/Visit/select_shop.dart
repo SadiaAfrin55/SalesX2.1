@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:logger/logger.dart';
 import 'package:salesx_new_project/Presentation/Page/Visit/Bloc/visit_cubit.dart';
 import 'package:salesx_new_project/Presentation/Page/Visit/Data/store.dart';
 import 'package:salesx_new_project/Presentation/Page/Visit/Search/search_dart.dart';
@@ -13,6 +14,7 @@ import 'package:salesx_new_project/Presentation/Widgets/TextFields/normalTextFie
 import '../../../Constants/Strings/app_strings.dart';
 import '../../../Data/Model/Store/Store.dart';
 import '../../Widgets/TextFields/materialSearchField.dart';
+import '../../Widgets/TextFields/on_chnage_text_textdield.dart';
 import 'Components/shop_card.dart';
 import 'ShopSearch/Bloc/search_bloc.dart';
 
@@ -30,7 +32,8 @@ class _SelectShopState extends State<SelectShop> {
   /// Controller
   final TextEditingController searchController = TextEditingController();
 
-  late List<store> books;
+  late List<store>? searchResult=[];
+  List<store>? storeslocal=[];
   FetchUserList _userList = FetchUserList();
 
   @override
@@ -88,99 +91,115 @@ class _SelectShopState extends State<SelectShop> {
                           fontWeight: FontWeight.w600,
                           color: Colors.black.withOpacity(0.5)),
                     ),
-                    IconButton(
-                      onPressed: () {
 
-                      },
-                      icon: Icon(
-                        Icons.search,
-                        color: Colors.black.withOpacity(0.5),
-                        size: 30,
-                      ),
-                    ),
                   ],
                 ),
                 const SizedBox(
                   height: 18,
                 ),
+                OnChangeTextField(
+                  hintText: 'Quantity',
+                  lable: 'Quantity',
+                  controller: searchController,
+                  readOnly: false,
+                  tap: (String name) {
+                    setState(() {
 
-                BlocBuilder<VisitCubit, VisitState>(
-                  builder: (context, state) {
-                    if (state is! GetShopdata) {
-                      return Center(
-                        child: CircularProgressIndicator(),
-                      );
-                    }
+                       searchResult =  storeslocal!.where((element){
+                        return element.storename!.toLowerCase().contains(name);
+                      }).toList();
+                    });
+                  },
+                ),
+                BlocListener<VisitCubit, VisitState>(
+                  listener: (context, state) {
                     var data = (state as GetShopdata).stores;
+                    if(state is GetShopdata){
+                      setState(() {
+                        storeslocal=data!.stores;
+                        searchResult=data.stores;
+                      });
+                    }
+                  },
+                  child: BlocBuilder<VisitCubit, VisitState>(
+                    builder: (context, state) {
+                      if (state is! GetShopdata) {
+                        return Center(
+                          child: CircularProgressIndicator(),
+                        );
+                      }
 
-                    return GridView.builder(
-                      physics: const NeverScrollableScrollPhysics(),
-                      shrinkWrap: true,
-                      gridDelegate:
-                          const SliverGridDelegateWithFixedCrossAxisCount(
-                              crossAxisCount: 2,
-                              crossAxisSpacing: 19.0,
-                              mainAxisSpacing: 17.0,
-                              childAspectRatio: 4 / 3),
-                      itemCount: data!.stores!.length,
-                      itemBuilder: (context, index) {
-                        return InkWell(
-                            onTap: () {
-                              Navigator.pushNamed(context, VISIT_CREATE_PAGE,
-                                  arguments: {
-                                    'shopId': data.stores![index].id,
-                                  });
-                            },
-                            child: Container(
-                              height: 75,
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  border: Border.all(
-                                      color: const Color(0xFFEEEFEF))),
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  Padding(
-                                    padding: const EdgeInsets.all(8.0),
-                                    child: Center(
-                                      child: Text(
-                                        data.stores![index].storename!,
-                                        textAlign: TextAlign.center,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                            color:
-                                                Colors.black.withOpacity(0.6)),
+
+                      return GridView.builder(
+                        physics: const NeverScrollableScrollPhysics(),
+                        shrinkWrap: true,
+                        gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisCount: 2,
+                            crossAxisSpacing: 19.0,
+                            mainAxisSpacing: 17.0,
+                            childAspectRatio: 4 / 3),
+                        itemCount: searchResult!.length,
+                        itemBuilder: (context, index) {
+                          return InkWell(
+                              onTap: () {
+                                Navigator.pushNamed(context, VISIT_CREATE_PAGE,
+                                    arguments: {
+                                      'shopId': searchResult![index].id,
+                                    });
+                              },
+                              child: Container(
+                                height: 75,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    border: Border.all(
+                                        color: const Color(0xFFEEEFEF))),
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    Padding(
+                                      padding: const EdgeInsets.all(8.0),
+                                      child: Center(
+                                        child: Text(
+                                          searchResult![index].storename!,
+                                          textAlign: TextAlign.center,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                              color:
+                                              Colors.black.withOpacity(0.6)),
+                                        ),
                                       ),
                                     ),
-                                  ),
-                                  const SizedBox(
-                                    height: 5,
-                                  ),
-                                  Row(
-                                    mainAxisAlignment: MainAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          'assets/icons/path-square.svg'),
-                                      const SizedBox(
-                                        width: 4,
-                                      ),
-                                      Text(
-                                        data.stores![index].storedmscode!,
-                                        style: TextStyle(
-                                            fontSize: 14,
-                                            fontWeight: FontWeight.w600,
-                                            color:
-                                                Colors.black.withOpacity(0.4)),
-                                      ),
-                                    ],
-                                  )
-                                ],
-                              ),
-                            ));
-                      },
-                    );
-                  },
+                                    const SizedBox(
+                                      height: 5,
+                                    ),
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment
+                                          .center,
+                                      children: [
+                                        SvgPicture.asset(
+                                            'assets/icons/path-square.svg'),
+                                        const SizedBox(
+                                          width: 4,
+                                        ),
+                                        Text(
+                                          searchResult![index].storedmscode!,
+                                          style: TextStyle(
+                                              fontSize: 14,
+                                              fontWeight: FontWeight.w600,
+                                              color:
+                                              Colors.black.withOpacity(0.4)),
+                                        ),
+                                      ],
+                                    )
+                                  ],
+                                ),
+                              ));
+                        },
+                      );
+                    },
+                  ),
                 )
               ],
             ),
