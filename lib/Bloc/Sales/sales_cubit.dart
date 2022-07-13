@@ -1,6 +1,7 @@
 import 'package:bloc/bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
+import '../../Data/Model/Sale/SaleChartResponse.dart';
 import '../../Data/Model/Sale/SaleResponse.dart';
 import '../../Data/Model/Survey/SurveyPredictionDataResponse.dart';
 import '../../Repository/Sales/sales_repository.dart';
@@ -66,14 +67,14 @@ class SalesCubit extends Cubit<SalesState> {
     });
   }
 
-  // void getUserSalesSurveyPrediction(String userId) {
-  //   SaleRepository().getUserSalesSurveyPrediction(userId).then((response){
-  //     // logger.d(response);
-  //     if(response!=null){
-  //       emit(GetSalesSurveyPradiction(surveyPredictionDataResponse:response));
-  //     }
-  //   });
-  // }
+  void getUserSalesSurveyPrediction(String userId,String year) {
+    SaleRepository().getUserSalesSurveyPrediction(userId,year).then((response){
+      logger.d(response);
+      if(response!=null){
+        emit(GetSalesSurveyPradiction(saleChartResponse:response));
+      }
+    });
+  }
 
   void getFoeUserSalesSurveyPrediction(String userId) {
     SaleRepository().getFoeUserSalesSurveyPrediction(userId).then((response){

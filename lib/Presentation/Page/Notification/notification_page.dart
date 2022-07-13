@@ -18,12 +18,14 @@ class NotificationPage extends StatefulWidget {
 
 class _NotificationPageState extends State<NotificationPage> {
 
+  String? userId;
   LocalDataGet _localDataGet = LocalDataGet();
 
   getToken() async {
     var tokenx = await _localDataGet.getData();
     setState(() {
-      BlocProvider.of<NotificationCubit>(context).loadedAllNotification();
+      userId = tokenx.get('userId');
+      BlocProvider.of<NotificationCubit>(context).loadedYourNotification(userId!);
     });
   }
 
@@ -42,7 +44,7 @@ class _NotificationPageState extends State<NotificationPage> {
             backgroundColor: Colors.white,
             appBar: AppBar(
               backgroundColor: Colors.white,
-              title: const Text('NotificationPage',
+              title: const Text('Notification',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
@@ -75,16 +77,18 @@ class _NotificationPageState extends State<NotificationPage> {
                         data.noticeBoardForm.isEmpty?
                         Container(
                           height: MediaQuery.of(context).size.height*0.5,
-                          child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset('assets/images/nodata.png'),
-                              Text('No data available',style: TextStyle(
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.w500,
-                                  color: Colors.black.withOpacity(0.8)
-                              ),),
-                            ],
+                          child: Center(
+                            child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset('assets/images/nodata.png'),
+                                Text('No data available',style: TextStyle(
+                                    fontSize: 16,
+                                    fontWeight: FontWeight.w500,
+                                    color: Colors.black.withOpacity(0.8)
+                                ),),
+                              ],
+                            ),
                           ),
                         ) :
                         Container(

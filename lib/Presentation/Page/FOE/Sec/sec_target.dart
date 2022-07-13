@@ -1,7 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:salesx_new_project/Service/LocalDataBase/localdata.dart';
 
+import '../../../../Bloc/List/list_cubit.dart';
 import '../../../../Constants/Strings/app_strings.dart';
 import '../../../Widgets/Card/Attendence/attendencelist_card.dart';
 import '../../../Widgets/Card/ProfileCard/profile_Card.dart';
@@ -9,6 +11,7 @@ import '../../../Widgets/Card/Sales/mysale_card.dart';
 import '../../../Widgets/Card/Sec/survey_card.dart';
 import '../../../Widgets/Card/Sec/target_card.dart';
 import '../../Attendence/Component/attendance_list-component.dart';
+
 class SecTarget extends StatefulWidget {
   const SecTarget({Key? key}) : super(key: key);
 
@@ -17,6 +20,31 @@ class SecTarget extends StatefulWidget {
 }
 
 class _SecTargetState extends State<SecTarget> {
+
+  String? linemanagerid;
+  String? role;
+
+  LocalDataGet _localDataGet = LocalDataGet();
+
+  getToken() async {
+    var tokenx = await _localDataGet.getData();
+    setState(() {
+      //linemanagerid = tokenx.get('linmanagerid');
+      role = tokenx.get('role');
+      //print("limmmmmm: " + linemanagerid!);
+      //BlocProvider.of<ListCubit>(context).loadSec(linemanagerid!);
+
+      BlocProvider.of<ListCubit>(context).loadSec();
+    });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    getToken();
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Container(
@@ -46,39 +74,61 @@ class _SecTargetState extends State<SecTarget> {
             toolbarHeight: 60,
             elevation: 0.5,
           ),
-          body: Container(
-            margin: const EdgeInsets.only(top: 20),
-            child: Column(
-              children: [
-                Container(
-                  color: Colors.white,
-                  child: Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20.0),
-                    child: GridView.builder(
-                      //physics: NeverScrollableScrollPhysics(),
-                        scrollDirection: Axis.vertical,
-                        shrinkWrap: true,
-                        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                            crossAxisCount: 2,
-                            childAspectRatio: 20 / 19,
-                            crossAxisSpacing: 13,
-                            mainAxisSpacing: 13),
-                        itemCount: 3,
-                        itemBuilder: (BuildContext ctx, index) {
-                          return InkWell(
-                            onTap: (){
-                              Navigator.pushNamed(context, SEC_TARGET_HISTORY_PAGE);
-                            },
-                            child: TargetCard(
-                              cardImage: Image.asset('assets/images/secimg.png',fit: BoxFit.cover,),
-                              title: 'Sadia',
-                              subtitle: 'Target Details' ,
-                            ),
-                          );
-                        }),
+          body: SingleChildScrollView(
+            child: Container(
+              margin: const EdgeInsets.only(top: 20),
+              child: Column(
+                children: [
+                  BlocBuilder<ListCubit, ListState>(
+                    builder: (context, state) {
+                      if(state is !SecGet){
+                        return CircularProgressIndicator();
+                      }
+
+                      var data = (state as SecGet).secResponse;
+
+                      return Container(
+                        color: Colors.white,
+                        child: Padding(
+                          padding: const EdgeInsets.symmetric(horizontal: 20.0),
+                          child: GridView.builder(
+                            physics: NeverScrollableScrollPhysics(),
+                              scrollDirection: Axis.vertical,
+                              shrinkWrap: true,
+                              gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                                  crossAxisCount: 2,
+                                  childAspectRatio: 20 / 19,
+                                  crossAxisSpacing: 13,
+                                  mainAxisSpacing: 13),
+                              itemCount: data!.linemanager!.length,
+                              itemBuilder: (BuildContext ctx, index) {
+                                return InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(context, SEC_TARGET_HISTORY_PAGE,
+                                        arguments: {
+                                          'cusname': data.linemanager![index].name,
+                                          'sale': data.linemanager![index].sales.toString(),
+                                          'target': data.linemanager![index].target.toString(),
+                                          'targetAchive': data.linemanager![index].targetAchive.toString(),
+                                        }
+                                    );
+                                  },
+                                  child: TargetCard(
+                                    cardImage: Image.asset(
+                                      'assets/icons/profile_user.png',
+                                      fit: BoxFit.cover,),
+                                    title: data.linemanager![index].name,
+                                  ),
+                                );
+                              }),
+                        ),
+                      );
+                    },
                   ),
-                )
-              ],
+                  const SizedBox(height: 40),
+
+                ],
+              ),
             ),
           ),
         ),

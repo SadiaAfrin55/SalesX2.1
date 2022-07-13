@@ -11,6 +11,7 @@ import 'package:hive/hive.dart';
 
 import '../../../../../../Constants/Strings/app_strings.dart';
 import '../../Profile/ProfileComponents/moreOption_components.dart';
+import '../OM/om_training.dart';
 
 class smActivityComponents extends StatefulWidget {
   const   smActivityComponents({Key? key}) : super(key: key);
@@ -25,6 +26,7 @@ class _smActivityComponentsState extends State<smActivityComponents> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,7 +35,7 @@ class _smActivityComponentsState extends State<smActivityComponents> {
               Navigator.pushNamed(context, SM_FOM_ATTENDANCE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/attendene.svg'),
+              image: SvgPicture.asset('assets/icons/cardIcon/Attendance.svg',height: 16,),
               title: 'Attendance',
               color: const Color(0xFFFFE5E0),
             ),
@@ -44,7 +46,7 @@ class _smActivityComponentsState extends State<smActivityComponents> {
               Navigator.pushNamed(context, SM_FOM_TARGET);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/target.svg'),
+              image: SvgPicture.asset('assets/icons/profileIcon/Target.svg'),
               title: 'Target',
               color: const Color(0xFFE1F3FF),
             ),
@@ -55,17 +57,20 @@ class _smActivityComponentsState extends State<smActivityComponents> {
               Navigator.pushNamed(context, SM_FOM_LEAVE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/leave.svg'),
+              image: SvgPicture.asset('assets/icons/cardIcon/Leave.svg',height: 16,),
               title: 'Leave',
               color: const Color(0xFFF1E1FF),
             ),
           ),
           GestureDetector(
             onTap: (){
-              //Navigator.pushNamed(context, LEAVE_HISTORY);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OmTrainingActivity()),
+              );
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/training.svg'),
+              image: SvgPicture.asset('assets/icons/profileIcon/Tr Attendance.svg'),
               title: 'Training',
               color: const Color(0xFFFFEFE0),
             ),

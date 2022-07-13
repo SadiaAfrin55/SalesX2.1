@@ -18,6 +18,7 @@ import '../../Widgets/TextFields/materialTextFieldTwo.dart';
 import '../../Widgets/TextFields/normal_background_textdield.dart';
 import '../../Widgets/TextFields/normal_textdield.dart';
 import '../../Widgets/TextFields/salescreate/sales_create_number.dart';
+import '../../Widgets/TextFields/salescreate/sales_create_remarks.dart';
 
 class SalesCreate extends StatefulWidget {
   const SalesCreate({Key? key}) : super(key: key);
@@ -75,7 +76,7 @@ class _SalesCreateState extends State<SalesCreate> {
           backgroundColor: Colors.white,
           leading: BackButton(color: Colors.black,),
           title: Text("Sales Form",style: TextStyle(color: Colors.black),),
-          elevation: 0,
+          elevation: 0.5,
           toolbarHeight: 60,
         ),
         body: BlocListener<ProductCubit, ProductState>(
@@ -122,7 +123,8 @@ class _SalesCreateState extends State<SalesCreate> {
           },
           child: Material(
             child: Container(
-              padding: EdgeInsets.only(left: 0,right:0,top: 0),
+              color: Colors.white,
+              padding: EdgeInsets.only(left: 15,right:15,top: 0),
               child: Column(
                 children: [
                   //AppBar//App bar
@@ -300,7 +302,7 @@ class _SalesCreateState extends State<SalesCreate> {
                                           }
                                       ):Container(),
                                       SizedBox(height: 14,),
-                                      SalesCreateTextfield(lable: "Remark(S)",controller: remarks,hintText: "Enter Remarks(optional)", readOnly: false, isNumber: false,),
+                                      SalesCreateRemarkTextfield(lable: "Remark(S)",controller: remarks,hintText: "Enter Remarks(optional)", readOnly: false, isNumber: false,),
                                       SizedBox(height: 34,),
                                       productId==""?Container(): FutureBuilder(
                                           future: lastcall(storeId,productId),
@@ -391,4 +393,6 @@ class _SalesCreateState extends State<SalesCreate> {
     Logger().d(json.decode(response.body));
     return json.decode(response.body);
   }
+
+
 }

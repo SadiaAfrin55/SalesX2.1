@@ -18,6 +18,7 @@ class ApplyLeave extends StatefulWidget {
 }
 
 class _ApplyLeaveState extends State<ApplyLeave> {
+  DateRangePickerController _dateRangePickerController = DateRangePickerController();
   var refreshKey = GlobalKey<RefreshIndicatorState>();
   String? leaveDate;
   List<String> _reason = ['sick','casual','half day']; // Option 2
@@ -456,6 +457,17 @@ class _ApplyLeaveState extends State<ApplyLeave> {
                 // selectionMode: DateRangePickerSelectionMode.range,
                 selectionMode: DateRangePickerSelectionMode.range,
                 onSelectionChanged: _onSelectionChanged,
+                showActionButtons: true,
+                cancelText: 'CANCEL',
+                confirmText: 'OK',
+               onSubmit: (Object? val){
+                  Navigator.pop(context);
+               },
+               onCancel: (){
+                  _dateRangePickerController.selectedRanges = null;
+               },
+
+
 
               ),
             )

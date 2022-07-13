@@ -36,7 +36,7 @@ class MaterialTextField extends StatelessWidget {
           ),
           enabledBorder: OutlineInputBorder(
             borderSide:
-            BorderSide(color:textFieldBorder, width: 1.0),
+            BorderSide(color:Colors.black12, width: 1.0),
             borderRadius: BorderRadius.all(Radius.circular(10.0)),
           ),
           focusedBorder: OutlineInputBorder(

@@ -11,11 +11,11 @@ part 'SaleResponse.g.dart';
 class SaleResponse{
 
   String? status;
-  int? lenght;
+  int? length;
   List<Sale>? sales;
 
 
-  SaleResponse(this.status, this.lenght, this.sales);
+  SaleResponse(this.status, this.length, this.sales);
 
   factory SaleResponse.fromJson(Map<String,dynamic>json)=>
       _$SaleResponseFromJson(json);

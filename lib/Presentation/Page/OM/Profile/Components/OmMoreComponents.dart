@@ -8,11 +8,17 @@ import 'package:flutter_svg/svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:hive/hive.dart';
+import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cubit.dart';
 
 import '../../../../../Constants/Colors/app_colors.dart';
 import '../../../../../Constants/Strings/app_strings.dart';
 import '../../../../../Service/LocalDataBase/localdata.dart';
+import '../../../../Screens/SplashScreen/splash_screen.dart';
+import '../../../../Widgets/AleartDialog/alert_dialog.dart';
+import '../../../../Widgets/Button/HomePage/big_button_icon.dart';
+import '../../../Leave/leave_history.dart';
 import '../../../Profile/ProfileComponents/moreOption_components.dart';
+import '../../om_list.dart';
 
 class OmMoreComponents extends StatefulWidget {
   const OmMoreComponents({Key? key}) : super(key: key);
@@ -156,7 +162,21 @@ class _OmMoreComponentsState extends State<OmMoreComponents> {
 
                       GestureDetector(
                         onTap: (){
-                          Navigator.pushNamed(context, SEC_LIST_PAGE);
+                          Navigator.pushNamed(context, VISIT_HISTORY_PAGE);
+                        },
+                        child: MoreOptionsCard(
+                          image: SvgPicture.asset('assets/icons/cardIcon/visit.svg',height: 16,color: const Color(0xFFC47CFD)),
+                          title: 'Visit History',
+                          color: const Color(0xFFF1E1FF),
+                        ),
+                      ),
+
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => FomList()),
+                          );
                         },
                         child: MoreOptionsCard(
                           image: SvgPicture.asset('assets/icons/foelist.svg'),
@@ -257,7 +277,7 @@ class _OmMoreComponentsState extends State<OmMoreComponents> {
                         padding: const EdgeInsets.all(6.0),
                         child: InkWell(
                           onTap: () {
-                            logOut(context);
+                            Navigator.pushNamed(context, OM_DAYOFF);
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16),

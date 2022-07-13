@@ -84,7 +84,7 @@ class _MapLoadingAnimationState extends State<MapLoadingAnimation>
   Widget build(BuildContext context) {
     double _width = MediaQuery.of(context).size.width;
     return Scaffold(
-      backgroundColor: Colors.grey.shade100,
+      backgroundColor: Colors.white,
       body: Center(
         child: Container(
           height: _width,

@@ -1,4 +1,6 @@
+import 'package:dotted_line/dotted_line.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:geocoding/geocoding.dart';
 import 'package:geolocator/geolocator.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
@@ -46,7 +48,7 @@ class _InvoicePageState extends State<InvoicePage> {
   static final DateTime now = DateTime.now();
   static final DateFormat formatter = DateFormat('MM-yyyy');
   static final DateFormat formate = DateFormat('yyyy-MM-dd');
-  final String formatted = formatter.format(now);
+  final String formatted = formate.format(now);
   final String dateIn=formate.format(now);
   String name="";
   late String userId;
@@ -103,139 +105,212 @@ class _InvoicePageState extends State<InvoicePage> {
         }
       },
       child: Scaffold(
-        backgroundColor: whiteBackground,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: BackButton(color: Colors.black,),
-          title: Text("Invoice",style: TextStyle(color: Colors.black),),
-          elevation: 0,
+          leading: const BackButton(color: Colors.black,),
+          title: const Text("Create Invoice",style: TextStyle(color: Colors.black,fontSize: 16,fontWeight: FontWeight.w600),),
+          elevation: 0.5,
         ),
+
         body:userAddress==null?Center(child: MapLoadingAnimation(),): Container(
-          height: MediaQuery.of(context).size.height,
+          height: MediaQuery.of(context).size.height*0.8,
           width: MediaQuery.of(context).size.width,
+          margin: const EdgeInsets.symmetric(horizontal: 15),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               Expanded(
                   flex: 4,
-                  child:Column(
-                    children: [
-                      Padding(
-                          padding: EdgeInsets.only(top: 8),
-                          child: Text("INVOICE",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 24,color: Colors.blue[900]),textAlign: TextAlign.center,)
-                      ),
-                      Padding(padding: EdgeInsets.all(14),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Bill To:",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(widget.customerName,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(userAddress!.substring(0,20)+'...',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(storeName,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(widget.customerEmail,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(widget.customerphone,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
-                              ],
-                            ),
-                            SizedBox(width: 10,),
-                            Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text("Date: $formatted",style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
-                              ],
-                            ),
-                          ],
-                        ),
-                      ),
-                      Padding(padding: EdgeInsets.all(14),
-                        child: Column(
-                          children: [
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text("Product",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.black),textAlign: TextAlign.start,),
-                                Text("Price",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.black),textAlign: TextAlign.start,),
-                                Text("Quantity",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.black),textAlign: TextAlign.start,),
-                                Text("Total",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.black),textAlign: TextAlign.start,),
-                              ],
-                            ),
-                            SizedBox(height: 8,),
+                  child:Container(
+                    margin:const EdgeInsets.only(top:14),
+                    child: Column(
+                      children: [
+                        Container(
+                          color: Colors.white,
+                          height: 224,
+                          child: Column(
+                            children: [
+                              Container(
+                                margin:const EdgeInsets.only(top:14),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.center,
+                                  children: [
+                                    SvgPicture.asset('assets/icons/invoice.svg'),
+                                    const SizedBox(width: 14,),
+                                    Text("Invoice",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 20,color: Colors.blue[900]),textAlign: TextAlign.center,),
+                                  ],
+                                ),
+                              ),
+                              const Padding(
+                                padding: EdgeInsets.symmetric(vertical: 17.0),
+                                child: DottedLine(dashColor: Colors.black26,),
+                              ),
 
-                            SizedBox(height: 8,),
-                            Divider(
-                              height: 2,
-                              thickness: 1,
-                            ),
-                            SizedBox(height: 8,),
-                            Row(
-                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                              children: [
-                                Text(widget.productName,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 18,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(widget.price,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 18,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(widget.quantity,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 18,color: Colors.black),textAlign: TextAlign.start,),
-                                Text(total.toString(),style: TextStyle(fontWeight: FontWeight.w300,fontSize: 18,color: Colors.black),textAlign: TextAlign.start,),
-                              ],
-                            ),
-                            SizedBox(height: 8,),
-                            Divider(
-                              height: 2,
-                              thickness: 1,
-                            ),
-                            SizedBox(height: 8,),
-                            Container(
-                              width: MediaQuery.of(context).size.width,
-                              child: Text("Grand Total: $total",style: TextStyle(fontWeight: FontWeight.w800,fontSize: 18,color: Colors.black),textAlign: TextAlign.end,),
-                            ),
+                              Container(
+                                margin: const EdgeInsets.symmetric(horizontal: 16),
+                                child: Row(
+                                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    const Text("Bill To:",style: TextStyle(fontWeight: FontWeight.w700,fontSize: 16,color: Colors.blue)),
+                                    Row(
+                                      children: [
+                                        SvgPicture.asset('assets/icons/Time.svg',color: Colors.black),
+                                        const SizedBox(width: 5,),
+                                        Text("$formatted",style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
+                                      ],
+                                    ),
 
-                          ],
+                                  ],
+                                ),
+                              ),
+                              const SizedBox(height: 8,),
+                              Row(
+                                //mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: [
+                                  Padding(
+                                    padding: const EdgeInsets.symmetric(horizontal: 16),
+                                    child: Column(
+                                      crossAxisAlignment: CrossAxisAlignment.start,
+                                      children: [
+                                        Text(widget.customerName,style: const TextStyle(fontWeight: FontWeight.w600,fontSize: 13,color: Colors.black),textAlign: TextAlign.start,),
+                                        const SizedBox(height: 6,),
+                                        // Text(userAddress!.substring(0,20)+'...',style: TextStyle(fontWeight: FontWeight.w300,fontSize: 14,color: Colors.black),textAlign: TextAlign.start,),
+                                        Text(storeName,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13,color: Colors.black),textAlign: TextAlign.start,),
+                                        const SizedBox(height: 6,),
+                                        Text(widget.customerEmail,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13,color: Colors.black),textAlign: TextAlign.start,),
+                                        const SizedBox(height: 6,),
+                                        Text(widget.customerphone,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 13,color: Colors.black),textAlign: TextAlign.start,),
+                                      ],
+                                    ),
+                                  ),
+                                  const SizedBox(width: 10,),
+                                ],
+                              ),
+                            ],
+                          ),
                         ),
-                      ),
-                    ],
+                        const SizedBox(height: 16,),
+                        Container(
+                          color: Colors.white,
+                          height: 218,
+                          padding: const EdgeInsets.symmetric(vertical: 15,horizontal: 16),
+                          child: Column(
+                            children: [
+                              Row(
+                                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                                children: const[
+                                  Expanded(
+                                      flex: 2,
+                                      child: Text("Product",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: Colors.black),textAlign: TextAlign.start,)),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Text("Price",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: Colors.black),textAlign: TextAlign.start,)),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Text("Quantity",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: Colors.black),textAlign: TextAlign.start,)),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Text("Total",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 12,color: Colors.black),textAlign: TextAlign.start,)),
+                                ],
+                              ),
+                              const SizedBox(height: 10,),
+
+                              const Divider(
+                                height: 1,
+                                thickness: 1,
+                              ),
+                              const SizedBox(height: 16,),
+                              Row(
+                                children: [
+                                  Expanded(
+                                      flex:2,
+                                      child: Text(widget.productName,style: const TextStyle(fontWeight: FontWeight.w300,fontSize: 11,color: Colors.black),textAlign: TextAlign.start,)),
+                                  Expanded(
+                                    flex: 1,
+                                    child: Row(
+                                      children: [
+                                        SvgPicture.asset('assets/icons/takaIcon.svg',color: Colors.black,),
+                                        const SizedBox(width: 4,),
+                                        Text(widget.price,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 11,color: Colors.black),textAlign: TextAlign.start,),
+                                      ],
+                                    ),
+                                  ),
+                                  Expanded(
+                                      flex: 1,
+                                      child: Text(widget.quantity,style: const TextStyle(fontWeight: FontWeight.w300,fontSize: 11,color: Colors.black),textAlign: TextAlign.start,)),
+                                  Expanded(
+                                      flex:1,
+                                      child: Text(total.toString(),style: const TextStyle(fontWeight: FontWeight.w300,fontSize: 11,color: Colors.black),textAlign: TextAlign.start,)),
+                                ],
+                              ),
+                              const SizedBox(height: 16,),
+                              const Divider(
+                                height: 2,
+                                thickness: 1,
+                              ),
+                              const SizedBox(height: 8,),
+                              Container(
+                                width: MediaQuery.of(context).size.width,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.start,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: [
+                                    Row(
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text("Grand Total: ",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 13,color: Colors.black),textAlign: TextAlign.end,),
+                                        const SizedBox(width: 4,),
+                                        SvgPicture.asset('assets/icons/takaIcon.svg',color: Colors.black,),
+                                        const SizedBox(width: 2,),
+                                        Text("$total",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 13,color: Colors.black),textAlign: TextAlign.end,),
+
+                                      ],
+                                    ),
+
+                                    const SizedBox(height: 30,),
+
+                                    Column(
+                                      crossAxisAlignment: CrossAxisAlignment.end,
+                                      mainAxisAlignment: MainAxisAlignment.end,
+                                      children: [
+                                        Text(name,style: const TextStyle(fontWeight: FontWeight.w700,fontSize: 14,color: Colors.black),textAlign: TextAlign.right,),
+                                        const SizedBox(height: 4,),
+                                        Text("Sales Incharge",style: TextStyle(fontWeight: FontWeight.w500,fontSize: 11,color: Colors.black.withOpacity(0.3)),textAlign: TextAlign.right,),
+                                      ],
+                                    ),
+
+                                  ],
+                                ),
+                              ),
+
+
+
+                            ],
+                          ),
+                        ),
+                      ],
+                    ),
                   )),
 
 
-              Expanded(
-                  flex: 1,
-                  child: Column(
-                    crossAxisAlignment: CrossAxisAlignment.start,
-                    children: [
-                      Row(
-                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                        children: [
-                          Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Container(
-                              width: 200,
-                              child:circle? Center(child: CircularProgressIndicator(),) :
-                              NormalButton(
-                                text: "Submit",
-                                color: Colors.blue,
-                                textColor: Colors.white,
-                                tap: (){
-                                  setState(() {
-                                    circle=true;
-                                  });
-                                  BlocProvider.of<SalesCubit>(context).createSale( storeName,name,widget.price,widget.model, formatted,dateIn,widget.customerName, widget.customerphone,
-                                      widget.customerEmail,int.parse( widget.quantity),widget.color, widget.customerAge,widget.remark,  userId,  linmanagerid,storeId);
+              Container(
+                width: MediaQuery.of(context).size.width,
+                height: 54,
+                child:circle? Center(child: CircularProgressIndicator(),) :
+                NormalButton(
+                  text: "Submit",
+                  color: Colors.blue,
+                  textColor: Colors.white,
+                  tap: (){
+                    setState(() {
+                      circle=true;
+                    });
+                    BlocProvider.of<SalesCubit>(context).createSale( storeName,name,widget.price,widget.model, formatted,dateIn,widget.customerName, widget.customerphone,
+                        widget.customerEmail,int.parse( widget.quantity),widget.color, widget.customerAge,widget.remark,  userId,  linmanagerid,storeId);
 
-                                }
-                              )
-                            ),
-                          ),
-                          Padding(
-                            padding: EdgeInsets.all(8),
-                            child: Column(
-                              children: [
-                                Text("Sales Incharge: ",style: TextStyle(fontWeight: FontWeight.w600,fontSize: 20,color: Colors.black),textAlign: TextAlign.end,),
-                                Text(name,style: TextStyle(fontWeight: FontWeight.w300,fontSize: 16,color: Colors.black),textAlign: TextAlign.end,),
-                              ],
-                            ),)
-                        ],
-                      )
-                    ],
-                  )
+                  }
+                )
               )
             ],
           ),

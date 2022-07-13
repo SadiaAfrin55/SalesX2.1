@@ -56,8 +56,6 @@ class AttendanceNetwork {
       var streamedResponse =await request.send();
       var response = await http.Response.fromStream(streamedResponse);
       logger.d('745 ${response.body}');
-
-
       return json.decode(response.body);
     }catch(e){
       logger.d(e);
@@ -88,6 +86,12 @@ class AttendanceNetwork {
 
 
   Future giveDayoffAttendance(File iamge, String storeId, String businessUnit, String useId, String userAddress) async{
+    print(iamge);
+    print(storeId);
+    print(businessUnit);
+    print(useId);
+    print(userAddress);
+
     try{
       var request =  http.MultipartRequest(
           'PATCH', Uri.parse(BASE_URL+"attendance/signoff/"+useId)
@@ -98,6 +102,7 @@ class AttendanceNetwork {
       request.files.add(await http.MultipartFile.fromPath('photo', iamge.path));
       logger.d(iamge.path);
       logger.d(businessUnit);
+      logger.d(storeId);
       logger.d(userAddress);
       var streamedResponse =await request.send();
       var response = await http.Response.fromStream(streamedResponse);

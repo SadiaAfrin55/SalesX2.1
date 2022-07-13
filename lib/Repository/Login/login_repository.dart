@@ -14,8 +14,8 @@ class LoginRepository {
       "password": password,
     };
     final userRaw=await loginNetwork.login(data);
-    // logger.d(userRaw.toString());
-    // logger.d(userRaw['success']);
+     logger.d(userRaw.toString());
+     //logger.d(userRaw['success']);
     if(userRaw['status']!="success"){
       return null;
     }

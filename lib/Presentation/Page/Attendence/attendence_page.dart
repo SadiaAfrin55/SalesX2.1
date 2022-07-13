@@ -21,7 +21,7 @@ import '../../Screens/SplashScreen/splash_screen.dart';
 import '../../Widgets/Button/CustomButoon/customiIcon_button.dart';
 import '../../Widgets/TextFields/normalTextField.dart';
 import '../../main_screen.dart';
-import '../Foe/Attendence/foe_attendence_page.dart';
+import '../FOE/Attendence/foe_attendence_page.dart';
 import '../OM/OmAttendence/om_attendence.dart';
 import 'AttendenceDone/done_attendance.dart';
 
@@ -160,479 +160,321 @@ class _AttendencePageState extends State<AttendencePage> {
     return Container(
       color: Colors.white,
       child: SafeArea(
-        child: role == "OM" ? OmAttendencePage() : role == "FOE" ? FoeAttendencePage()
-                : role == "SOM"
-                    ? Container(
-                        color: Colors.white,
-                        child: SafeArea(
-                          child: BlocListener<AttendenceCubit, AttendenceState>(
-                            listener: (context, state) {
-                              if (state is MarkMorningAttendance) {
-                                final data =
-                                    (state as MarkMorningAttendance).attendance;
-                                if (data!) {
-                                  Navigator.pushReplacement(
-                                      context, PageTransition(MainScreen()));
-                                }
-                              } else {
-                                circle = false;
+        child: role == "OM"
+            ? OmAttendencePage()
+            : role == "FOM"
+                ? OmAttendencePage()
+                : role == "FOE"
+                    ? OmAttendencePage()
+                    : role == "SOM"
+                        ? OmAttendencePage()
+                        : BlocBuilder<AttendenceCubit, AttendenceState>(
+                            builder: (context, state) {
+                              if (state is! CheckUserAttendance) {
+                                return Container();
                               }
-                            },
-                            child: Scaffold(
-                              backgroundColor: Colors.white,
-                              appBar: AppBar(
-                                backgroundColor: Colors.white,
-                                title: const Text(
-                                  'Attendance ',
-                                  style: TextStyle(
-                                    fontSize: 18,
-                                    fontWeight: FontWeight.w700,
-                                    color: Colors.black,
-                                  ),
-                                ),
-                                leading: Padding(
-                                  padding: const EdgeInsets.symmetric(
-                                      horizontal: 10.0),
-                                  child: IconButton(
-                                    onPressed: () {
-                                      Navigator.pop(context);
-                                    },
-                                    icon: const Icon(
-                                      Icons.arrow_back,
-                                      color: Colors.black,
-                                      size: 27,
-                                    ),
-                                  ),
-                                ),
-                                toolbarHeight: 60,
-                                elevation: 0.5,
-                              ),
-                              body: Form(
-                                key: _globalkey,
-                                child: SingleChildScrollView(
-                                  child: Container(
-                                    margin: const EdgeInsets.symmetric(
-                                        horizontal: 16, vertical: 25),
-                                    child: Column(
-                                      children: [
+                              var data =
+                                  (state as CheckUserAttendance).attendance;
 
-
-
-
-
-
-
-
-                                        _image == null
-                                            ? Container()
-                                            : Container(
-                                                height: 356,
-                                                width: MediaQuery.of(context)
-                                                    .size
-                                                    .width,
-                                                child: Image.file(
-                                                  _image!,
-                                                  fit: BoxFit.cover,
-                                                ),
+                              return data == "yes"
+                                  ? DoneAttendance()
+                                  : BlocListener<AttendenceCubit,
+                                      AttendenceState>(
+                                      listener: (context, state) {
+                                        if (state is MarkMorningAttendance) {
+                                          final data =
+                                              (state as MarkMorningAttendance)
+                                                  .attendance;
+                                          if (data!) {
+                                            Navigator.pushReplacement(context,
+                                                PageTransition(MainScreen()));
+                                          }
+                                        } else {
+                                          circle = false;
+                                        }
+                                      },
+                                      child: Scaffold(
+                                        backgroundColor: Colors.white,
+                                        appBar: AppBar(
+                                          backgroundColor: Colors.white,
+                                          title: const Text(
+                                            'Attendance',
+                                            style: TextStyle(
+                                              fontSize: 18,
+                                              fontWeight: FontWeight.w700,
+                                              color: Colors.black,
+                                            ),
+                                          ),
+                                          leading: Padding(
+                                            padding: const EdgeInsets.symmetric(
+                                                horizontal: 10.0),
+                                            child: IconButton(
+                                              onPressed: () {
+                                                Navigator.pop(context);
+                                              },
+                                              icon: const Icon(
+                                                Icons.arrow_back,
+                                                color: Colors.black,
+                                                size: 27,
                                               ),
-                                        const SizedBox(
-                                          height: 16,
+                                            ),
+                                          ),
+                                          toolbarHeight: 60,
+                                          elevation: 0.5,
                                         ),
-                                        const SizedBox(
-                                          height: 8,
-                                        ),
-                                        addrerss == null
-                                            ? Container()
-                                            : _image == null
-                                                ? Container()
-                                                : circle
-                                                    ? Center(
-                                                        child:
-                                                            CircularProgressIndicator(),
-                                                      )
-                                                    : InkWell(
-                                                        onTap: () {
-                                                          if (islate!) {
-                                                            if (_globalkey
-                                                                .currentState!
-                                                                .validate()) {
-                                                              setState(() {
-                                                                circle = true;
-                                                              });
-                                                              BlocProvider.of<
-                                                                          AttendenceCubit>(
-                                                                      context)
-                                                                  .giveTrainingAttendance(
-                                                                      _image!,
-                                                                      businessUnit!,
-                                                                      useId!,
-                                                                      role!,
-                                                                      addrerss!);
-                                                            }
-                                                          } else {
-                                                            setState(() {
-                                                              circle = true;
-                                                            });
-                                                            //BlocProvider.of<AttendenceCubit>(context).giveTrainingAttendance(_image!,businessUnit!, useId!, role!, addrerss!);
-                                                            BlocProvider.of<
-                                                                        AttendenceCubit>(
-                                                                    context)
-                                                                .giveMorningLateAttendance(
-                                                                    _image!,
-                                                                    storeId!,
-                                                                    businessUnit!,
-                                                                    useId!,
-                                                                    role!,
-                                                                    remarkController
-                                                                        .text,
-                                                                    addrerss!);
+                                        body: Form(
+                                          key: _globalkey,
+                                          child: SingleChildScrollView(
+                                            child: Container(
+                                              margin: EdgeInsets.symmetric(
+                                                  horizontal: 16, vertical: 25),
+                                              child: Column(
+                                                children: [
+                                                  Column(
+                                                    children: [
+                                                      BlocBuilder<
+                                                          AttendenceCubit,
+                                                          AttendenceState>(
+                                                        builder:
+                                                            (context, state) {
+                                                          if (state
+                                                              is CheckMoringLateAttendance) {
+                                                            final dataLate =
+                                                                state.status;
+                                                            return dataLate ==
+                                                                    "yes"
+                                                                ? Container(
+                                                                    width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    child:
+                                                                        Column(
+                                                                      crossAxisAlignment:
+                                                                          CrossAxisAlignment
+                                                                              .start,
+                                                                      children: [
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              20,
+                                                                        ),
+                                                                        const Text(
+                                                                          "You are late, Please tell us why you late?",
+                                                                          style:
+                                                                              TextStyle(color: Colors.black),
+                                                                        ).tr(),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              16,
+                                                                        ),
+                                                                        MaterialTextField(
+                                                                          lable:
+                                                                              tr("Remark"),
+                                                                          hintText:
+                                                                              tr("type your reasons"),
+                                                                          readOnly:
+                                                                              false,
+                                                                          controller:
+                                                                              remarkController,
+                                                                        ),
+                                                                        const SizedBox(
+                                                                          height:
+                                                                              16,
+                                                                        ),
+                                                                      ],
+                                                                    ))
+                                                                : Container(
+                                                                    child:
+                                                                        Center(
+                                                                      child: Text(
+                                                                          'perfect'),
+                                                                    ),
+                                                                  );
                                                           }
+                                                          return Shimmer
+                                                              .fromColors(
+                                                            baseColor:
+                                                                Colors.grey,
+                                                            highlightColor:
+                                                                Colors.white,
+                                                            child: Container(
+                                                              height: 50,
+                                                            ),
+                                                          );
                                                         },
-                                                        child: Container(
-                                                          height: 54,
+                                                      ),
+                                                      const Text(
+                                                        "Please take a clear photo yourself",
+                                                        textAlign:
+                                                            TextAlign.center,
+                                                        style: TextStyle(
+                                                            fontSize: 15,
+                                                            color: Color(
+                                                                0xFF727272)),
+                                                      ).tr(),
+                                                      const SizedBox(
+                                                        height: 8,
+                                                      ),
+                                                    ],
+                                                  ),
+                                                  _image == null
+                                                      ? Container()
+                                                      : Container(
+                                                          height: 356,
                                                           width: MediaQuery.of(
                                                                   context)
                                                               .size
                                                               .width,
-                                                          decoration: BoxDecoration(
-                                                              color: Color(
-                                                                  0xff0180F5),
-                                                              borderRadius:
-                                                                  BorderRadius
-                                                                      .circular(
-                                                                          6)),
-                                                          child: Row(
-                                                            mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                            children: [
-                                                              Text(
-                                                                "Mark your attendance",
-                                                                style: TextStyle(
-                                                                    color: Colors
-                                                                        .white,
-                                                                    fontSize:
-                                                                        16,
-                                                                    fontWeight:
-                                                                        FontWeight
-                                                                            .w600),
-                                                              ).tr(),
-                                                            ],
+                                                          child: Image.file(
+                                                            _image!,
+                                                            fit: BoxFit.cover,
                                                           ),
-                                                        )),
-                                      ],
-                                    ),
-                                  ),
-                                ),
-                              ),
-                            ),
-                          ),
-                        ),
-                      )
-
-
-                    : BlocBuilder<AttendenceCubit, AttendenceState>(
-                      builder: (context, state) {
-                        if(state is !CheckUserAttendance){
-                          return Container();
-                        }
-                        var data = (state as CheckUserAttendance).attendance;
-
-                                    return data=="yes"? DoneAttendance():
-                                    BlocListener<AttendenceCubit, AttendenceState>(
-                                            listener: (context, state) {
-                                              if (state is MarkMorningAttendance) {
-                                                final data = (state as MarkMorningAttendance).attendance;
-                                                if (data!) {
-                                                  Navigator.pushReplacement(context, PageTransition(MainScreen()));
-                                                }
-                                              } else {
-                                                circle = false;
-                                              }
-                                            },
-                                            child: Scaffold(
-                                              backgroundColor: Colors.white,
-                                              appBar: AppBar(
-                                                backgroundColor: Colors.white,
-                                                title: const Text(
-                                                  'Attendance',
-                                                  style: TextStyle(
-                                                    fontSize: 18,
-                                                    fontWeight: FontWeight.w700,
-                                                    color: Colors.black,
+                                                        ),
+                                                  const SizedBox(
+                                                    height: 16,
                                                   ),
-                                                ),
-                                                leading: Padding(
-                                                  padding:
-                                                      const EdgeInsets.symmetric(horizontal: 10.0),
-                                                  child: IconButton(
-                                                    onPressed: () {
-                                                      Navigator.pop(context);
-                                                    },
-                                                    icon: const Icon(
-                                                      Icons.arrow_back,
-                                                      color: Colors.black,
-                                                      size: 27,
-                                                    ),
-                                                  ),
-                                                ),
-                                                toolbarHeight: 60,
-                                                elevation: 0.5,
-                                              ),
-                                              body: Form(
-                                                key: _globalkey,
-                                                child: SingleChildScrollView(
-                                                  child: Container(
-                                                    margin: EdgeInsets.symmetric(
-                                                        horizontal: 16, vertical: 25),
-                                                    child: Column(
-                                                      children: [
-
-
-
-                                                        Column(
-                                                          children: [
-                                                              BlocBuilder<AttendenceCubit, AttendenceState>(
-                                                                builder: (context, state) {
-                                                                  if (state is CheckMoringLateAttendance) {
-                                                                    final dataLate = state.status;
-                                                                    return dataLate=="yes" ? Container(
-                                                                        width: MediaQuery.of(context).size.width,
-                                                                        child: Column(
-                                                                          crossAxisAlignment: CrossAxisAlignment.start,
-                                                                          children: [
-                                                                            const SizedBox(
-                                                                              height: 20,
-                                                                            ),
-                                                                            const Text(
-                                                                              "You are late, Please tell us why you late?",
-                                                                              style: TextStyle(
-                                                                                  color: Colors
-                                                                                      .black),
-                                                                            ).tr(),
-                                                                            const SizedBox(
-                                                                              height: 16,
-                                                                            ),
-                                                                            MaterialTextField(
-                                                                              lable:
-                                                                              tr("Remark"),
-                                                                              hintText: tr(
-                                                                                  "type your reasons"),
-                                                                              readOnly: false,
-                                                                              controller:
-                                                                              remarkController,
-                                                                            ),
-                                                                            const SizedBox(
-                                                                              height: 16,
-                                                                            ),
-                                                                          ],
-                                                                        ))
-                                                                        : Container(child: Center(child: Text('perfect'),),);
-                                                                  }
-                                                                  return Shimmer.fromColors(
-                                                                    baseColor: Colors.grey,
-                                                                    highlightColor: Colors.white,
-
-                                                                    child: Container(
-                                                                      height: 50,
-
-                                                                    ),
-                                                                  );
+                                                  Container(
+                                                    width:
+                                                        MediaQuery.of(context)
+                                                            .size
+                                                            .width,
+                                                    child: _image == null
+                                                        ? circle
+                                                            ? Container()
+                                                            : InkWell(
+                                                                onTap: () {
+                                                                  setState(() {
+                                                                    //circle=true;
+                                                                    imageprocess =
+                                                                        true;
+                                                                    getImage();
+                                                                  });
+                                                                  //getImage();
                                                                 },
-                                                            ),
-                                                            const Text(
-                                                              "Please take a clear photo yourself",
-                                                              textAlign: TextAlign.center,
-                                                              style: TextStyle(
-                                                                  fontSize: 15,
-                                                                  color: Color(0xFF727272)),
-                                                            ).tr(),
-                                                            const SizedBox(
-                                                              height: 8,
-                                                            ),
-                                                          ],
-                                                        ),
-
-                                                        _image == null
-                                                            ? Container()
-                                                            : Container(
-                                                                height: 356,
-                                                                width: MediaQuery.of(context)
-                                                                    .size
-                                                                    .width,
-                                                                child: Image.file(
-                                                                  _image!,
-                                                                  fit: BoxFit.cover,
-                                                                ),
-                                                              ),
-                                                        const SizedBox(
-                                                          height: 16,
-                                                        ),
-                                                        Container(
-                                                          width: MediaQuery.of(context).size.width,
-                                                          child: _image == null
-                                                              ? circle
-                                                                  ? Container()
-                                                                  : InkWell(
-                                                                      onTap: () {
-                                                                        setState(() {
-                                                                          //circle=true;
-                                                                          imageprocess = true;
-                                                                          getImage();
-                                                                        });
-                                                                        //getImage();
-                                                                      },
-                                                                      child: Container(
-                                                                        height: 54,
-                                                                        width:
-                                                                            MediaQuery.of(context)
-                                                                                .size
-                                                                                .width,
-                                                                        decoration: BoxDecoration(
-                                                                          color: _image != null
-                                                                              ? Color(0x88BFDCFC)
-                                                                              : Color(0xFF0180F5),
-                                                                          borderRadius:
-                                                                              BorderRadius.circular(
-                                                                                  6),
-                                                                        ),
-                                                                        child: Center(
-                                                                          child: RichText(
-                                                                            text: TextSpan(
-                                                                                children: [
-                                                                                  WidgetSpan(
-                                                                                    child: Container(
-                                                                                        margin: EdgeInsets.only(
-                                                                                            right:
-                                                                                                10),
-                                                                                        child: Icon(
-                                                                                            Icons
-                                                                                                .camera_enhance_sharp,
-                                                                                            size:
-                                                                                                20,
-                                                                                            color: _image !=
-                                                                                                    null
-                                                                                                ? Color(0xFF0180F5)
-                                                                                                : Colors.white)),
-                                                                                  ),
-                                                                                  TextSpan(
-                                                                                      text: _image !=
-                                                                                              null
-                                                                                          ? tr(
-                                                                                              'Retake Photo')
-                                                                                          : tr(
-                                                                                              "Take a photo"),
-                                                                                      //text: tr("Take a photo"),
-                                                                                      style: TextStyle(
-                                                                                          fontWeight:
-                                                                                              FontWeight
-                                                                                                  .w600,
-                                                                                          fontSize:
-                                                                                              16,
-                                                                                          color: _image !=
-                                                                                                  null
-                                                                                              ? Color(
-                                                                                                  0xFF0180F5)
-                                                                                              : Colors
-                                                                                                  .white)),
-                                                                                ]),
-                                                                          ),
-                                                                        ),
-                                                                      ))
-                                                              : Container(),
-                                                        ),
-                                                        const SizedBox(
-                                                          height: 8,
-                                                        ),
-                                                        addrerss == null
-                                                            ? Container()
-                                                            : _image == null
-                                                                ? Container(
-                                                                    child: Center(
-                                                                      child: Text(''),
+                                                                child:
+                                                                    Container(
+                                                                  height: 54,
+                                                                  width: MediaQuery.of(
+                                                                          context)
+                                                                      .size
+                                                                      .width,
+                                                                  decoration:
+                                                                      BoxDecoration(
+                                                                    color: _image !=
+                                                                            null
+                                                                        ? Color(
+                                                                            0x88BFDCFC)
+                                                                        : Color(
+                                                                            0xFF0180F5),
+                                                                    borderRadius:
+                                                                        BorderRadius
+                                                                            .circular(6),
+                                                                  ),
+                                                                  child: Center(
+                                                                    child:
+                                                                        RichText(
+                                                                      text: TextSpan(
+                                                                          children: [
+                                                                            WidgetSpan(
+                                                                              child: Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.camera_enhance_sharp, size: 20, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
+                                                                            ),
+                                                                            TextSpan(
+                                                                                text: _image != null ? tr('Retake Photo') : tr("Take a photo"),
+                                                                                //text: tr("Take a photo"),
+                                                                                style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
+                                                                          ]),
                                                                     ),
-                                                                  )
-                                                                : circle
-                                                                    ? Center(
-                                                                        child:
-                                                                            Text(''),
-                                                                      )
-                                                                    : InkWell(
-                                                                        onTap: () {
-                                                                          if (_globalkey
-                                                                              .currentState!
-                                                                              .validate()) {
-                                                                            setState(() {
-                                                                              circle = true;
-                                                                            });
-                                                                            BlocProvider.of<
-                                                                                        AttendenceCubit>(
-                                                                                    context)
-                                                                                .giveMorningAttendance(
-                                                                                    _image!,
-                                                                                    storeId!,
-                                                                                    businessUnit!,
-                                                                                    useId!,
-                                                                                    role!,
-                                                                                    addrerss!);
-
-                                                                            log('photooooooooooooooo  ');
-                                                                          } else {
-                                                                            setState(() {
-                                                                              circle = true;
-                                                                            });
-                                                                            log('muuuuuuuuuuuuuuuuuuuuuu  ');
-                                                                            BlocProvider.of<
-                                                                                        AttendenceCubit>(
-                                                                                    context)
-                                                                                .giveMorningAttendance(
-                                                                                    _image!,
-                                                                                    storeId!,
-                                                                                    businessUnit!,
-                                                                                    useId!,
-                                                                                    role!,
-                                                                                    addrerss!);
-                                                                          }
-                                                                        },
-                                                                        child: Container(
-                                                                          height: 54,
-                                                                          width:
-                                                                              MediaQuery.of(context)
-                                                                                  .size
-                                                                                  .width,
-                                                                          decoration: BoxDecoration(
-                                                                              color:
-                                                                                  Color(0xff0180F5),
-                                                                              borderRadius:
-                                                                                  BorderRadius
-                                                                                      .circular(6)),
-                                                                          child: Row(
-                                                                            mainAxisAlignment:
-                                                                                MainAxisAlignment
-                                                                                    .center,
-                                                                            children: [
-                                                                              Text(
-                                                                                "Mark your attendance",
-                                                                                style: TextStyle(
-                                                                                    color: Colors
-                                                                                        .white,
-                                                                                    fontSize: 16,
-                                                                                    fontWeight:
-                                                                                        FontWeight
-                                                                                            .w600),
-                                                                              ).tr(),
-                                                                            ],
-                                                                          ),
-                                                                        )),
-                                                      ],
-                                                    ),
+                                                                  ),
+                                                                ))
+                                                        : Container(),
                                                   ),
-                                                ),
+                                                  const SizedBox(
+                                                    height: 8,
+                                                  ),
+                                                  addrerss == null
+                                                      ? Container()
+                                                      : _image == null
+                                                          ? Container(
+                                                              child: Center(
+                                                                child: Text(''),
+                                                              ),
+                                                            )
+                                                          : circle
+                                                              ? Center(
+                                                                  child:
+                                                                      Text(''),
+                                                                )
+                                                              : InkWell(
+                                                                  onTap: () {
+                                                                    if (_globalkey
+                                                                        .currentState!
+                                                                        .validate()) {
+                                                                      setState(
+                                                                          () {
+                                                                        circle =
+                                                                            true;
+                                                                      });
+                                                                      BlocProvider.of<AttendenceCubit>(context).giveMorningAttendance(
+                                                                          _image!,
+                                                                          storeId!,
+                                                                          businessUnit!,
+                                                                          useId!,
+                                                                          role!,
+                                                                          addrerss!);
+
+                                                                      log('photooooooooooooooo  ');
+                                                                    } else {
+                                                                      setState(
+                                                                          () {
+                                                                        circle =
+                                                                            true;
+                                                                      });
+                                                                      log('muuuuuuuuuuuuuuuuuuuuuu  ');
+                                                                      BlocProvider.of<AttendenceCubit>(context).giveMorningAttendance(
+                                                                          _image!,
+                                                                          storeId!,
+                                                                          businessUnit!,
+                                                                          useId!,
+                                                                          role!,
+                                                                          addrerss!);
+                                                                    }
+                                                                  },
+                                                                  child:
+                                                                      Container(
+                                                                    height: 54,
+                                                                    width: MediaQuery.of(
+                                                                            context)
+                                                                        .size
+                                                                        .width,
+                                                                    decoration: BoxDecoration(
+                                                                        color: Color(
+                                                                            0xff0180F5),
+                                                                        borderRadius:
+                                                                            BorderRadius.circular(6)),
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .center,
+                                                                      children: [
+                                                                        Text(
+                                                                          "Mark your attendance",
+                                                                          style: TextStyle(
+                                                                              color: Colors.white,
+                                                                              fontSize: 16,
+                                                                              fontWeight: FontWeight.w600),
+                                                                        ).tr(),
+                                                                      ],
+                                                                    ),
+                                                                  )),
+                                                ],
                                               ),
                                             ),
-                                          );
-  },
-),
+                                          ),
+                                        ),
+                                      ),
+                                    );
+                            },
+                          ),
       ),
     );
   }

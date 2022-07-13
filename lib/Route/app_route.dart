@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cubit.dart';
+import 'package:salesx_new_project/Bloc/Leave/leave_cubit.dart';
+import 'package:salesx_new_project/Presentation/Page/Visit/Bloc/visit_cubit.dart';
 import '../Bloc/Attendence/attendence_cubit.dart';
 import '../Bloc/Inventory/inventory_cubit.dart';
+import '../Bloc/List/list_cubit.dart';
 import '../Bloc/Login/login_cubit.dart';
 import '../Bloc/Product/product_cubit.dart';
 import '../Bloc/Sales/sales_cubit.dart';
@@ -10,10 +14,17 @@ import '../Bloc/User/user_cubit.dart';
 import '../Constants/Strings/app_strings.dart';
 import '../Presentation/Page/AdminContact/admin_contact.dart';
 import '../Presentation/Page/Attendence/AttendenceDone/back_home.dart';
+import '../Presentation/Page/Attendence/FoeAttendance/foe_picture_attendance.dart';
 import '../Presentation/Page/Attendence/attendence_history.dart';
 import '../Presentation/Page/Attendence/attendence_page.dart';
 import '../Presentation/Page/CommingSoon/comming_soon.dart';
 import '../Presentation/Page/Dayoff/mark_dayoff_attendance.dart';
+import '../Presentation/Page/FOE/Sec/LeaveRequest/approved_request.dart';
+import '../Presentation/Page/FOE/Sec/SecTrainingComponents/sec_training_components.dart';
+import '../Presentation/Page/FOE/Sec/sec_sales_details.dart';
+import '../Presentation/Page/FOE/Sec/sec_survey_history_details.dart';
+import '../Presentation/Page/FOE/Sec/sec_training_history.dart';
+import '../Presentation/Page/FOE/Sec/seclist_details.dart';
 import '../Presentation/Page/FOM/FOE/foe_attendence_history.dart';
 import '../Presentation/Page/FOM/FOE/foe_leave.dart';
 import '../Presentation/Page/FOM/FOE/foe_target.dart';
@@ -49,6 +60,7 @@ import '../Presentation/Page/OM/FOM/Activity/FOMactivity/fom_target.dart';
 import '../Presentation/Page/OM/FOM/Activity/FoeActivity/fom_foe_activity.dart';
 import '../Presentation/Page/OM/FOM/Activity/fom_activity.dart';
 import '../Presentation/Page/OM/FoeActivity/om_foe_activity.dart';
+import '../Presentation/Page/OM/OmDayoff/om_dayoff.dart';
 import '../Presentation/Page/Profile/Dayoff/mark_dayoff.dart';
 import '../Presentation/Page/Profile/profile_page.dart';
 import '../Presentation/Page/SM/OM/om_attendance.dart';
@@ -76,6 +88,9 @@ import '../Presentation/Page/OM/FOM/Activity/FoeActivity/fom_foe_activity.dart';
 //import '../Presentation/Page/Target/target_page.dart';
 import '../Presentation/Page/Target/target_page.dart';
 import '../Presentation/Page/Training/training_page.dart';
+import '../Presentation/Page/Visit/create_visit.dart';
+import '../Presentation/Page/Visit/select_shop.dart';
+import '../Presentation/Page/Visit/visit_history.dart';
 import '../Presentation/Screens/ForgetPass/forget_password_page.dart';
 import '../Presentation/Screens/SplashScreen/splash_screen.dart';
 import '../Presentation/main_screen.dart';
@@ -335,11 +350,35 @@ class AppRouter {
               create: (context) => InventoryCubit(),
               child: SecAttendenceSurvey(),
             ));
+
+      case SEC_TRAINING_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => ListCubit(),
+              child: SecTrainingHistory(),
+            ));
+
       case SEC_SALES_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
               create: (context) => InventoryCubit(),
               child: SecSalesHistory(),
+            ));
+      case SEC_SALES_DETAILS_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => ListCubit(),
+              child: SecDetailsInfo(
+                name:arguments!['name'],
+                mobile:arguments['mobile'],
+                age:arguments['age'],
+                email:arguments['email'],
+                remark:arguments['remark'],
+                takenname:arguments['takenname'],
+                date:arguments['date'],
+                productname:arguments['productname'],
+                productprice:arguments['productprice'],
+              ),
             ));
       case SEC_SURVEY_PAGE:
         return MaterialPageRoute(
@@ -347,6 +386,23 @@ class AppRouter {
               create: (context) => InventoryCubit(),
               child: SecSurveyHistory(),
             ));
+
+      case SEC_SURVEY_DETAILS_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => ListCubit(),
+              child: SecSurveyDetails(
+                name:arguments!['name'],
+                phone:arguments['phone'],
+                age:arguments['age'],
+                email:arguments['email'],
+                interestedin:arguments['interestedin'],
+                minbud:arguments['minbud'],
+                maxbud:arguments['maxbud'],
+                date:arguments['date'],
+              ),
+            ));
+
       case SEC_TARGET_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
@@ -356,8 +412,13 @@ class AppRouter {
       case SEC_TARGET_HISTORY_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
-              create: (context) => InventoryCubit(),
-              child: SecTargetHistory(),
+              create: (context) => ListCubit(),
+              child: SecTargetHistory(
+                cusname:arguments!['cusname'],
+                sale:arguments['sale'],
+                target:arguments['target'],
+                targetAchive:arguments['targetAchive'],
+              ),
             ));
       case SEC_INVENTORY_PAGE:
         return MaterialPageRoute(
@@ -369,7 +430,9 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
               create: (context) => InventoryCubit(),
-              child: SecInventoryHistory(),
+              child: SecInventoryHistory(
+                userid:arguments!['userid'],
+              ),
             ));
       case SEC_LEAVE_PAGE:
         return MaterialPageRoute(
@@ -381,22 +444,77 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
               create: (context) => InventoryCubit(),
-              child: SecLeaveHistory(),
+              child: SecLeaveHistory(name:arguments!['name'],),
             ));
       case SEC_LEAVE_REQUEST_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
-              create: (context) => InventoryCubit(),
+              create: (context) => LeaveCubit(),
               child: SecLeaveRequest(),
             ));
         case SEC_LIST_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
-              create: (context) => InventoryCubit(),
+              create: (context) => ListCubit(),
               child: SecListPage(),
             ));
 
+      case SEC_LIST_DETAILES_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => ListCubit(),
+              child: SeclistDetails(
+                name:arguments!['name'],
+                personalemail:arguments['personalemail'],
+                officeemail:arguments['officeemail'],
+                phone:arguments['phone'],
+                area:arguments['area'],
+                teritory:arguments['teritory'],
+                rigion:arguments['rigion'],
+              ),
+            ));
+
+      case VISIT_SHOP_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => InventoryCubit(),
+              child: SelectShop(),
+            ));
+
+      case VISIT_CREATE_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => InventoryCubit(),
+              child: CreateShop(
+                shopId:arguments!['shopId'],
+              ),
+            ));
+
+      case FOE_ATTENDANCE_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => InventoryCubit(),
+              child: FoePictureAttendencePage(
+                shopId:arguments!['shopId'],
+              ),
+            ));
+
+      case VISIT_HISTORY_PAGE:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => VisitCubit(),
+              child: VisitHistory(),
+            ));
+
         //om
+
+      case OM_DAYOFF:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => VmAttendenceCubit(),
+              child: OmDayoff(),
+            ));
+
       case FOM_ACTIVITY_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
@@ -540,6 +658,22 @@ class AppRouter {
             builder: (BuildContext context) => BlocProvider(
               create: (context) => AttendenceCubit(),
               child: CommingSoon(),
+            ));
+      case ApproveLeaverequest_Page:
+        return MaterialPageRoute(
+            builder: (BuildContext context) => BlocProvider(
+              create: (context) => AttendenceCubit(),
+              child: ApprovedRequest(
+                id:arguments!['id'],
+                name:arguments['name'],
+                reason:arguments['reason'],
+                requestPendingFrom:arguments['requestPendingFrom'],
+                type:arguments['type'],
+                days:arguments['days'],
+                from:arguments['from'],
+                to:arguments['to'],
+                approve:arguments['approve'],
+              ),
             ));
 
 

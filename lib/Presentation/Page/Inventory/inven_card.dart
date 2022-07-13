@@ -44,7 +44,7 @@ class InventoryModelCard extends StatelessWidget {
                     ),
                   ),
                   const SizedBox(height: 5),
-                  Text('$category',
+                  Text('On Stock',
                     style: const TextStyle(
                         fontSize: 11,
                         fontWeight: FontWeight.w400,

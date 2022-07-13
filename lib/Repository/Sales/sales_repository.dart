@@ -1,4 +1,5 @@
 import 'package:logger/logger.dart';
+import '../../Data/Model/Sale/SaleChartResponse.dart';
 import '../../Data/Model/Sale/SaleResponse.dart';
 import '../../Data/Model/Survey/SurveyPredictionDataResponse.dart';
 import '../../Network/Sales/sales_network.dart';
@@ -61,10 +62,10 @@ class SaleRepository {
     return  SaleResponse.fromJson(raw);
   }
 
-  Future<SurveyPredictionDataResponse> getUserSalesSurveyPrediction(String userId,String year) async{
+  Future<SaleChartResponse> getUserSalesSurveyPrediction(String userId,String year) async{
     final rawx=await SaleNetwork().getUserSalesSurveyPrediction(userId,year);
-    // logger.d(rawx);
-    return SurveyPredictionDataResponse.fromJson(rawx);
+    logger.d(rawx);
+    return SaleChartResponse.fromJson(rawx);
   }
 
   Future<SurveyPredictionDataResponse> getFoeUserSalesSurveyPrediction(String userId) async{

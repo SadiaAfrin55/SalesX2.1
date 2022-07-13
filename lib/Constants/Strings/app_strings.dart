@@ -59,12 +59,17 @@ const INVENTORY_PAGE = "inventory_page";
 
 //Foe
 const FOE_HOME_PAGE = "foe_home_page";
+const FOE_ATTENDANCE_PAGE = "foe_attandance_page";
 const FOE_PROFILE_PAGE = "foe_profile_page";
+const SEC_TRAINING_PAGE = "sec_training_page";
 const SEC_LIST_PAGE = "sec_list_page";
+const SEC_LIST_DETAILES_PAGE = "sec_list_detailes_page";
 const SEC_ACTIVITY_PAGE = "sec_activity_page";
 const SEC_ATTENDENCE_PAGE = "sec_attendence_page";
 const SEC_SALES_PAGE = "sec_sales_page";
+const SEC_SALES_DETAILS_PAGE = "sec_sales_details_page";
 const SEC_SURVEY_PAGE = "sec_survey_page";
+const SEC_SURVEY_DETAILS_PAGE = "sec_survey_details_page";
 const SEC_TARGET_PAGE = "sec_target_page";
 const SEC_TARGET_HISTORY_PAGE = "sec_target_history_page";
 const SEC_INVENTORY_PAGE = "sec_inventory_page";
@@ -72,6 +77,9 @@ const SEC_INVENTORY_HISTORY_PAGE = "sec_inventory_history_page";
 const SEC_LEAVE_PAGE = "sec_leave_page";
 const SEC_LEAVE_HISTORY_PAGE = "sec_leave_history_page";
 const SEC_LEAVE_REQUEST_PAGE = "sec_leave_request_page";
+const VISIT_SHOP_PAGE = "visit_shop_page";
+const VISIT_CREATE_PAGE = "visit_create_page";
+const VISIT_HISTORY_PAGE = "visit_history_page";
 
 
 //OM
@@ -81,6 +89,7 @@ const OM_FOM_ATTENDANCE = "om_fom_attendance";
 const OM_FOM_TARGET = "om_fom_target";
 const OM_FOM_LEAVE = "om_fom_leave";
 const OM_FOM_TRAINING = "om_fom_training";
+const OM_DAYOFF = "om_dayoff";
 
 //FOM
 const FOM_HOME_PAGE = "fom_home_page";
@@ -110,3 +119,4 @@ const STORE_UPDATE = "store_update";
 const MARK_DAYOFF = "mark_dayoff";
 const BACK_TO_HOME = "back_to_home";
 const COMMINGSOON = "comming_soon";
+const ApproveLeaverequest_Page = "approve_leave_request";

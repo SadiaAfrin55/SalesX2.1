@@ -87,8 +87,8 @@ class _InventoryListComponentsState extends State<InventoryListComponents> {
 
                           return InventoryModelCard(
                             name: product?.productName ?? '',
-                            price: product?.promoprice ?? '0',
-                            category: product?.category ?? '',
+                            price: _inventory.quantity?.toString() ?? '5',
+                            //category: product?.category ?? '',
                           );
                         },
                       ),

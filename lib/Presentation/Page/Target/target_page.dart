@@ -50,12 +50,13 @@ class _TargetPageState extends State<TargetPage> {
                       children:  [
                         Row(
                           children:  [
-                            SvgPicture.asset('assets/icons/empty-wallet.svg'),
+                            SvgPicture.asset('assets/icons/empty-wallet.svg',color: Color(0xFF0180F5),),
                             const SizedBox(width: 8,),
                             const Text('Target by amount',
                               style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                  color: Color(0xFF0180F5),
                               ),
                             ),
 
@@ -85,13 +86,13 @@ class _TargetPageState extends State<TargetPage> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: const[
                                         Text("20%",style: TextStyle(
-                                            fontSize: 14,
+                                            fontSize: 15,
                                             fontWeight: FontWeight.w600,
                                             color: const Color(0xFF232C2E),
                                         ),),
                                         SizedBox(height: 2,),
                                         Text("Achive",style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w400,
                                           color: const Color(0xFF232C2E),
                                         ),),
@@ -112,7 +113,7 @@ class _TargetPageState extends State<TargetPage> {
                                       children: const [
                                         Text('Target Amount',
                                           style: TextStyle(
-                                              fontSize: 11,
+                                              fontSize: 12,
                                               fontWeight: FontWeight.w400,
                                               color:Color(0xFF232C2E)
 
@@ -127,7 +128,7 @@ class _TargetPageState extends State<TargetPage> {
                                         const SizedBox(width: 4,),
                                         const Text('350000',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w700,
                                               color:Color(0xFF232C2E)
 
@@ -138,7 +139,7 @@ class _TargetPageState extends State<TargetPage> {
                                     const SizedBox(height: 16,),
                                     const Text('Achive Amount',
                                       style: TextStyle(
-                                          fontSize: 11,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                           color:Color(0xFF232C2E)
 
@@ -151,7 +152,7 @@ class _TargetPageState extends State<TargetPage> {
                                         const SizedBox(width: 4,),
                                         const Text('70000',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w700,
                                               color:Color(0xFF0180F5)
 
@@ -168,12 +169,13 @@ class _TargetPageState extends State<TargetPage> {
                         const SizedBox(height: 32,),
                         Row(
                           children: [
-                            SvgPicture.asset('assets/icons/target-chart.svg'),
+                            SvgPicture.asset('assets/icons/target-chart.svg',color: Color(0xFF0180F5),),
                             const SizedBox(width: 8,),
                             const Text('Target by quantity',
                               style: TextStyle(
-                                  fontSize: 14,
-                                  fontWeight: FontWeight.w700
+                                  fontSize: 15,
+                                  fontWeight: FontWeight.w700,
+                                color: Color(0xFF0180F5),
                               ),
                             ),
                           ],
@@ -201,13 +203,13 @@ class _TargetPageState extends State<TargetPage> {
                                       mainAxisAlignment: MainAxisAlignment.center,
                                       children: const[
                                         Text("50%",style: TextStyle(
-                                          fontSize: 14,
+                                          fontSize: 15,
                                           fontWeight: FontWeight.w600,
                                           color: const Color(0xFF232C2E),
                                         ),),
                                         SizedBox(height: 2,),
                                         Text("Achive",style: TextStyle(
-                                          fontSize: 12,
+                                          fontSize: 13,
                                           fontWeight: FontWeight.w400,
                                           color: const Color(0xFF232C2E),
                                         ),),
@@ -226,7 +228,7 @@ class _TargetPageState extends State<TargetPage> {
                                   children: [
                                     const Text('Target quantity',
                                       style: TextStyle(
-                                          fontSize: 11,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                           color:Color(0xFF232C2E)
 
@@ -237,7 +239,7 @@ class _TargetPageState extends State<TargetPage> {
                                       children: const [
                                          Text('500',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w700,
                                               color:Color(0xFF232C2E)
 
@@ -248,7 +250,7 @@ class _TargetPageState extends State<TargetPage> {
                                     const SizedBox(height: 16,),
                                     const Text('Achive Amount',
                                       style: TextStyle(
-                                          fontSize: 11,
+                                          fontSize: 12,
                                           fontWeight: FontWeight.w400,
                                           color:Color(0xFF232C2E)
 
@@ -259,7 +261,7 @@ class _TargetPageState extends State<TargetPage> {
                                       children: const [
                                         Text('250',
                                           style: TextStyle(
-                                              fontSize: 15,
+                                              fontSize: 16,
                                               fontWeight: FontWeight.w700,
                                               color:Color(0xFF0180F5)
 

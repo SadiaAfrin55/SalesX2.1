@@ -28,6 +28,10 @@ class PhonenumberTextField extends StatelessWidget {
         contentPadding:
         EdgeInsets.symmetric(vertical: 11.0,horizontal: 12),
         border: InputBorder.none,
+        enabledBorder: OutlineInputBorder(
+          borderRadius: BorderRadius.circular(8.0,),
+          borderSide: BorderSide(color: Colors.transparent,),
+        ),
         filled: true,
         fillColor: Color(0xFFF5F7F8),
       ),

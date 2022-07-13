@@ -64,13 +64,19 @@ class _StoreLatLonState extends State<StoreLatLon> with SingleTickerProviderStat
     var tokenx = await _localDataGet.getData();
     setState(() {
       storeId = tokenx.get('storeId');
-      Logger().d("widget shopId"+storeId!);
+      Logger().d("widget shopId "+storeId!);
       role = tokenx.get('role');
 
       if(role=="SEC") {
         Logger().d("call api");
         BlocProvider.of<StoreCubit>(context).checkStoreLanLot(storeId!);
       }
+
+      if(role=="OM") {
+        Logger().d("call api");
+        BlocProvider.of<StoreCubit>(context).checkStoreLanLot(storeId!);
+      }
+
     });
   }
 

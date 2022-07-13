@@ -22,10 +22,10 @@ class TargetCard extends StatelessWidget {
         children: [
           CircleAvatar(
               radius: 35,
-              //backgroundColor: Colors.transparent,
+              backgroundColor: Colors.transparent,
               child: Center(child: cardImage,)),
           const SizedBox(height: 8),
-          Text('$title',style: TextStyle(
+          Text('$title',style: const TextStyle(
               fontSize: 14,
               fontWeight: FontWeight.w600,
               fontFamily: 'Manrope'
@@ -34,7 +34,7 @@ class TargetCard extends StatelessWidget {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text('$subtitle',
+              Text('See Details',
                 style: const TextStyle(
                   fontSize: 10,
                   fontWeight: FontWeight.w500,
@@ -42,9 +42,11 @@ class TargetCard extends StatelessWidget {
                   fontFamily: 'Manrope',
                 ),),
               const SizedBox(width: 2,),
-              SvgPicture.asset('assets/icons/double-arrow.svg')
+              SvgPicture.asset('assets/icons/double-arrow.svg'),
+
             ],
           ),
+          const SizedBox(height: 40),
         ],
       ),
     );

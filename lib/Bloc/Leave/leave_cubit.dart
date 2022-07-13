@@ -67,25 +67,25 @@ class LeaveCubit extends Cubit<LeaveState> {
     });
   }
 
-  // void loadedApprovedLeave(String linemanageId, String status, String token) {
-  //   LeaveRepository().loadedPendingLeave(linemanageId,status,token).then((leave){
-  //     logger.d(leave);
-  //     if(leave!=null){
-  //       emit(ApprovedLeaveLoded(leaveResponse: leave));
-  //     }
-  //
-  //   });
-  // }
+  void loadedApprovedLeave(String linemanageId, String status, String token) {
+    LeaveRepository().loadedPendingLeave(linemanageId,status,token).then((leave){
+      logger.d(leave);
+      if(leave!=null){
+        emit(ApprovedLeaveLoded(leaveResponse: leave));
+      }
 
-  // void loadedRejectLeave(String linemanageId, String status, String token) {
-  //   LeaveRepository().loadedPendingLeave(linemanageId,status,token).then((leave){
-  //     logger.d(leave);
-  //     if(leave!=null){
-  //       emit(RejectedLeaveLoded(leaveResponse: leave));
-  //     }
-  //
-  //   });
-  // }
+    });
+  }
+
+  void loadedRejectLeave(String linemanageId, String status, String token) {
+    LeaveRepository().loadedPendingLeave(linemanageId,status,token).then((leave){
+      logger.d(leave);
+      if(leave!=null){
+        emit(RejectedLeaveLoded(leaveResponse: leave));
+      }
+
+    });
+  }
 
   void updateLeaveStatus(String id, String status) {
     LeaveRepository().updateLeaveStatus(id,status).then((leave){

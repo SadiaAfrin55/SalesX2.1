@@ -86,6 +86,7 @@ class StoreNetwork {
 
   Future checkStoreLanLot(String storeId) async{
     print("ssssssssss"+storeId);
+    print(storeId);
     try{
       final response=await get(Uri.parse(BASE_URL+'stores/latloncheck/'+storeId),
         headers: {

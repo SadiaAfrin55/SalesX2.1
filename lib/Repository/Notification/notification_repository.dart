@@ -12,4 +12,11 @@ class NotificationRepository{
     logger.d(rawx);
     return NotificationResponse.fromJson(rawx);
   }
+
+  Future<NotificationResponse> loadedYourNotification(String userId) async{
+    final rawx=await NotificationNetwork().loadedYourNotification(userId);
+    logger.d(rawx);
+    return NotificationResponse.fromJson(rawx);
+  }
+
 }

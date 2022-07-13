@@ -24,15 +24,15 @@ class LeaveError extends LeaveState {
 //   GetLeaveByMonth({this.monthlyleaveResponse});
 // }
 //
-// class ApprovedLeaveLoded extends LeaveState {
-//   final LeaveResponse? leaveResponse;
-//   ApprovedLeaveLoded({this.leaveResponse});
-// }
-//
-// class RejectedLeaveLoded extends LeaveState {
-//   final LeaveResponse? leaveResponse;
-//   RejectedLeaveLoded({this.leaveResponse});
-// }
+class ApprovedLeaveLoded extends LeaveState {
+  final LeaveResponse? leaveResponse;
+  ApprovedLeaveLoded({this.leaveResponse});
+}
+
+class RejectedLeaveLoded extends LeaveState {
+  final LeaveResponse? leaveResponse;
+  RejectedLeaveLoded({this.leaveResponse});
+}
 
 class UpdateStatus extends LeaveState{
   final String? response;

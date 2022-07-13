@@ -61,190 +61,249 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     return SafeArea(
-      child: Scaffold(
-        backgroundColor: Colors.white,
-        appBar: const PreferredSize(
-            preferredSize: Size.fromHeight(65),
-            child: CustomAppBar()
-        ),
-        body: SingleChildScrollView(
-          child: Container(
-            width: MediaQuery.of(context).size.width,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                const SizedBox(height: 21,),
+      child: RefreshIndicator(
+        onRefresh: () async {
+          return Future<void>.delayed(const Duration(seconds: 1));
+        },
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: const PreferredSize(
+              preferredSize: Size.fromHeight(65),
+              child: CustomAppBar()
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              width: MediaQuery.of(context).size.width,
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  const SizedBox(height: 21,),
 
-                Column(
-                  children: [
-                    BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
-                      builder: (context, state) {
-                        if(state is !CheckUserDayoffAtendance){
-                          return Center(child: Text("loading"),);
-                        }
-                        var data = (state as CheckUserDayoffAtendance).attendance;
+                  Column(
+                    children: [
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
 
-                        return data=="yes"? Center(
-                          child: RichText(
-                            textAlign: TextAlign.center,
-                            text: const TextSpan(
-                              children: <TextSpan>[
-                                TextSpan(text: 'You can’t create any sales or\n survey today.', style: TextStyle(fontSize:14,fontWeight: FontWeight.w400,color: Colors.black)),
-                                TextSpan(text: ' It’s your dayclose',style: TextStyle(fontSize:14,fontWeight: FontWeight.w400,color: Colors.redAccent)),
-                              ],
+                          return data=="yes"? Container(
+                            color: Colors.lightBlue,
+                            child: SizedBox(
+                              height: 21,
+                              child: Center(
+                                child: RichText(
+                                  textAlign: TextAlign.center,
+                                  text: const TextSpan(
+                                    children: <TextSpan>[
+                                      TextSpan(text: 'You can’t create any sales or\n survey today.', style: TextStyle(fontSize:14,fontWeight: FontWeight.w400,color: Colors.black)),
+                                      TextSpan(text: ' It’s your dayclose',style: TextStyle(fontSize:14,fontWeight: FontWeight.w400,color: Colors.redAccent)),
+                                    ],
+                                  ),
+                                ),
+                              ),
                             ),
-                          ),
-                        ):Text('');
-                      },
-                    )
+                          ):SizedBox(
+                              height: 5,
+                              child: Container(color:Colors.lime,child: Text('')));
+                        },
+                      )
 
-                  ],
-                ),
-
-                const SizedBox(height: 21,),
-                Center(child: SvgPicture.asset("assets/images/banner.svg", semanticsLabel: 'Acme Logo',width: MediaQuery.of(context).size.width*0.9,)),
-                const SizedBox(height: 24,),
-                StoreLatLon(),
-                const Padding(
-                  padding: EdgeInsets.only(left: 16.0,right: 16,bottom: 10),
-                  child: Text("Your work list",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold ),),
-                ),
-
-
-                Padding(
-                padding: const EdgeInsets.all(16.0),
-                child: GridView(
-                  physics: const NeverScrollableScrollPhysics(),
-                  shrinkWrap: true,
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisCount: 2,
-                    crossAxisSpacing: 17.0,
-                    mainAxisSpacing: 16.0,
-                    childAspectRatio:6/3
+                    ],
                   ),
-                  children: [
-                    BigButtonIcon(text: "Attendance",color: const Color(0xFFFEEBEF),image: "assets/icons/cardIcon/Attendance.svg",tap: (){
-                      Navigator.pushNamed(context, ATTENDANCE);
-                    },),
+
+                  //const SizedBox(height: 21,),
+                  Center(child: SvgPicture.asset("assets/images/banner.svg", semanticsLabel: 'Acme Logo',width: MediaQuery.of(context).size.width*0.9,)),
+                  const SizedBox(height: 24,),
+                  StoreLatLon(),
+                  const Padding(
+                    padding: EdgeInsets.only(left: 16.0,right: 16,bottom: 10),
+                    child: Text("Your work list",style: TextStyle(fontSize:15,fontWeight: FontWeight.bold ),),
+                  ),
 
 
-                    BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
-                      builder: (context, state) {
-                        if(state is !CheckUserDayoffAtendance){
-                          return Center(child: Text("loading"),);
-                        }
-                        var data = (state as CheckUserDayoffAtendance).attendance;
-
-                        return data=="yes"?BigButtonIcon(text: "Sales",color: const Color(0xFFFFF6E1),image: "assets/icons/cardIcon/My survey.svg",tap: (){
-                          showDialog(context: context,
-                              builder: (BuildContext context){
-                                return AlertDialog(
-                                  content: AleartDialogue(
-                                    pressed: (){
-                                      Navigator.pushReplacement(context, PageTransition(SalesHistory()));
-                                    }
-                                  )
-                                );
-                              }
-                          );
-                        },):BigButtonIcon(text: "Sales",color: const Color(0xFFFFF6E1),image: "assets/icons/cardIcon/My survey.svg",tap: (){
-                                          Navigator.pushNamed(context, SALES_CREATE_PAGE);
-                                        },);
-                      },
+                  Padding(
+                  padding: const EdgeInsets.all(16.0),
+                  child: GridView(
+                    physics: const NeverScrollableScrollPhysics(),
+                    shrinkWrap: true,
+                    gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisCount: 2,
+                      crossAxisSpacing: 17.0,
+                      mainAxisSpacing: 16.0,
+                      childAspectRatio:6/3
                     ),
+                    children: [
+                      BigButtonIcon(text: "Attendance",color: const Color(0xFFFEEBEF),image: "assets/icons/cardIcon/Attendance.svg",tap: (){
+                        Navigator.pushNamed(context, ATTENDANCE);
+                      },),
 
-                    BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
-                      builder: (context, state) {
-                        if(state is !CheckUserDayoffAtendance){
-                          return Center(child: Text("loading"),);
-                        }
-                        var data = (state as CheckUserDayoffAtendance).attendance;
 
-                        return data=="yes"?BigButtonIcon(text: "Survey",color: const Color(0xFFE2FDED),image: "assets/icons/cardIcon/Survey.svg",tap: (){
-                          showDialog(context: context,
-                              builder: (BuildContext context){
-                                return AlertDialog(
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
+
+                          return data=="yes"?BigButtonIcon(text: "Sales",color: const Color(0xFFFFF6E1),image: "assets/icons/cardIcon/My survey.svg",tap: (){
+                            showDialog(context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
                                     content: AleartDialogue(
-                                        pressed: (){
-                                          Navigator.pushReplacement(context, PageTransition(SurveyHistory()));
-                                        }
+                                      pressed: (){
+                                        Navigator.pushReplacement(context, PageTransition(SalesHistory()));
+                                      }
                                     )
-                                );
-                              }
-                          );
-                        },): BigButtonIcon(text: "Survey",color: const Color(0xFFE2FDED),image: "assets/icons/cardIcon/Survey.svg",tap: (){
-                          Navigator.pushNamed(context, SURVEY_PAGE);
-                        },);
-                      },
-                    ),
+                                  );
+                                }
+                            );
+                          },):BigButtonIcon(text: "Sales",color: const Color(0xFFFFF6E1),image: "assets/icons/cardIcon/My survey.svg",tap: (){
+                                            Navigator.pushNamed(context, SALES_CREATE_PAGE);
+                                          },);
+                        },
+                      ),
 
-                    BigButtonIcon(text: "Target",color: const Color(0xFFE1F3FF),image: "assets/icons/cardIcon/Target.svg",tap: (){
-                       Navigator.pushNamed(context, TARGET_PAGE);
-                    },),
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
 
-                    BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
-                      builder: (context, state) {
-                        if(state is !CheckUserDayoffAtendance){
-                          return Center(child: Text("loading"),);
-                        }
-                        var data = (state as CheckUserDayoffAtendance).attendance;
+                          return data=="yes"?BigButtonIcon(text: "Survey",color: const Color(0xFFE2FDED),image: "assets/icons/cardIcon/Survey.svg",tap: (){
+                            showDialog(context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                      content: AleartDialogue(
+                                          pressed: (){
+                                            Navigator.pushReplacement(context, PageTransition(SurveyHistory()));
+                                          }
+                                      )
+                                  );
+                                }
+                            );
+                          },): BigButtonIcon(text: "Survey",color: const Color(0xFFE2FDED),image: "assets/icons/cardIcon/Survey.svg",tap: (){
+                            Navigator.pushNamed(context, SURVEY_PAGE);
+                          },);
+                        },
+                      ),
 
-                        return data=="yes"?BigButtonIcon(text: "Inventory",color: const Color(0xFFE2E1FF),image: "assets/icons/cardIcon/inventory.svg",tap: (){
-                          showDialog(context: context,
-                              builder: (BuildContext context){
-                                return AlertDialog(
-                                    content: AleartDialogue(
-                                        pressed: (){
-                                          Navigator.pushReplacement(context, PageTransition(InventoryList()));
-                                        }
-                                    )
-                                );
-                              }
-                          );
-                        },): BigButtonIcon(text: "Inventory",color: const Color(0xFFE2E1FF),image: "assets/icons/cardIcon/inventory.svg",tap: (){
-                          Navigator.pushNamed(context, INVENTORY_PAGE);
-                        },);
-                      },
-                    ),
+                      BigButtonIcon(text: "Target",color: const Color(0xFFE1F3FF),image: "assets/icons/cardIcon/Target.svg",tap: (){
+                         Navigator.pushNamed(context, TARGET_PAGE);
+                      },),
 
-                    BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
-                      builder: (context, state) {
-                        if(state is !CheckUserDayoffAtendance){
-                          return Center(child: Text("loading"),);
-                        }
-                        var data = (state as CheckUserDayoffAtendance).attendance;
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
 
-                        return data=="yes"?BigButtonIcon(text: "Leave",color: const Color(0xFFF1E1FF),image: "assets/icons/cardIcon/Leave.svg",tap: (){
-                          showDialog(context: context,
-                              builder: (BuildContext context){
-                                return AlertDialog(
-                                    content: AleartDialogue(
-                                        pressed: (){
-                                          Navigator.pushReplacement(context, PageTransition(LeaveHistory()));
-                                        }
-                                    )
-                                );
-                              }
-                          );
-                        },): BigButtonIcon(text: "Leave",color: const Color(0xFFF1E1FF),image: "assets/icons/cardIcon/Leave.svg",tap: (){
-                          Navigator.pushNamed(context, LEAVE_PAGE);
-                        },);
-                      },
-                    ),
+                          return data=="yes"?BigButtonIcon(text: "Inventory",color: const Color(0xFFE2E1FF),image: "assets/icons/cardIcon/inventory.svg",tap: (){
+                            showDialog(context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                      content: AleartDialogue(
+                                          pressed: (){
+                                            Navigator.pushReplacement(context, PageTransition(InventoryList()));
+                                          }
+                                      )
+                                  );
+                                }
+                            );
+                          },): BigButtonIcon(text: "Inventory",color: const Color(0xFFE2E1FF),image: "assets/icons/cardIcon/inventory.svg",tap: (){
+                            Navigator.pushNamed(context, INVENTORY_PAGE);
+                          },);
+                        },
+                      ),
 
-                    BigButtonIcon(text: "Training",color: const Color(0xFFFFEFE0),image: "assets/icons/cardIcon/Tr Attendance.svg",tap: (){
-                      Navigator.pushNamed(context, TRAINING_PAGE);
-                    },),
-                    BigButtonIcon(text: "Feedback",color: const Color(0xFFE0EDFF),image: "assets/icons/cardIcon/Feedback.svg",tap: (){
-                      Navigator.pushNamed(context, FEEDBACK_PAGE);
-                    },),
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
 
-                  ],
-                ),
-                ),
+                          return data=="yes"?BigButtonIcon(text: "Leave",color: const Color(0xFFF1E1FF),image: "assets/icons/cardIcon/Leave.svg",tap: (){
+                            showDialog(context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                      content: AleartDialogue(
+                                          pressed: (){
+                                            Navigator.pushReplacement(context, PageTransition(LeaveHistory()));
+                                          }
+                                      )
+                                  );
+                                }
+                            );
+                          },): BigButtonIcon(text: "Leave",color: const Color(0xFFF1E1FF),image: "assets/icons/cardIcon/Leave.svg",tap: (){
+                            Navigator.pushNamed(context, LEAVE_PAGE);
+                          },);
+                        },
+                      ),
 
-              ],
 
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
+
+                          return data=="yes"?BigButtonIcon(text: "Training",color: const Color(0xFFFFEFE0),image: "assets/icons/cardIcon/Tr Attendance.svg",tap: (){
+                            showDialog(context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                      content: AleartDialogue(
+                                          pressed: (){
+                                            Navigator.pushReplacement(context, PageTransition(MainScreen()));
+                                          }
+                                      )
+                                  );
+                                }
+                            );
+                          },): BigButtonIcon(text: "Training",color: const Color(0xFFFFEFE0),image: "assets/icons/cardIcon/Tr Attendance.svg",tap: (){
+                            Navigator.pushNamed(context, TRAINING_PAGE);
+                          },);
+                        },
+                      ),
+
+
+                      BlocBuilder<DayoffAttendanceCubit, DayoffAttendanceState>(
+                        builder: (context, state) {
+                          if(state is !CheckUserDayoffAtendance){
+                            return Center(child: Text("loading"),);
+                          }
+                          var data = (state as CheckUserDayoffAtendance).attendance;
+
+                          return data=="yes"?BigButtonIcon(text: "Feedback",color: const Color(0xFFE0EDFF),image: "assets/icons/cardIcon/Feedback.svg",tap: (){
+                            showDialog(context: context,
+                                builder: (BuildContext context){
+                                  return AlertDialog(
+                                      content: AleartDialogue(
+                                          pressed: (){
+                                            Navigator.pushReplacement(context, PageTransition(MainScreen()));
+                                          }
+                                      )
+                                  );
+                                }
+                            );
+                          },): BigButtonIcon(text: "Feedback",color: const Color(0xFFE0EDFF),image: "assets/icons/cardIcon/Feedback.svg",tap: (){
+                            Navigator.pushNamed(context, FEEDBACK_PAGE);
+                          },);
+                        },
+                      ),
+
+
+                    ],
+                  ),
+                  ),
+
+                ],
+
+              ),
             ),
           ),
         ),

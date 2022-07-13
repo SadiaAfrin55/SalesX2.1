@@ -68,3 +68,4 @@ class StoreHolidayCheck extends AttendenceState{
   StoreHolidayCheck({this.holiday});
 
 }
+

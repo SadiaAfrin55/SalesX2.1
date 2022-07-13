@@ -10,9 +10,9 @@ VmAttendanceByDateResponse _$VmAttendanceByDateResponseFromJson(
         Map<String, dynamic> json) =>
     VmAttendanceByDateResponse(
       json['success'] as bool?,
-      json['attendance'] == null
-          ? null
-          : VmAttendances.fromJson(json['attendance'] as Map<String, dynamic>),
+      (json['attendance'] as List<dynamic>?)
+          ?.map((e) => VmAttendances.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$VmAttendanceByDateResponseToJson(

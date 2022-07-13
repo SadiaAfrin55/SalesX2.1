@@ -1,5 +1,6 @@
 
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:lottie/lottie.dart';
 
 import '../Button/CustomButoon/custom_button.dart';
@@ -17,14 +18,17 @@ class AleartDialogue extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
           Container(
-              height:150,
-              width: 150,
-              child: Lottie.asset('assets/lottie/sorry.json',)),
-          const SizedBox(height: 10,),
-          const Text("Sorry ! You can't, today is your day off",
+              height:140,
+              width: 140,
+              child: SvgPicture.asset('assets/icons/daypopup.svg')
+              //Lottie.asset('assets/lottie/sorry.json',)
+            ),
+          const SizedBox(height: 15,),
+          const Text("You can’t create any sales\nor survey today. It’s your dayclose",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 14,
-                fontWeight: FontWeight.w400,
+                fontWeight: FontWeight.w500,
                 color: Colors.black
             ),
           ),

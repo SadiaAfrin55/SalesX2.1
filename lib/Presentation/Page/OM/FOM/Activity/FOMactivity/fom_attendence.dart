@@ -24,7 +24,7 @@ class _FomAttendenceSurveyState extends State<FomAttendenceSurvey> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            title: const Text('Attendance',
+            title: const Text('Attendancerrr',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
@@ -124,6 +124,7 @@ class _FomAttendenceSurveyState extends State<FomAttendenceSurvey> {
                     ),
                   ],
                 ),
+
                 ListView.builder(
                     shrinkWrap: true,
                     scrollDirection: Axis.vertical,

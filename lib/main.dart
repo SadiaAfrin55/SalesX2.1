@@ -4,9 +4,12 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:path_provider/path_provider.dart' as pathProvider;
+import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cubit.dart';
 import 'package:salesx_new_project/Bloc/DayoffAttendance/dayoff_attendance_cubit.dart';
+import 'package:salesx_new_project/Bloc/List/list_cubit.dart';
 import 'package:salesx_new_project/Bloc/Notification/notification_cubit.dart';
 import 'package:salesx_new_project/Bloc/Store/store_cubit.dart';
+import 'package:salesx_new_project/Presentation/Page/Visit/Bloc/visit_cubit.dart';
 import 'Bloc/Attendence/FoeAttendence/foe_attendence_cubit.dart';
 import 'Bloc/Attendence/attendence_cubit.dart';
 import 'Bloc/Dayoff/dayoff_cubit.dart';
@@ -72,6 +75,15 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<NotificationCubit>(
           create: (context) => NotificationCubit(),
+        ),
+        BlocProvider<VmAttendenceCubit>(
+          create: (context) => VmAttendenceCubit(),
+        ),
+        BlocProvider<ListCubit>(
+          create: (context) => ListCubit(),
+        ),
+        BlocProvider<VisitCubit>(
+          create: (context) => VisitCubit(),
         ),
 
       ],

@@ -1,6 +1,7 @@
 // ignore: file_names
 import 'package:json_annotation/json_annotation.dart';
 
+import 'VmAttendanceResponse.dart';
 import 'VmAttendances.dart';
 
 
@@ -12,7 +13,7 @@ part 'VmAttendanceByDateResponse.g.dart';
 class VmAttendanceByDateResponse {
 
   bool? success;
-  VmAttendances? attendance;
+  List<VmAttendances>? attendance;
 
 
   VmAttendanceByDateResponse(this.success, this.attendance);

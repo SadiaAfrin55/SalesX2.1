@@ -45,95 +45,98 @@ class _SecAttendenceSurveyState extends State<SecAttendenceSurvey> {
             elevation: 0.5,
           ),
           body: SingleChildScrollView(
-            child: Column(
-              children: [
-                Column(
-                  children: [
-                    Container(
-                      height: _height,
-                      color: const Color(0xFFE6F2FE),
-                      child: Padding(
-                        padding: const EdgeInsets.symmetric(horizontal: 12.0),
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          children: [
-                            Expanded(
-                              child: Row(
-                                children: [
-                                  Expanded(
-                                      flex:1,
-                                      child: SvgPicture.asset('assets/icons/filter_icon.svg')),
-                                  Expanded(
-                                      flex: 8,
-                                      child: Text('Filter',style: TextStyle(fontSize:16,fontWeight:FontWeight.w600,color: Color(0xFF0180F5),))),
-                                ],
-                              ),
-                            ),
+            child: Container(
 
-                            InkWell(
-                              onTap: (){
-                                setState(() {
-                                  isVisible = !isVisible;
-                                });
-                              },
-                              child: Column(
-                                mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                                  isVisible?
-                                  SvgPicture.asset('assets/icons/filter-side.svg'):
-                                  SvgPicture.asset('assets/icons/filter-back.svg'),
-                                ],
-                              ),
-                            ),
-
-                          ],
-                        ),
-                      ),
-                    ),
-                    InkWell(
-                      onTap: (){
-                        setState(() {
-                          _height = 264;
-                        });
-                      },
-                      child: Visibility(
-                        visible: !isVisible,
-                        child: Align(
-                          alignment: Alignment.bottomCenter,
-                          child: AnimatedContainer(
-                            duration: const Duration(seconds: 1),
-                            curve: Curves.easeInOut,
-                            color: Colors.green,
-                            height: _height,
-                            child: Column(
-                              children: [
-                                Row(
-                                  children: [
-                                    Column(
-                                      children: [
-
-                                      ],
-                                    ),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                        ),
-                      ),
-                    ),
-                  ],
-                ),
-                ListView.builder(
-                  shrinkWrap: true,
-                  scrollDirection: Axis.vertical,
-                    physics: const NeverScrollableScrollPhysics(),
-                  itemCount: 20,
-                  itemBuilder: (context,index){
-                    return AttendencelistCard();
-                  }
-                ),
-              ],
+              child: Column(
+                children: [
+                  // Column(
+                  //   children: [
+                  //     Container(
+                  //       height: _height,
+                  //       color: const Color(0xFFE6F2FE),
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Expanded(
+                  //               child: Row(
+                  //                 children: [
+                  //                   Expanded(
+                  //                       flex:1,
+                  //                       child: SvgPicture.asset('assets/icons/filter_icon.svg')),
+                  //                   Expanded(
+                  //                       flex: 8,
+                  //                       child: Text('Filter',style: TextStyle(fontSize:16,fontWeight:FontWeight.w600,color: Color(0xFF0180F5),))),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //
+                  //             InkWell(
+                  //               onTap: (){
+                  //                 setState(() {
+                  //                   isVisible = !isVisible;
+                  //                 });
+                  //               },
+                  //               child: Column(
+                  //                 mainAxisAlignment: MainAxisAlignment.center,
+                  //                 children: [
+                  //                   isVisible?
+                  //                   SvgPicture.asset('assets/icons/filter-side.svg'):
+                  //                   SvgPicture.asset('assets/icons/filter-back.svg'),
+                  //                 ],
+                  //               ),
+                  //             ),
+                  //
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: (){
+                  //         setState(() {
+                  //           _height = 264;
+                  //         });
+                  //       },
+                  //       child: Visibility(
+                  //         visible: !isVisible,
+                  //         child: Align(
+                  //           alignment: Alignment.bottomCenter,
+                  //           child: AnimatedContainer(
+                  //             duration: const Duration(seconds: 1),
+                  //             curve: Curves.easeInOut,
+                  //             color: Colors.green,
+                  //             height: _height,
+                  //             child: Column(
+                  //               children: [
+                  //                 Row(
+                  //                   children: [
+                  //                     Column(
+                  //                       children: [
+                  //
+                  //                       ],
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
+                  ListView.builder(
+                    shrinkWrap: true,
+                    scrollDirection: Axis.vertical,
+                      physics: const NeverScrollableScrollPhysics(),
+                    itemCount: 20,
+                    itemBuilder: (context,index){
+                      return AttendencelistCard();
+                    }
+                  ),
+                ],
+              ),
             ),
           ),
         ),

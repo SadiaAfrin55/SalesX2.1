@@ -138,7 +138,7 @@ class _FomMoreComponentsState extends State<FomMoreComponents> {
                           Navigator.pushNamed(context, ATTENDANCE_HISTORY);
                         },
                         child: MoreOptionsCard(
-                          image: SvgPicture.asset('assets/icons/cardIcon/attendene.svg',height: 16,),
+                          image: SvgPicture.asset('assets/icons/attendenceHistory.svg'),
                           title: 'Attendance History',
                           color: const Color(0xFFFFE5E0),
                         ),
@@ -148,11 +148,23 @@ class _FomMoreComponentsState extends State<FomMoreComponents> {
                           Navigator.pushNamed(context, LEAVE_HISTORY);
                         },
                         child: MoreOptionsCard(
-                          image: SvgPicture.asset('assets/icons/cardIcon/leave.svg',color: const Color(0xFFFDC741)),
+                          image: SvgPicture.asset('assets/icons/leave_history.svg'),
                           title: 'Leave History',
                           color: const Color(0xFFFFF6E1),
                         ),
                       ),
+
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, VISIT_HISTORY_PAGE);
+                        },
+                        child: MoreOptionsCard(
+                          image: SvgPicture.asset('assets/icons/cardIcon/visit.svg',height: 16,color: const Color(0xFFC47CFD)),
+                          title: 'Visit History',
+                          color: const Color(0xFFF1E1FF),
+                        ),
+                      ),
+
                       GestureDetector(
                         onTap: (){
                           Navigator.pushNamed(context, FOM_FOE_LIST);
@@ -256,7 +268,7 @@ class _FomMoreComponentsState extends State<FomMoreComponents> {
                         padding: const EdgeInsets.all(6.0),
                         child: InkWell(
                           onTap: () {
-                            logOut(context);
+                            Navigator.pushNamed(context, OM_DAYOFF);
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16),

@@ -22,4 +22,14 @@ class NotificationCubit extends Cubit<NotificationState> {
     });
   }
 
+  void loadedYourNotification(String userId) {
+    print("notiifjjj");
+    NotificationRepository().loadedYourNotification(userId).then((response) {
+      logger.d(response);
+      if (response != null) {
+        emit(AllNotificationget(notificationResponse: response));
+      }
+    });
+  }
+
 }

@@ -32,9 +32,9 @@ class SalesServyGetByMonth extends SalesState{
 }
 
 class GetSalesSurveyPradiction extends SalesState {
-  final SurveyPredictionDataResponse? surveyPredictionDataResponse;
+  final SaleChartResponse? saleChartResponse;
 
-  GetSalesSurveyPradiction({this.surveyPredictionDataResponse});
+  GetSalesSurveyPradiction({this.saleChartResponse});
 }
 
 class GetFoewUserSalesSurveyPradiction extends SalesState {

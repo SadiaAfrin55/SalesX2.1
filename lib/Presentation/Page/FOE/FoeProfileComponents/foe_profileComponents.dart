@@ -12,6 +12,8 @@ import '../../../../Constants/Colors/app_colors.dart';
 import '../../../../Constants/Strings/app_strings.dart';
 import '../../../../Service/LocalDataBase/localdata.dart';
 import '../../../main_screen.dart';
+import '../../OM/OmDayoff/om_dayoff.dart';
+import '../../Profile/Dayoff/mark_foe_dayoff.dart';
 import '../../Profile/ProfileComponents/moreOption_components.dart';
 
 
@@ -139,9 +141,9 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                           Navigator.pushNamed(context, ATTENDANCE_HISTORY);
                         },
                         child: MoreOptionsCard(
-                          image: SvgPicture.asset('assets/icons/cardIcon/attendene.svg',height: 16,),
+                          image: SvgPicture.asset('assets/icons/attendenceHistory.svg'),
                           title: 'Attendance History',
-                          color: const Color(0xFFFFE5E0),
+                          color: Color(0xFFFFE5E0),
                         ),
                       ),
                       GestureDetector(
@@ -149,14 +151,14 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                           Navigator.pushNamed(context, LEAVE_HISTORY);
                         },
                         child: MoreOptionsCard(
-                          image: SvgPicture.asset('assets/icons/cardIcon/leave.svg',color: const Color(0xFFFDC741)),
+                          image: SvgPicture.asset('assets/icons/leave_history.svg'),
                           title: 'Leave History',
-                          color: const Color(0xFFFFF6E1),
+                          color: Color(0xFFFFF6E1),
                         ),
                       ),
                       GestureDetector(
                         onTap: (){
-                          Navigator.pushNamed(context, LEAVE_HISTORY);
+                          Navigator.pushNamed(context, VISIT_HISTORY_PAGE);
                         },
                         child: MoreOptionsCard(
                           image: SvgPicture.asset('assets/icons/cardIcon/visit.svg',height: 16,color: const Color(0xFFC47CFD)),
@@ -180,9 +182,9 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                           showAlertDialog(context);
                         },
                         child: MoreOptionsCard(
-                          image: SvgPicture.asset('assets/icons/dayClose.svg',height: 16,),
+                          image: SvgPicture.asset('assets/icons/dayClose.svg'),
                           title: 'Day close',
-                          color: const Color(0xFFFFEFE0),
+                          color: Color(0xFFFFEFE0),
                         ),
                       ),
                       InkWell(
@@ -248,12 +250,12 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                             Navigator.pop(context);
                           },
                           child: Container(
-                            padding: const EdgeInsets.all(16),
+                            padding: EdgeInsets.all(16),
                             height: 54,
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
-                                color: const Color(0XFFE1F0FF)),
+                                color: Color(0XFFE1F0FF)),
                             child: const Text(
                               "No",
                               style:
@@ -268,7 +270,10 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                         padding: const EdgeInsets.all(6.0),
                         child: InkWell(
                           onTap: () {
-                            logOut(context);
+                            Navigator.push(
+                              context,
+                              MaterialPageRoute(builder: (context) => OmDayoff()),
+                            );
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16),
@@ -276,7 +281,7 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                             width: MediaQuery.of(context).size.width,
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(6),
-                                color: const Color(0xFF0180F5)),
+                                color: Color(0xFF0180F5)),
                             child: const Text(
                               "Yes",
                               style:
@@ -286,6 +291,41 @@ class _FoeMoreComponentsState extends State<FoeMoreComponents> {
                           ),
                         )),
                   ),
+
+
+                  // Expanded(
+                  //   child: Padding(
+                  //       padding: const EdgeInsets.all(6.0),
+                  //       child: InkWell(
+                  //         onTap: () {
+                  //           setState(() {
+                  //             marking = true;
+                  //           });
+                  //           Navigator.pop(context);
+                  //           print(_image);
+                  //           print(storeid);
+                  //           print(businessunit);
+                  //           print(userid);
+                  //           print(addrerss);
+                  //           BlocProvider.of<AttendenceCubit>(context)
+                  //               .giveDayoffAttendance(_image!,storeid!,businessunit!,userid!,addrerss!);
+                  //         },
+                  //         child: Container(
+                  //           padding: const EdgeInsets.all(16),
+                  //           height: 54,
+                  //           width: MediaQuery.of(context).size.width,
+                  //           decoration: BoxDecoration(
+                  //               borderRadius: BorderRadius.circular(6),
+                  //               color: Color(0xFF0180F5)),
+                  //           child: const Text(
+                  //             "Yes",
+                  //             style:
+                  //             TextStyle(color: Colors.white, fontSize: 16),
+                  //             textAlign: TextAlign.center,
+                  //           ),
+                  //         ),
+                  //       )),
+                  // ),
                 ],
               ),
             )

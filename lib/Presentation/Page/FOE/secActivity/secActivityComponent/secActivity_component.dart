@@ -25,6 +25,7 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
   Widget build(BuildContext context) {
     return Container(
       color: Colors.white,
+      margin: const EdgeInsets.symmetric(horizontal: 20),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -33,7 +34,7 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
               Navigator.pushNamed(context, SEC_ATTENDENCE_PAGE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/attendene.svg'),
+              image: SvgPicture.asset('assets/icons/cardIcon/Attendance.svg',height: 16,),
               title: 'Attendance',
               color: const Color(0xFFFFE5E0),
             ),
@@ -43,7 +44,7 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
               Navigator.pushNamed(context, SEC_SALES_PAGE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/sales.svg',height: 16,),
+              image: SvgPicture.asset('assets/icons/cardIcon/My survey.svg',height: 16,),
               title: 'Sales',
               color: const Color(0xFFFFF6E1),
             ),
@@ -53,7 +54,7 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
               Navigator.pushNamed(context, SEC_SURVEY_PAGE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/survey.svg',height: 16,),
+              image: SvgPicture.asset('assets/icons/cardIcon/Survey.svg',height: 16,),
               title: 'Survey',
               color: const Color(0xFFE2FDED),
             ),
@@ -63,37 +64,37 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
               Navigator.pushNamed(context, SEC_TARGET_PAGE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/target.svg'),
+              image: SvgPicture.asset('assets/icons/profileIcon/Target.svg'),
               title: 'Target',
               color: const Color(0xFFE1F3FF),
             ),
           ),
-          GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, SEC_INVENTORY_PAGE);
-            },
-            child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/inventory.svg'),
-              title: 'Inventory',
-              color: const Color(0xFFE8E7FD),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: (){
+          //     Navigator.pushNamed(context, SEC_INVENTORY_PAGE);
+          //   },
+          //   child: MoreOptionsCard(
+          //     image: SvgPicture.asset('assets/icons/cardIcon/inventory.svg',height: 16,),
+          //     title: 'Inventory',
+          //     color: const Color(0xFFE8E7FD),
+          //   ),
+          // ),
           GestureDetector(
             onTap: (){
               Navigator.pushNamed(context, SEC_LEAVE_PAGE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/leave.svg'),
+              image: SvgPicture.asset('assets/icons/cardIcon/Leave.svg',height: 16,),
               title: 'Leave',
               color: const Color(0xFFF1E1FF),
             ),
           ),
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, LEAVE_HISTORY);
+              Navigator.pushNamed(context, SEC_TRAINING_PAGE);
             },
             child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/cardIcon/training.svg'),
+              image: SvgPicture.asset('assets/icons/profileIcon/Tr Attendance.svg'),
               title: 'Training',
               color: const Color(0xFFFFF6E1),
             ),

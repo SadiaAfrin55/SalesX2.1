@@ -67,7 +67,7 @@ class StoreRepository {
 
   Future<StoreGetResponse> getAllStore() async{
     final rawx=await StoreNetwork().getAllStore();
-    logger.d(rawx);
+    //logger.d(rawx);
     return StoreGetResponse.fromJson(rawx);
   }
 

@@ -37,8 +37,8 @@ class SaleNetwork {
   Future getUserSaleByMonth(String userId,String leaveDate) async{
     print(leaveDate);
     try{
-      //var response=await get(Uri.parse(BASE_URL+"sales/getUserSales/byMonth/"+userId+"/"+leaveDate));
-      var response=await get(Uri.parse(BASE_URL+"sales/getUserSales/byMonth/6151a0cc11cb63219269c7e5/"+leaveDate));
+      var response=await get(Uri.parse(BASE_URL+"sales/getUserSales/byMonth/"+userId+"/"+leaveDate));
+      //var response=await get(Uri.parse(BASE_URL+"sales/getUserSales/byMonth/6151a0cc11cb63219269c7e5/"+leaveDate));
       logger.d(response.body);
       return json.decode(response.body);
     }catch(err){
@@ -68,7 +68,7 @@ class SaleNetwork {
 
   Future getUserSalesSurveyPrediction(String userId,String year) async{
     try{
-      final response=await get(Uri.parse(BASE_URL+'sales/userSalesPradiction/'+userId));
+      final response=await get(Uri.parse(BASE_URL+'sales/salesyearly?userid='+userId+"&year="+year));
       // logger.d(response.body);
       return json.decode(response.body);
     }catch(e){

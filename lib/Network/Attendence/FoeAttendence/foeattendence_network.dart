@@ -13,6 +13,7 @@ class FoeAttendenceNetwork {
   Future giveFoeAttendance(File iamge, String storeId, String businessUnit, String useId, String note,String lat,String lon)async {
     print("store id is "+storeId);
     print("business id is "+businessUnit);
+
     try{
       var request =  http.MultipartRequest(
           'POST', Uri.parse("https://api.salesx-staging.xyz/api/v1/foeAttendance/givefirstAttendance/"+useId)
@@ -35,6 +36,9 @@ class FoeAttendenceNetwork {
   }
 
   Future giveSignOffAttendance(File iamge, String useId, String note)async {
+    print(iamge);
+    print(useId);
+    print(note);
     try{
       var request =  http.MultipartRequest(
           'PATCH', Uri.parse(BASE_URL+"foeAttendance/foeSignoff/"+useId)

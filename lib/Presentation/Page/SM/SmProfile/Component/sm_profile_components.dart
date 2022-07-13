@@ -180,9 +180,19 @@ class _SmMoreComponentsState extends State<SmMoreComponents> {
                           Navigator.pushNamed(context, ATTENDANCE_HISTORY);
                         },
                         child: MoreOptionsCard(
-                          image: SvgPicture.asset('assets/icons/cardIcon/attendene.svg',height: 16,),
+                          image: SvgPicture.asset('assets/icons/attendenceHistory.svg',height: 16,),
                           title: 'Attendance History',
                           color: const Color(0xFFFFE5E0),
+                        ),
+                      ),
+                      GestureDetector(
+                        onTap: (){
+                          Navigator.pushNamed(context, VISIT_HISTORY_PAGE);
+                        },
+                        child: MoreOptionsCard(
+                          image: SvgPicture.asset('assets/icons/cardIcon/visit.svg',height: 16,color: const Color(0xFFC47CFD)),
+                          title: 'Visit History',
+                          color: const Color(0xFFF1E1FF),
                         ),
                       ),
                       GestureDetector(
@@ -195,28 +205,16 @@ class _SmMoreComponentsState extends State<SmMoreComponents> {
                           color: const Color(0xFFE8E7FD),
                         ),
                       ),
-                      // BlocBuilder<AttendenceCubit, AttendenceState>(
-                      //   builder: (context, state) {
-                      //     if (state is! MarkDayoffAttendance) {
-                      //       return Center(
-                      //         child: const CircularProgressIndicator(),
-                      //       );
-                      //     }
-                      //     final data = (state as MarkDayoffAttendance).attendance;
-                      //     return circle?Center(
-                      //       child: CircularProgressIndicator()):
-                      //     data!?Container():InkWell(
-                      //       onTap: () {
-                      //         showAlertDialog(context);
-                      //       },
-                      //       child: MoreOptionsCard(
-                      //         image: SvgPicture.asset('assets/icons/dayClose.svg',height: 16,),
-                      //         title: 'Day close',
-                      //         color: const Color(0xFFFFEFE0),
-                      //       ),
-                      //    );
-                      //       },
-                      //     ),
+                      InkWell(
+                        onTap: () {
+                          showAlertDialog(context);
+                        },
+                        child: MoreOptionsCard(
+                          image: SvgPicture.asset('assets/icons/dayClose.svg',height: 16,),
+                          title: 'Day close',
+                          color: const Color(0xFFFFEFE0),
+                        ),
+                      ),
                       InkWell(
                         onTap: () {
                           logOut(context);
@@ -303,8 +301,7 @@ class _SmMoreComponentsState extends State<SmMoreComponents> {
                             setState(() {
                               circle = true;
                             });
-                            Navigator.pop(context);
-                            //BlocProvider.of<DayoffCubit>(context).markAsDayoffAttendance(_image!);
+                            Navigator.pushNamed(context, OM_DAYOFF);
                           },
                           child: Container(
                             padding: const EdgeInsets.all(16),
