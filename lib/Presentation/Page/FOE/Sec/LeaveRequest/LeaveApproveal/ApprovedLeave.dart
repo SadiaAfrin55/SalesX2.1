@@ -9,6 +9,9 @@ import '../Components/leave_card.dart';
 
 
 class ApprovedLeave extends StatefulWidget {
+  final String? id;
+
+  const ApprovedLeave({Key? key, this.id}) : super(key: key);
   @override
   _ApprovedLeaveState createState() => _ApprovedLeaveState();
 }
@@ -26,7 +29,7 @@ class _ApprovedLeaveState extends State<ApprovedLeave> {
     var tokenx = await _localDataGet.getData();
     setState(() {
       linmanagerName = tokenx.get('linmanagerName');
-      linemanageId = tokenx.get('linmanagerid');
+      linemanageId = tokenx.get('userId');
       token = tokenx.get('token');
       role = tokenx.get('role');
 

@@ -19,7 +19,9 @@ import 'LeaveRequest/LeaveApproveal/RejectedLeave.dart';
 
 class SecLeaveHistory extends StatefulWidget {
   final String? name;
-  const SecLeaveHistory({Key? key,this.name}) : super(key: key);
+  final String? secId;
+
+  const SecLeaveHistory({Key? key,this.name, this.secId}) : super(key: key);
 
   @override
   _SecLeaveHistoryState createState() => _SecLeaveHistoryState();
@@ -45,7 +47,7 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
       //BlocProvider.of<ListCubit>(context).loadSec(linemanagerid!);
       // BlocProvider.of<ListCubit>(context).loadSecdata(linemanageId!);
       // BlocProvider.of<LeaveCubit>(context).loadedApprovedLeave(linemanageId!,"accept",token!);
-      BlocProvider.of<LeaveCubit>(context).loadedPendingLeave(linemanageId!,"pending",token!);
+      // BlocProvider.of<LeaveCubit>(context).loadedPendingLeave(linemanageId!,"pending",token!);
       // BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanageId!,"reject",token!);
     });
   }
@@ -53,7 +55,7 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
   @override
   void initState() {
     // TODO: implement initState
-
+    issueType="Pending";
     getToken();
     super.initState();
   }
@@ -152,9 +154,9 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
                   const SizedBox(height: 20,),
                   //LeaveListCard()
 
-                  issueType=="Approved"?ApprovedLeave():Text(''),
-                  issueType=="Pending"?PendingLeave():Text(''),
-                  issueType=="Rejected"?RejectedLeave():Text(''),
+                  issueType=="Approved"?ApprovedLeave(id: widget.secId,):Text(''),
+                  issueType=="Pending"?PendingLeave(id: widget.secId,):Text(''),
+                  issueType=="Rejected"?RejectedLeave(id: widget.secId,):Text(''),
                 ],
               ),
             ),

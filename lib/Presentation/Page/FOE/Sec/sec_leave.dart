@@ -113,6 +113,7 @@ class _SecLeaveState extends State<SecLeave> {
                                     Navigator.pushNamed(context, SEC_LEAVE_HISTORY_PAGE,
                                         arguments: {
                                           'name': data.linemanager![index].name,
+                                          "id":data.linemanager![index].id,
                                         }
                                     );
                                   },

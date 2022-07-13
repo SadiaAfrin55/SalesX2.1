@@ -76,7 +76,7 @@ class SurveyNetwork {
     print("charttt");
     try{
       final response=await http.get(Uri.parse(BASE_URL+'survey/get-yearly-survey?userid='+userId+"&year="+year));
-      // logger.d(response.body);
+      logger.d(response.body);
       return json.decode(response.body);
     }catch(e){
       logger.d(e);

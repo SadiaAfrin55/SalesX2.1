@@ -29,7 +29,7 @@ class _SurveyChartState extends State<SurveyChart>{
   String? year;
   var dateParse;
   List<ChartData>? chartData=[];
-
+  List<String> yearsList = ['2022','2023','2024'];
   LocalDataGet _localDataGet = LocalDataGet();
 
   getToken() async {
@@ -67,9 +67,14 @@ class _SurveyChartState extends State<SurveyChart>{
         if(state is GetSurveyPradiction){
           final data=(state as GetSurveyPradiction).surveyPredictionDataResponse;
           setState(() {
-            data!.object!.forEach((element) {
-              chartData!.add(ChartData(element.month.toString(),element.totalsurvey!.toDouble(),Colors.blueAccent));
-            });
+            if(data!.object!.isEmpty){
+              chartData!.clear();
+            }else{
+              data.object!.forEach((element) {
+                chartData!.add(ChartData(element.month.toString(),element.totalsurvey!.toDouble(),Colors.blueAccent));
+              });
+            }
+
           });
         }
       },
@@ -110,7 +115,32 @@ class _SurveyChartState extends State<SurveyChart>{
                 ),
             ),
              ),
-
+            Container(
+              height: 45,
+              margin: EdgeInsets.symmetric(horizontal: 16,vertical: 0),
+              width: MediaQuery.of(context).size.width,
+              padding: const EdgeInsets.all(13),
+              color: const Color(0xFFF5F7F8),
+              child: DropdownButtonHideUnderline(
+                child: DropdownButton(
+                  value: year,
+                  icon: const Icon(Icons.keyboard_arrow_down,color: Color(0xFF292D32),),
+                  iconSize: 20,
+                  onChanged: (newValue) {
+                    setState(() {
+                      year=newValue.toString();
+                      BlocProvider.of<SurveyCubit>(context).getUserSurveyPrediction(userId!,year!);
+                    });
+                  },
+                  items: yearsList.map((location) {
+                    return DropdownMenuItem(
+                      child:  Text(location),
+                      value:location,
+                    );
+                  }).toList(),
+                ),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 12,vertical: 8),
               child: Container(

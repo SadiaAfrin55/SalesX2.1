@@ -9,6 +9,9 @@ import '../../../../../Service/LocalDataBase/localdata.dart';
 
 
 class PendingLeave extends StatefulWidget {
+  final String? id;
+
+  const PendingLeave({Key? key, this.id}) : super(key: key);
   @override
   _PendingLeaveState createState() => _PendingLeaveState();
 }

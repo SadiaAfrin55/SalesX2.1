@@ -444,7 +444,7 @@ class AppRouter {
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
               create: (context) => InventoryCubit(),
-              child: SecLeaveHistory(name:arguments!['name'],),
+              child: SecLeaveHistory(name:arguments!['name'],secId:arguments['id']),
             ));
       case SEC_LEAVE_REQUEST_PAGE:
         return MaterialPageRoute(

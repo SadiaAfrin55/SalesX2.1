@@ -57,6 +57,7 @@ class LeaveNetwork {
   }
 
   Future loadedPendingLeave(String userId,String status,String token) async{
+    Logger().e(BASE_URL+'leave/getLeaveManger/'+userId+"/"+status);
     try{
       final response=await get(Uri.parse(BASE_URL+'leave/getLeaveManger/'+userId+"/"+status),
         headers: {
@@ -64,7 +65,7 @@ class LeaveNetwork {
           "Authorization":"Bearer $token"
         },
       );
-      // logger.d(response.body);
+      logger.d(response.body);
       return json.decode(response.body);
 
     }catch(e){

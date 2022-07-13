@@ -9,6 +9,9 @@ import '../Components/leave_card.dart';
 
 
 class RejectedLeave extends StatefulWidget {
+  final  String? id;
+
+  const RejectedLeave({Key? key, this.id}) : super(key: key);
   @override
   _RejectedLeaveState createState() => _RejectedLeaveState();
 }
@@ -25,7 +28,7 @@ class _RejectedLeaveState extends State<RejectedLeave> {
     var tokenx = await _localDataGet.getData();
     setState(() {
       linmanagerName = tokenx.get('linmanagerName');
-      linemanageId = tokenx.get('linmanagerid');
+      linemanageId = tokenx.get('userId');
       //BlocProvider.of<LeaveCubit>(context).loadedRejectLeave("615ae6e526547e00086986f3","reject","s");
       BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanageId!,"reject","s");
     });
