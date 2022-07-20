@@ -17,28 +17,33 @@ class FomList extends StatefulWidget {
 
 class _FomListState extends State<FomList> {
 
-  String? linemanagerid;
   String? role;
-
+  String? userId;
+  String? shopId;
+  bool checkAtten = false;
+  String? linemanageridx;
   LocalDataGet _localDataGet = LocalDataGet();
 
   getToken() async {
     var tokenx = await _localDataGet.getData();
     setState(() {
-      linemanagerid = tokenx.get('linmanagerid');
       role = tokenx.get('role');
-      print("limmmmmm: " + linemanagerid!);
-      //BlocProvider.of<ListCubit>(context).loadSec(linemanagerid!);
-      // if(role == "SEC"){
-      //   BlocProvider.of<ListCubit>(context).loadSecdata(linemanagerid!);
-      // }
-      BlocProvider.of<ListCubit>(context).loadSecdata(linemanagerid!);
+      shopId = tokenx.get('storeId');
+      userId = tokenx.get('userId');
+      print("shopId: "+shopId!);
+      linemanageridx = tokenx.get('linemanagerid');
+      role = tokenx.get('role');
+      print("limmmmmm: " + role!);
+      // BlocProvider.of<ListCubit>(context).loadSec(linemanageridx!);
+      if(role == "SEC"){
+        BlocProvider.of<ListCubit>(context).loadSecdata(linemanageridx!);
+      }
+      BlocProvider.of<ListCubit>(context).loadSecdata(linemanageridx!);
     });
   }
 
   @override
   void initState() {
-    // TODO: implement initState
     getToken();
     super.initState();
   }

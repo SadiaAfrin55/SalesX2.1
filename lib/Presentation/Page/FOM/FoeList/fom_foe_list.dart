@@ -24,7 +24,7 @@ class _FomFoeListPageState extends State<FomFoeListPage> {
     setState(() {
       linemanagerid = tokenx.get('linmanagerid');
       role = tokenx.get('role');
-      //print("limmmmmm: " + linemanagerid!);
+      print("limmmmmm: " + role!);
       BlocProvider.of<ListCubit>(context).loadSecdata(linemanagerid!);
       //BlocProvider.of<ListCubit>(context).loadSec();
     });
