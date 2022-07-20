@@ -5,6 +5,7 @@ import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceByDateResponse.dart';
+import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
 import '../../../Data/Model/Attendance/VmAttendance/VmAttendances.dart';
 import '../../../Repository/Attendence/VmAttendence/vm_attendence_repository.dart';
 
@@ -41,16 +42,29 @@ class VmAttendenceCubit extends Cubit<VmAttendenceState> {
     });
   }
 
-  void loadVmAttendanceByMonth(String userId, String leaveDate) {
-    print("ddddddddddd");
-    VmAttendanceByDateResponse datax;
-    VmAttendanceRepository().loadVmAttendanceByMonth(userId,leaveDate).then((data) => {
+  // void loadVmAttendanceByMonth(String userId, String leaveDate) {
+  //   print("ddddddddddd");
+  //   VmAttendanceByDateResponse datax;
+  //   VmAttendanceRepository().loadVmAttendanceByMonth(userId,leaveDate).then((data) => {
+  //     logger.d(data),
+  //     if(data!=null){
+  //         emit(GetVmAttendanceByDate(attendance:null))
+  //     }
+  //   });
+  // }
+
+
+
+  void loadVmAttendanceByMonth(String userId) {
+    VmAttendanceRepository().loadVmAttendanceByMonth(userId).then((data) => {
       logger.d(data),
       if(data!=null){
-          emit(GetVmAttendanceByDate(attendance:null))
+        emit(GetVmAttendanceByDate(vmAttendanceResponse:data))
       }
     });
   }
+
+
 
   void chekVmSignffAttendance(String userId) {
     VmAttendanceRepository().chekVmSignffAttendance(userId).then((value) => {

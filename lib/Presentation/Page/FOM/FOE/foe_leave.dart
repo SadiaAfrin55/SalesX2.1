@@ -106,6 +106,7 @@ class _FoeLeaveState extends State<FoeLeave> {
                                     Navigator.pushNamed(context, SEC_LEAVE_HISTORY_PAGE,
                                         arguments: {
                                           'name': data.linemanager![index].name,
+                                          'secId': data.linemanager![index].id,
                                         }
                                     );
                                   },

@@ -145,6 +145,8 @@ class _FeedbackPageState extends State<FeedbackPage> {
                           ),
                         ),
                       ),
+                      const SizedBox(height: 12,),
+
                     ],
                   ),
                 ),

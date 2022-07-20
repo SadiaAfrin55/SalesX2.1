@@ -29,17 +29,17 @@ class _SecLeaveState extends State<SecLeave> {
   getToken() async {
     var tokenx = await _localDataGet.getData();
     setState(() {
-      //linemanagerid = tokenx.get('linmanagerid');
+      linemanagerid = tokenx.get('linmanagerid');
       role = tokenx.get('role');
 
       print("limmmmmm: " + role!);
-      //BlocProvider.of<ListCubit>(context).loadSecdata(linemanagerid!);
-      BlocProvider.of<ListCubit>(context).loadSec();
-      if(role == "FOE"){
-        BlocProvider.of<LeaveCubit>(context).loadedApprovedLeave(linemanagerid!,"accept","s");
-        BlocProvider.of<LeaveCubit>(context).loadedPendingLeave(linemanagerid!,"pending","s");
-        BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanagerid!,"reject","s");
-      }
+      BlocProvider.of<ListCubit>(context).loadSecdata(linemanagerid!);
+      //BlocProvider.of<ListCubit>(context).loadSec();
+      // if(role == "FOE"){
+      //   BlocProvider.of<LeaveCubit>(context).loadedApprovedLeave(linemanagerid!,"accept","s");
+      //   BlocProvider.of<LeaveCubit>(context).loadedPendingLeave(linemanagerid!,"pending","s");
+      //   BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanagerid!,"reject","s");
+      // }
 
     });
   }

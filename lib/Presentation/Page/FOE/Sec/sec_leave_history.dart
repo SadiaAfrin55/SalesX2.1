@@ -2,7 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:salesx_new_project/Presentation/Page/FOE/Sec/LeaveRequest/pending_request.dart';
+import 'package:salesx_new_project/Presentation/Page/FOE/Sec/LeaveRequest/Issue/pending.dart';
 
 import '../../../../Bloc/Leave/leave_cubit.dart';
 import '../../../../Bloc/List/list_cubit.dart';
@@ -14,8 +14,10 @@ import '../../../Widgets/Card/ProfileCard/profile_Card.dart';
 import '../../../Widgets/Card/Sales/mysale_card.dart';
 import '../../../Widgets/Card/Sec/survey_card.dart';
 import '../../../Widgets/Card/Sec/target_card.dart';
-import 'LeaveRequest/LeaveApproveal/ApprovedLeave.dart';
-import 'LeaveRequest/LeaveApproveal/RejectedLeave.dart';
+import 'LeaveRequest/Issue/accept.dart';
+import 'LeaveRequest/Issue/reject.dart';
+
+
 
 class SecLeaveHistory extends StatefulWidget {
   final String? name;
@@ -29,7 +31,7 @@ class SecLeaveHistory extends StatefulWidget {
 
 class _SecLeaveHistoryState extends State<SecLeaveHistory> {
 
-  List<String> issueTypeDrop = ['Approved','Rejected','Pending'];
+  List<String> issueTypeDrop = ['accept','reject','pending'];
   String? issueType;
   String? linmanagerName;
   String? linemanageId;
@@ -44,18 +46,13 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
       linemanageId = tokenx.get('linmanagerid');
       token = tokenx.get('token');
       print("leeeeelimmmmmm: " + linemanageId!);
-      //BlocProvider.of<ListCubit>(context).loadSec(linemanagerid!);
-      // BlocProvider.of<ListCubit>(context).loadSecdata(linemanageId!);
-      // BlocProvider.of<LeaveCubit>(context).loadedApprovedLeave(linemanageId!,"accept",token!);
-      // BlocProvider.of<LeaveCubit>(context).loadedPendingLeave(linemanageId!,"pending",token!);
-      // BlocProvider.of<LeaveCubit>(context).loadedRejectLeave(linemanageId!,"reject",token!);
     });
   }
 
   @override
   void initState() {
     // TODO: implement initState
-    issueType="Pending";
+    //issueType="Pending";
     getToken();
     super.initState();
   }
@@ -75,7 +72,7 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
                    Expanded(
                    flex: 4,
                    child: Text('${widget.name}'+'  Leave History',
-                    style: TextStyle(
+                    style: const TextStyle(
                       fontSize: 16,
                       fontWeight: FontWeight.w700,
                       color: Colors.black,
@@ -110,7 +107,7 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
                         Row(
                           children: [
                             Container(
-                              height: 45,
+                              height: 50,
                               width: MediaQuery.of(context).size.width*0.92,
                               padding: const EdgeInsets.all(13),
                               color: const Color(0xFFF5F7F8),
@@ -154,9 +151,9 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
                   const SizedBox(height: 20,),
                   //LeaveListCard()
 
-                  issueType=="Approved"?ApprovedLeave(id: widget.secId,):Text(''),
-                  issueType=="Pending"?PendingLeave(id: widget.secId,):Text(''),
-                  issueType=="Rejected"?RejectedLeave(id: widget.secId,):Text(''),
+                  issueType=="accept"?AcceptRequest(id: widget.secId,):Text(''),
+                  issueType=="pending"?PendingRequest(id: widget.secId,):Text(''),
+                  issueType=="reject"?RejectRequest(id: widget.secId,):Text(''),
                 ],
               ),
             ),

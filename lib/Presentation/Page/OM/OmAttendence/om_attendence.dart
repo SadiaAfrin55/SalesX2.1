@@ -31,7 +31,7 @@ import '../../Attendence/AttendenceDone/done_attendance.dart';
 
 
 class OmAttendencePage extends StatefulWidget {
-  const OmAttendencePage({Key? key}) : super(key: key);
+  const  OmAttendencePage({Key? key}) : super(key: key);
 
   @override
   _OmAttendencePageState createState() => _OmAttendencePageState();
@@ -291,6 +291,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                   .center,
                                               children: [
                                                 SizedBox(height: 14,),
+
                                                 BlocBuilder<StoreCubit,
                                                     StoreState>(
                                                   builder: (context, state) {
@@ -350,11 +351,15 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                     );
                                                   },
                                                 ),
+
                                                 SizedBox(height: 14,),
+
                                                 MaterialTextField(lable: "Note",
                                                   controller: note,
                                                   hintText: "Enter note", readOnly: false,),
+
                                                 SizedBox(height: 20),
+
                                                 const Text(
                                                   "Click a clear photo of yourself",
                                                   style: TextStyle(
@@ -363,7 +368,9 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                     color: Color(0xFF727272)
                                                   ),
                                                   textAlign: TextAlign.center,),
+
                                                 SizedBox(height: 10),
+
                                                 Container(
                                                   width: MediaQuery.of(context).size.width,
                                                   child: _image == null
@@ -372,85 +379,49 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                     _image!,height: 350,),
                                                 ),
 
+                                                const SizedBox(
+                                                  height: 16,
+                                                ),
+
+                                                InkWell(
+                                                  onTap: (){
+                                                    setState(() {
+                                                      //circle=true;
+                                                      imageprocess =
+                                                      true;
+                                                      getImage();
+                                                    });
+                                                  },
+                                                  child: Container(
+                                                    height: 54,
+                                                    width: MediaQuery.of(context).size.width,
+                                                    decoration: BoxDecoration(
+                                                      color: _image != null ? Color(0x88BFDCFC) : Color(0xFF0180F5),
+                                                      borderRadius: BorderRadius.circular(6),
+                                                    ),
+                                                    child: Center(
+                                                      child:
+                                                      RichText(
+                                                        text: TextSpan(
+                                                            children: [
+                                                              WidgetSpan(
+                                                                child: Container(margin: EdgeInsets.only(right: 10), child: Icon(Icons.camera_enhance_sharp, size: 20, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
+                                                              ),
+                                                              TextSpan(
+                                                                  text: _image != null ? tr('Retake Photo') : tr("Take a photo"),
+                                                                  //text: tr("Take a photo"),
+                                                                  style: TextStyle(fontWeight: FontWeight.w600, fontSize: 16, color: _image != null ? Color(0xFF0180F5) : Colors.white)),
+                                                            ]),
+                                                      ),
+                                                    ),
+                                                  ),
+                                                ),
 
                                                 const SizedBox(
                                                   height: 16,
                                                 ),
 
 
-                                                Container(
-                                                  width: MediaQuery.of(context).size.width,
-                                                  child: _image == null
-                                                      ? circle
-                                                      ? Container()
-                                                      : InkWell(
-                                                      onTap: () {
-                                                        setState(() {
-                                                          //circle=true;
-                                                          imageprocess = true;
-                                                          getImage();
-                                                        });
-                                                        //getImage();
-                                                      },
-                                                      child: Container(
-                                                        height: 54,
-                                                        width:
-                                                        MediaQuery.of(context)
-                                                            .size
-                                                            .width,
-                                                        decoration: BoxDecoration(
-                                                          color: _image != null
-                                                              ? Color(0x88BFDCFC)
-                                                              : Color(0xFF0180F5),
-                                                          borderRadius:
-                                                          BorderRadius.circular(
-                                                              6),
-                                                        ),
-                                                        child: Center(
-                                                          child: RichText(
-                                                            text: TextSpan(
-                                                                children: [
-                                                                  WidgetSpan(
-                                                                    child: Container(
-                                                                        margin: EdgeInsets.only(
-                                                                            right:
-                                                                            10),
-                                                                        child: Icon(
-                                                                            Icons
-                                                                                .camera_enhance_sharp,
-                                                                            size:
-                                                                            20,
-                                                                            color: _image !=
-                                                                                null
-                                                                                ? Color(0xFF0180F5)
-                                                                                : Colors.white)),
-                                                                  ),
-                                                                  TextSpan(
-                                                                      text: _image !=
-                                                                          null
-                                                                          ? tr(
-                                                                          'Retake Photo')
-                                                                          : tr(
-                                                                          "Take a photo"),
-                                                                      //text: tr("Take a photo"),
-                                                                      style: TextStyle(
-                                                                          fontWeight:
-                                                                          FontWeight
-                                                                              .w600,
-                                                                          fontSize:
-                                                                          16,
-                                                                          color: _image !=
-                                                                              null
-                                                                              ? Color(
-                                                                              0xFF0180F5)
-                                                                              : Colors
-                                                                              .white)),
-                                                                ]),
-                                                          ),
-                                                        ),
-                                                      ))
-                                                      : Container(),
-                                                ),
 
 
                                                 _image != null ? circle
@@ -494,6 +465,9 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                 ) :
 
 
+
+
+
                                                 imageprocess ? selectedValue != null ? _totalDistance == -1.0
                                                     ? Text(
                                                     "Select Store or Take Photo")
@@ -501,7 +475,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                     ? Center(
                                                   child: CircularProgressIndicator(),)
                                                     : CustomButton(
-                                                       title: 'Mark Your Attendence',
+                                                  title: 'Mark Your Attendence',
                                                   onTap: (){
                                                     print(note.text);
                                                     print(_totalDistance);
@@ -531,7 +505,15 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                     }
                                                   },
                                                 ): Text("You are not in store")
-                                                    : Container() : Container()
+                                                    : Container() : Container(),
+
+
+
+                                                const SizedBox(
+                                                  height: 20,
+                                                ),
+
+
                                               ],
                                             ),
                                           ),

@@ -325,9 +325,9 @@ class _SurveyPageState extends State<SurveyPage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset('assets/icons/check_grren.png'),
+            Image.asset('assets/icons/Frame.png'),
             const Text("Done!!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,).tr(),
-            const Text("You have successfully marked your attendance",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,).tr(),
+            const Text("You have successfully done your survey",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,).tr(),
             Padding(
                 padding: const EdgeInsets.all(16.0),
                 child:  InkWell(

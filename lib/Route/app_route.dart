@@ -19,7 +19,6 @@ import '../Presentation/Page/Attendence/attendence_history.dart';
 import '../Presentation/Page/Attendence/attendence_page.dart';
 import '../Presentation/Page/CommingSoon/comming_soon.dart';
 import '../Presentation/Page/Dayoff/mark_dayoff_attendance.dart';
-import '../Presentation/Page/FOE/Sec/LeaveRequest/approved_request.dart';
 import '../Presentation/Page/FOE/Sec/SecTrainingComponents/sec_training_components.dart';
 import '../Presentation/Page/FOE/Sec/sec_sales_details.dart';
 import '../Presentation/Page/FOE/Sec/sec_survey_history_details.dart';
@@ -38,7 +37,7 @@ import '../Presentation/Page/Foe/Sec/sec_inventory.dart';
 import '../Presentation/Page/Foe/Sec/sec_inventory_history.dart';
 import '../Presentation/Page/Foe/Sec/sec_leave.dart';
 import '../Presentation/Page/Foe/Sec/sec_leave_history.dart';
-import '../Presentation/Page/Foe/Sec/sec_leave_request.dart';
+ //import '../Presentation/Page/Foe/Sec/sec_leave_request.dart';
 import '../Presentation/Page/Foe/Sec/sec_list.dart';
 import '../Presentation/Page/Foe/Sec/sec_sales_history.dart';
 import '../Presentation/Page/Foe/Sec/sec_survey_history.dart';
@@ -446,12 +445,12 @@ class AppRouter {
               create: (context) => InventoryCubit(),
               child: SecLeaveHistory(name:arguments!['name'],secId:arguments['id']),
             ));
-      case SEC_LEAVE_REQUEST_PAGE:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => BlocProvider(
-              create: (context) => LeaveCubit(),
-              child: SecLeaveRequest(),
-            ));
+      // case SEC_LEAVE_REQUEST_PAGE:
+      //   return MaterialPageRoute(
+      //       builder: (BuildContext context) => BlocProvider(
+      //         create: (context) => LeaveCubit(),
+      //         child: SecLeaveRequest(),
+      //       ));
         case SEC_LIST_PAGE:
         return MaterialPageRoute(
             builder: (BuildContext context) => BlocProvider(
@@ -659,22 +658,23 @@ class AppRouter {
               create: (context) => AttendenceCubit(),
               child: CommingSoon(),
             ));
-      case ApproveLeaverequest_Page:
-        return MaterialPageRoute(
-            builder: (BuildContext context) => BlocProvider(
-              create: (context) => AttendenceCubit(),
-              child: ApprovedRequest(
-                id:arguments!['id'],
-                name:arguments['name'],
-                reason:arguments['reason'],
-                requestPendingFrom:arguments['requestPendingFrom'],
-                type:arguments['type'],
-                days:arguments['days'],
-                from:arguments['from'],
-                to:arguments['to'],
-                approve:arguments['approve'],
-              ),
-            ));
+
+      // case ApproveLeaverequest_Page:
+      //   return MaterialPageRoute(
+      //       builder: (BuildContext context) => BlocProvider(
+      //         create: (context) => AttendenceCubit(),
+      //         child: ApprovedRequest(
+      //           id:arguments!['id'],
+      //           name:arguments['name'],
+      //           reason:arguments['reason'],
+      //           requestPendingFrom:arguments['requestPendingFrom'],
+      //           type:arguments['type'],
+      //           days:arguments['days'],
+      //           from:arguments['from'],
+      //           to:arguments['to'],
+      //           approve:arguments['approve'],
+      //         ),
+      //       ));
 
 
       default:

@@ -1,4 +1,3 @@
-
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
@@ -73,69 +72,69 @@ class _LeaveListComponentsState extends State<LeaveListComponents> {
         //   });
         // }
       },
-  child: BlocBuilder<LeaveCubit, LeaveState>(
-      builder: (context, state) {
+      child: BlocBuilder<LeaveCubit, LeaveState>(
+        builder: (context, state) {
 
-        log('555 $state');
+          log('555 $state');
 
-        // final data = (state as GetLeaveByMonth).monthlyleaveResponse;
-        //Logger().d(data!.leaveform![0].leaveformat);
+          // final data = (state as GetLeaveByMonth).monthlyleaveResponse;
+          //Logger().d(data!.leaveform![0].leaveformat);
 
 
-        if (state is LeaveLoded) {
+          if (state is LeaveLodedByMonth) {
 
-          final data = state.leaveResponse;
-          return Column(
-            children: [
-              data.leaveform!.isEmpty?Container(
-                height: MediaQuery.of(context).size.height*0.5,
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Image.asset('assets/images/nodata.png'),
-                    Text('No data available',style: TextStyle(
-                        fontSize: 16,
-                        fontWeight: FontWeight.w500,
-                        color: Colors.black.withOpacity(0.8)
-                    ),),
-                  ],
-                ),
-              ):SizedBox(
-                //height: MediaQuery.of(context).size.height,
-                child: ListView(
-                    physics: const NeverScrollableScrollPhysics(),
-                    shrinkWrap: true,
-                    children: data.leaveform!.map((leave) =>
-                        Container(
-                          margin: const EdgeInsets.only(bottom: 14),
-                          child: LeaveListCard(
-                            leaveType: leave.leaveformat,
-                            status: leave.acceptence,
-                            createdDate: createdateIntoDat(leave.createdAt,0),
-                            fromDate: convertdateIntoDat(leave.date,0),
-                            toDate: convertdateIntoDat(leave.date,1),
-                            leaveReason: leave.reason,
-                          ),
-                        )
-                    ).toList()
-                ),
-              )
-            ],
-          );
+            final data = state.leaveResponseByMonth;
+            return Column(
+              children: [
+                data.leaveform!.isEmpty?Container(
+                  height: MediaQuery.of(context).size.height*0.5,
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      Image.asset('assets/images/nodata.png'),
+                      Text('No data available',style: TextStyle(
+                          fontSize: 16,
+                          fontWeight: FontWeight.w500,
+                          color: Colors.black.withOpacity(0.8)
+                      ),),
+                    ],
+                  ),
+                ):SizedBox(
+                  //height: MediaQuery.of(context).size.height,
+                  child: ListView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      shrinkWrap: true,
+                      children: data.leaveform!.map((leave) =>
+                          Container(
+                            margin: const EdgeInsets.only(bottom: 14),
+                            child: LeaveListCard(
+                              leaveType: leave.leaveformat,
+                              status: leave.acceptence,
+                              createdDate: createdateIntoDat(leave.createdAt,0),
+                              fromDate: convertdateIntoDat(leave.date,0),
+                              toDate: convertdateIntoDat(leave.date,1),
+                              leaveReason: leave.reason,
+                            ),
+                          )
+                      ).toList()
+                  ),
+                )
+              ],
+            );
 
-        }
+          }
 
-        if (state is LeaveError) {
-          return Center(child: Text(state.message),);
-        }
+          if (state is LeaveError) {
+            return Center(child: Text(state.message),);
+          }
 
           return const Center(
             child: CircularProgressIndicator(),
           );
 
-          },
-        ),
-        );
+        },
+      ),
+    );
   }
   String convertdateIntoDat(String? date,int? index){
     List dates = date!.split('To');

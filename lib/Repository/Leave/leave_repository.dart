@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:logger/logger.dart';
 
 import '../../Data/Model/Leave/LeaveCreateResponse.dart';
+import '../../Data/Model/Leave/LeaveHistory/LeaveResponseByMonth.dart';
 import '../../Data/Model/Leave/LeaveResponse.dart';
 import '../../Data/Model/Leave/TotalLeave.dart';
 import '../../Network/Leave/Leave_network.dart';
@@ -23,10 +24,10 @@ class LeaveRepository {
     }
   }
 
-  Future<LeaveResponse?> getLeaveByMonth(String userId, String leaveDate) async{
+  Future<LeaveResponseByMonth?> getLeaveByMonth(String userId, String leaveDate) async{
     final leaveRaw=await LeaveNetwork().getLeaveListByMonth(userId,leaveDate);
 
-    final leaveResponse=LeaveResponse.fromJson(leaveRaw);
+    final leaveResponse=LeaveResponseByMonth.fromJson(leaveRaw);
 
       return  leaveResponse;
   }
@@ -48,16 +49,11 @@ class LeaveRepository {
     return LeaveCreateResponse.fromJson(LeaveResRaw);
   }
 
-  Future<LeaveResponse?> loadedPendingLeave(String userId,String status, String token) async{
-    // logger.d("repository");
-    final leaveRaw=await LeaveNetwork().loadedPendingLeave(userId,status,token);
-    LeaveResponse leaveResponse=LeaveResponse.fromJson(leaveRaw);
-    // logger.d(leaveResponse.leaveform);
-    if(leaveResponse!=null){
+  Future loadedPendingLeave(String userId,String status) async{
+    final leaveRaw=await LeaveNetwork().loadedPendingLeave(userId,status);
+    logger.d('5555 $leaveRaw');
       return  LeaveResponse.fromJson(leaveRaw);
-    }else{
-      return null;
-    }
+
   }
 
 

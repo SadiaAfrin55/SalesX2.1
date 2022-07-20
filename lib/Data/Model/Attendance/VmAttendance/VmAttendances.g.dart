@@ -22,9 +22,10 @@ VmAttendances _$VmAttendancesFromJson(Map<String, dynamic> json) =>
           ? null
           : VmWorkingHourAttendance.fromJson(
               json['workinghour'] as Map<String, dynamic>),
-      (json['storeAttendance'] as List<dynamic>?)
-          ?.map((e) => VmStoreAttendance.fromJson(e as Map<String, dynamic>))
-          .toList(),
+      json['storeAttendance'] == null
+          ? null
+          : VmStoreAttendance.fromJson(
+              json['storeAttendance'] as Map<String, dynamic>),
     );
 
 Map<String, dynamic> _$VmAttendancesToJson(VmAttendances instance) =>

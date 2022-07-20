@@ -81,9 +81,9 @@ class _FOMHomePageState extends State<FOMHomePage> {
                         BigButtonIcon(text: "Attendance",color: const Color(0xFFFEEBEF),image: "assets/icons/cardIcon/Attendance.svg",tap: (){
                           Navigator.pushNamed(context, ATTENDANCE);
                         },),
-                        BigButtonIcon(text: "Target",color: const Color(0xFFE1F3FF),image: "assets/icons/cardIcon/Target.svg",tap: (){
-                          Navigator.pushNamed(context, TARGET_PAGE);
-                        },),
+                        // BigButtonIcon(text: "Target",color: const Color(0xFFE1F3FF),image: "assets/icons/cardIcon/Target.svg",tap: (){
+                        //   Navigator.pushNamed(context, TARGET_PAGE);
+                        // },),
                         BlocBuilder<VmAttendenceCubit, VmAttendenceState>(
                           builder: (context, state) {
                             if(state is !CheckVmSignOffAtendance){

@@ -10,25 +10,14 @@ part 'LeaveResponse.g.dart';
 @JsonSerializable()
 class LeaveResponse{
 
- final String? status;
- final int? length;
- @JsonKey(
-  name:'leave'
- )
- final List<Leave>? leaveform;
+  String? status;
+  int? length;
+  List<Leave>? leaveform;
 
   LeaveResponse({this.status, this.length, this.leaveform});
 
  factory LeaveResponse.fromJson(Map<String,dynamic>json)=>
      _$LeaveResponseFromJson(json);
  Map<String,dynamic>toJson()=>_$LeaveResponseToJson(this);
-
- @override
- String toString() {
-
-  return 'status: $status , lenght: $length,leaveform:  $leaveform';
-
-  }
-
 
 }

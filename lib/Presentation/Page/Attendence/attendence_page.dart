@@ -230,6 +230,7 @@ class _AttendencePageState extends State<AttendencePage> {
                                                   horizontal: 16, vertical: 25),
                                               child: Column(
                                                 children: [
+                                                  //Late attendance
                                                   Column(
                                                     children: [
                                                       BlocBuilder<
@@ -317,6 +318,8 @@ class _AttendencePageState extends State<AttendencePage> {
                                                       ),
                                                     ],
                                                   ),
+
+
                                                   _image == null
                                                       ? Container()
                                                       : Container(
@@ -330,9 +333,13 @@ class _AttendencePageState extends State<AttendencePage> {
                                                             fit: BoxFit.cover,
                                                           ),
                                                         ),
+
+
                                                   const SizedBox(
                                                     height: 16,
                                                   ),
+
+
                                                   InkWell(
                                                     onTap: (){
                                                       setState(() {
@@ -375,6 +382,8 @@ class _AttendencePageState extends State<AttendencePage> {
                                                   const SizedBox(
                                                     height: 8,
                                                   ),
+
+
                                                   addrerss == null
                                                       ? Container()
                                                       : _image == null

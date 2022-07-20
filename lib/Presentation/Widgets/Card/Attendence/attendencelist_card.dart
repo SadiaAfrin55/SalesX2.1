@@ -64,91 +64,87 @@ class _AttendencelistCardState extends State<AttendencelistCard> {
               //backgroundImage: AssetImage('assets/icons/profile_user.png'),
             ),
             const SizedBox(width: 20),
+
+
             Column(
+              mainAxisAlignment: MainAxisAlignment.center,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Check in',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                         Text('${widget.checkIn}',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.lightBlue,
-                          ),
-                        ),
-
-                      ],
-                    ),
-                    const SizedBox(width: 28),
-                    Column(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Check out',
-                          style: TextStyle(
-                            fontSize: 14,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                        const SizedBox(height: 6),
-                        Text('${widget.checkOut}',
-                          style: TextStyle(
-                            fontSize: 15,
-                            fontWeight: FontWeight.w600,
-                            color: Colors.lightBlue,
-                          ),
-                        ),
-                        const SizedBox(height: 12),
-
-                      ],
-                    ),
-                  ],
+                const Text('Check in',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
                 ),
-                const SizedBox(height: 5),
+                const SizedBox(height: 6),
+                Text('${widget.checkIn}',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.lightBlue,
+                  ),
+                ),
+                const SizedBox(height: 6,),
                 Row(
                   children: [
                     SvgPicture.asset(
-                      'assets/icons/time_icon.svg',
-                      color: Colors.red,
+                      'assets/icons/calender_icon.svg',
                     ),
+                    SizedBox(width: 5),
+                    Text('${widget.attendenceDate}',
+                      style: TextStyle(
+                        fontSize: 13,
+                        fontWeight: FontWeight.w400,
+                        color: Colors.black,
+                      ),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+
+             Container(
+              width: MediaQuery.of(context).size.width*0.1,
+            ),
+
+            Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                const Text('Check out',
+                  style: TextStyle(
+                    fontSize: 14,
+                    fontWeight: FontWeight.w500,
+                  ),
+                ),
+                const SizedBox(height: 6),
+                Text('${widget.checkOut}',
+                  style: const TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w600,
+                    color: Colors.lightBlue,
+                  ),
+                ),
+                const SizedBox(height: 6,),
+                Row(
+                  children: [
+                    // SvgPicture.asset(
+                    //   'assets/icons/time_icon.svg',
+                    //   color: Colors.green,
+                    // ),
                     SizedBox(width: 5),
                     Text('${widget.status}',
                       style: TextStyle(
                         fontSize: 13,
                         fontWeight: FontWeight.w400,
-                        color: Colors.red,
+                        color: Colors.green,
                       ),
                     ),
                   ],
                 ),
-                // Row(
-                //   children: [
-                //     SvgPicture.asset(
-                //       'assets/icons/calender_icon.svg',
-                //     ),
-                //     SizedBox(width: 5),
-                //     Text('${widget.attendenceDate}',
-                //       style: TextStyle(
-                //         fontSize: 13,
-                //         fontWeight: FontWeight.w500,
-                //       ),
-                //     ),
-                //   ],
-                // ),
               ],
-            )
+            ),
+
           ],
         ),
       ),

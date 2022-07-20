@@ -95,7 +95,7 @@ class _SelectShopState extends State<SelectShop> {
                   ],
                 ),
                 const SizedBox(
-                  height: 18,
+                  height: 12,
                 ),
                 OnChangeTextField(
                   hintText: 'Quantity',
@@ -110,6 +110,9 @@ class _SelectShopState extends State<SelectShop> {
                       }).toList();
                     });
                   },
+                ),
+                const SizedBox(
+                  height: 20,
                 ),
                 BlocListener<VisitCubit, VisitState>(
                   listener: (context, state) {

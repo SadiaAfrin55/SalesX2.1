@@ -1,29 +1,27 @@
 part of 'leave_cubit.dart';
 
-
-
-
 @immutable
 abstract class LeaveState {}
 
 class LeaveInitial extends LeaveState {}
-
-class LeaveLoded extends LeaveState {
-  final LeaveResponse leaveResponse;
-  // final LeaveStatus leaveStatus;
-  LeaveLoded({required this.leaveResponse});
-}
 
 class LeaveError extends LeaveState {
   final String message;
   LeaveError(this.message);
 }
 
-// class GetLeaveByMonth extends LeaveState {
-//   final LeaveResponse? monthlyleaveResponse;
-//   GetLeaveByMonth({this.monthlyleaveResponse});
-// }
-//
+class LeaveLodedByMonth extends LeaveState {
+  final LeaveResponseByMonth leaveResponseByMonth;
+  // final LeaveStatus leaveStatus;
+  LeaveLodedByMonth({required this.leaveResponseByMonth});
+}
+
+class LeaveLoded extends LeaveState {
+  final LeaveResponse? leaveResponse;
+  // final LeaveStatus leaveStatus;
+  LeaveLoded({required this.leaveResponse});
+}
+
 class ApprovedLeaveLoded extends LeaveState {
   final LeaveResponse? leaveResponse;
   ApprovedLeaveLoded({this.leaveResponse});

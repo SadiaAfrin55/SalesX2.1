@@ -6,9 +6,6 @@ import 'VmSignOffAttendance.dart';
 import 'VmStoreAttendance.dart';
 import 'VmWorkingHourAttendance.dart';
 
-
-
-
 part 'VmAttendances.g.dart';
 
 @JsonSerializable()
@@ -24,7 +21,7 @@ class VmAttendances {
 
   VmSignOffAttendance? signoffAtd;
   VmWorkingHourAttendance? workinghour;
-  List<VmStoreAttendance>? storeAttendance;
+  VmStoreAttendance? storeAttendance;
 
 
   VmAttendances(

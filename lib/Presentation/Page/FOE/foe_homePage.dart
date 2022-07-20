@@ -95,9 +95,9 @@ class _FoeHomePageState extends State<FoeHomePage> {
                           Navigator.pushNamed(context, ATTENDANCE);
                         },),
 
-                        BigButtonIcon(text: "Target",color: const Color(0xFFE1F3FF),image: "assets/icons/cardIcon/Target.svg",tap: (){
-                          Navigator.pushNamed(context, TARGET_PAGE);
-                        },),
+                        // BigButtonIcon(text: "Target",color: const Color(0xFFE1F3FF),image: "assets/icons/cardIcon/Target.svg",tap: (){
+                        //   Navigator.pushNamed(context, TARGET_PAGE);
+                        // },),
                         // BigButtonIcon(text: "Leave",color: const Color(0xFFF1E1FF),image: "assets/icons/cardIcon/Leave.svg",tap: (){
                         //   Navigator.pushNamed(context, LEAVE_PAGE);
                         // },),

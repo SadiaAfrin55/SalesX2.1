@@ -7,15 +7,14 @@ import '../../../../Service/LocalDataBase/localdata.dart';
 import '../../../Widgets/Card/Attendence/attendencelist_card.dart';
 import '../../Survey/survey_noData.dart';
 
-class AttendanceListComponenet extends StatefulWidget {
-  final String? date;
-  const AttendanceListComponenet({Key? key, this.date}) : super(key: key);
+class VmAttendanceListComponenet extends StatefulWidget {
+  const VmAttendanceListComponenet({Key? key}) : super(key: key);
 
   @override
-  _AttendanceListComponenetState createState() => _AttendanceListComponenetState();
+  _VmAttendanceListComponenetState createState() => _VmAttendanceListComponenetState();
 }
 
-class _AttendanceListComponenetState extends State<AttendanceListComponenet> {
+class _VmAttendanceListComponenetState extends State<VmAttendanceListComponenet> {
   String? role;
 
   LocalDataGet _localDataGet = LocalDataGet();
@@ -36,23 +35,23 @@ class _AttendanceListComponenetState extends State<AttendanceListComponenet> {
 
   @override
   Widget build(BuildContext context) {
-    return BlocListener<AttendenceCubit, AttendenceState>(
+    return BlocListener<VmAttendenceCubit, VmAttendenceState>(
       listener: (context, state) {
-        if(state is GetUserAttendanceByMonth){
+        if(state is GetVmAttendanceByDate){
           setState(() {
 
           });
         }
       },
-      child: BlocBuilder<AttendenceCubit, AttendenceState>(
+      child: BlocBuilder<VmAttendenceCubit, VmAttendenceState>(
         builder: (context, state) {
-          if(state is !GetUserAttendanceByMonth){
+          if(state is !GetVmAttendanceByDate){
             return Center(child: CircularProgressIndicator(),);
           }
-          final data = (state as GetUserAttendanceByMonth).attendance;
+          final data = (state as GetVmAttendanceByDate).vmAttendanceResponse;
           return Column(
             children: [
-              data!.isEmpty?
+              data!.attendance!.isEmpty?
               Container(
                 height: MediaQuery.of(context).size.height*0.5,
                 child: Column(
@@ -70,13 +69,13 @@ class _AttendanceListComponenetState extends State<AttendanceListComponenet> {
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: data.length,
+                itemCount: data.attendance!.length,
                 itemBuilder: (context, index) {
                   return AttendencelistCard(
-                    img: data[index].morningAtd!.photo,
-                    checkIn: data[index].workinghour!.intime,
-                    checkOut: data[index].signoffAtd!.outTime,
-                    attendenceDate: data[index].dateid,
+                    img: data.attendance![index].storeAttendance!.photo,
+                    checkIn: data.attendance![index].workinghour!.intime,
+                    checkOut: data.attendance![index].workinghour!.outtime,
+                    attendenceDate: data.attendance![index].dateid,
                     status: '',
                   );
                 },

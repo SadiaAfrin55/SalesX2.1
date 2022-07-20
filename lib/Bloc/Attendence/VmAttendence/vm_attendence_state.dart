@@ -25,14 +25,9 @@ class GetVmAttendance extends VmAttendenceState{
 }
 
 class GetVmAttendanceByDate extends VmAttendenceState{
-
-  bool? success;
-  List<VmAttendances>? attendance;
-
-  GetVmAttendanceByDate({this.success, this.attendance});
-//final VmAttendanceByDateResponse? vmAttendanceByDateResponse;
+  VmAttendanceResponse? vmAttendanceResponse;
   //List<VmAttendances>? attendance;
-
+  GetVmAttendanceByDate({this.vmAttendanceResponse});
 }
 
 class CheckVmSignOffAtendance extends VmAttendenceState{

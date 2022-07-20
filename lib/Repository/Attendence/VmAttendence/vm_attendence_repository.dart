@@ -6,6 +6,7 @@ import 'package:logger/logger.dart';
 
 import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceByDateResponse.dart';
 import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
+import '../../../Data/Model/Attendance/VmAttendance/VmAttendances.dart';
 import '../../../Network/Attendence/VmAttendence/vm_attendence_network.dart';
 
 
@@ -28,10 +29,16 @@ class VmAttendanceRepository {
     return VmAttendanceResponse.fromJson(rawx);
   }
 
-  Future loadVmAttendanceByMonth(String userId, String leaveDate) async{
-    final rawx=await VmAttendanceService().loadVmAttendanceByMonth(userId,leaveDate);
+  // Future loadVmAttendanceByMonth(String userId, String leaveDate) async{
+  //   final rawx=await VmAttendanceService().loadVmAttendanceByMonth(userId,leaveDate);
+  //   logger.d(rawx);
+  //   return rawx;
+  // }
+
+  Future <VmAttendanceResponse>loadVmAttendanceByMonth(String userId) async{
+    final rawx=await VmAttendanceService().loadVmAttendance(userId);
     logger.d(rawx);
-    return rawx;
+    return VmAttendanceResponse.fromJson(rawx);
   }
 
   Future chekVmSignffAttendance(String userId) async{

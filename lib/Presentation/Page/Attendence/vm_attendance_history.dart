@@ -5,21 +5,22 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
 import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cubit.dart';
-import 'package:salesx_new_project/Presentation/Page/Attendence/vm_attendance_history.dart';
 import '../../../Bloc/Attendence/attendence_cubit.dart';
 import '../../../Constants/Strings/app_strings.dart';
 import '../../../Service/LocalDataBase/localdata.dart';
+import '../../Widgets/Card/Attendence/attendencelist_card.dart';
 import '../../Widgets/Card/Survey/phone_card.dart';
 import 'Component/attendance_list-component.dart';
+import 'Component/vm_attendance_list_component.dart';
 
-class AttendenceHistory extends StatefulWidget {
-  const AttendenceHistory({Key? key}) : super(key: key);
+class VmAttendenceHistory extends StatefulWidget {
+  const VmAttendenceHistory({Key? key}) : super(key: key);
 
   @override
-  _AttendenceHistoryState createState() => _AttendenceHistoryState();
+  _VmAttendenceHistoryState createState() => _VmAttendenceHistoryState();
 }
 
-class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProviderStateMixin {
+class _VmAttendenceHistoryState extends State<VmAttendenceHistory> with TickerProviderStateMixin {
 
   bool isClicked = true;
   String? userId;
@@ -43,7 +44,7 @@ class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProvid
       userId = tokenx.get('userId');
       role = tokenx.get('role');
       BlocProvider.of<VmAttendenceCubit>(context).loadVmAttendanceByMonth(userId!);
-      BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
+      //BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
     });
   }
 
@@ -75,14 +76,14 @@ class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return role=="FOE"?VmAttendenceHistory():Container(
+    return Container(
       color: Colors.white,
       child: SafeArea(
           child: Scaffold(
             backgroundColor: Colors.white,
             appBar: AppBar(
               backgroundColor: Colors.white,
-              title: const Text('Attendance History',
+              title: const Text('vm Attendance History',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,
@@ -109,7 +110,7 @@ class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProvid
                 margin: const EdgeInsets.symmetric(horizontal: 12),
                 child: Column(
                   children: [
-                    AttendanceListComponenet()
+                    VmAttendanceListComponenet()
                   ],
                 ),
               ),

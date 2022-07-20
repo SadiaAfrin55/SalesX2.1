@@ -107,7 +107,7 @@ class _SurveyChartState extends State<SurveyChart>{
           children: [
              Container(
                margin: const EdgeInsets.only(left: 24,right: 24,top: 21,bottom: 21),
-               child: const Text('Statistics',
+               child: const Text('A total survey by month',
                 style: TextStyle(
                     fontSize: 18,
                     fontWeight: FontWeight.w700,

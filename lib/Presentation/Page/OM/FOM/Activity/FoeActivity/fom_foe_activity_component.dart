@@ -41,20 +41,20 @@ class _FomFoeActivityComponentState extends State<FomFoeActivityComponent> {
             ),
           ),
 
-          GestureDetector(
-            onTap: (){
-              Navigator.pushNamed(context, FOM_FOE_TARGET);
-            },
-            child: MoreOptionsCard(
-              image: SvgPicture.asset('assets/icons/profileIcon/Target.svg'),
-              title: 'Target',
-              color: const Color(0xFFE1F3FF),
-            ),
-          ),
+          // GestureDetector(
+          //   onTap: (){
+          //     Navigator.pushNamed(context, FOM_FOE_TARGET);
+          //   },
+          //   child: MoreOptionsCard(
+          //     image: SvgPicture.asset('assets/icons/profileIcon/Target.svg'),
+          //     title: 'Target',
+          //     color: const Color(0xFFE1F3FF),
+          //   ),
+          // ),
 
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, FOM_FOE_LEAVE);
+              Navigator.pushNamed(context, SEC_LEAVE_PAGE);
             },
             child: MoreOptionsCard(
               image: SvgPicture.asset('assets/icons/cardIcon/Leave.svg',height: 16,),

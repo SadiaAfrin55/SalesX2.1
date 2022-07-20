@@ -109,61 +109,61 @@ class _SalesChartState extends State<SalesChart> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Container(
-                margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
-                child: const Text(
-                  'Select Year',
-                  style: TextStyle(
-                      fontSize: 16,
-                      fontWeight: FontWeight.w300,
-                      color: Color(0xFF121826)),
-                ),
-              ),
-              Container(
-                margin: const EdgeInsets.only(
-                    left: 10, right: 10, top: 12, bottom: 10),
-                height: 45,
-                width: MediaQuery.of(context).size.width * 0.94,
-                padding: const EdgeInsets.all(13),
-                color: const Color(0xFFF5F7F8),
-                child: DropdownButtonHideUnderline(
-                  child: DropdownButton(
-                    value: issueType,
-                    icon: const Icon(
-                      Icons.keyboard_arrow_down,
-                      color: Color(0xFF292D32),
-                    ),
-                    iconSize: 20,
-                    onChanged: (newValue) {
-                      setState(() {
-                        issueType = newValue.toString();
-
-                        if (issueType != null) {
-                          setState(() {
-                            isSelected = true;
-                            BlocProvider.of<SalesCubit>(context)
-                                .getUserSalesSurveyPrediction(userId!, year!);
-                            log("selected userid: "+userId!);
-                            log("selected date: "+year!);
-                          });
-                        } else {
-                          setState(() {
-                            isSelected = false;
-                          });
-                        }
-                      });
-                    },
-                    items: issueTypeDrop.map(
-                      (location) {
-                        return DropdownMenuItem(
-                          child: Text(location),
-                          value: location,
-                        );
-                      },
-                    ).toList(),
-                  ),
-                ),
-              ),
+              // Container(
+              //   margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
+              //   child: const Text(
+              //     'Select Year',
+              //     style: TextStyle(
+              //         fontSize: 16,
+              //         fontWeight: FontWeight.w300,
+              //         color: Color(0xFF121826)),
+              //   ),
+              // ),
+              // Container(
+              //   margin: const EdgeInsets.only(
+              //       left: 10, right: 10, top: 12, bottom: 10),
+              //   height: 45,
+              //   width: MediaQuery.of(context).size.width * 0.94,
+              //   padding: const EdgeInsets.all(13),
+              //   color: const Color(0xFFF5F7F8),
+              //   child: DropdownButtonHideUnderline(
+              //     child: DropdownButton(
+              //       value: issueType,
+              //       icon: const Icon(
+              //         Icons.keyboard_arrow_down,
+              //         color: Color(0xFF292D32),
+              //       ),
+              //       iconSize: 20,
+              //       onChanged: (newValue) {
+              //         setState(() {
+              //           issueType = newValue.toString();
+              //
+              //           if (issueType != null) {
+              //             setState(() {
+              //               isSelected = true;
+              //               BlocProvider.of<SalesCubit>(context)
+              //                   .getUserSalesSurveyPrediction(userId!, year!);
+              //               log("selected userid: "+userId!);
+              //               log("selected date: "+year!);
+              //             });
+              //           } else {
+              //             setState(() {
+              //               isSelected = false;
+              //             });
+              //           }
+              //         });
+              //       },
+              //       items: issueTypeDrop.map(
+              //         (location) {
+              //           return DropdownMenuItem(
+              //             child: Text(location),
+              //             value: location,
+              //           );
+              //         },
+              //       ).toList(),
+              //     ),
+              //   ),
+              // ),
               Container(
                 margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
                 child: const Text(

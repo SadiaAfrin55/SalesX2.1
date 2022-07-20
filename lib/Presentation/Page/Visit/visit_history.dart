@@ -46,7 +46,7 @@ class _VisitHistoryState extends State<VisitHistory> {
       month=dateParse.month.toString();
     }
 
-    var formattedDate = "${dateParse.year}-$month-${'0'+dateParse.day.toString()}";
+    var formattedDate = "${dateParse.year}-$month-${dateParse.day.toString()}";
     visitdate=formattedDate.toString();
 
     getToken();
@@ -175,4 +175,11 @@ class _VisitHistoryState extends State<VisitHistory> {
       ),
     );
   }
+
+   String convertTime(String? time,int? index){
+     List dates = time!.split(':');
+     print(dates[1]);
+     return dates[index!];
+   }
+
 }

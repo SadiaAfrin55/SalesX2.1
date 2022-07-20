@@ -18,6 +18,7 @@ import 'package:salesx_new_project/Bloc/Dayoff/dayoff_cubit.dart';
 import '../../../../../Constants/Colors/app_colors.dart';
 import '../../../../../Constants/Strings/app_strings.dart';
 import '../../../../../Service/LocalDataBase/localdata.dart';
+import '../../../Attendence/vm_attendance_history.dart';
 import '../../../Profile/ProfileComponents/moreOption_components.dart';
 
 class SmMoreComponents extends StatefulWidget {
@@ -177,7 +178,10 @@ class _SmMoreComponentsState extends State<SmMoreComponents> {
                     children: [
                       InkWell(
                         onTap: (){
-                          Navigator.pushNamed(context, ATTENDANCE_HISTORY);
+                          Navigator.push(
+                            context,
+                            MaterialPageRoute(builder: (context) => VmAttendenceHistory()),
+                          );
                         },
                         child: MoreOptionsCard(
                           image: SvgPicture.asset('assets/icons/attendenceHistory.svg',height: 16,),
