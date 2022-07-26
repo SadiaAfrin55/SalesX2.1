@@ -18,11 +18,6 @@ class FoeChartComponents extends StatelessWidget {
           children: [
 
             ProfileCard(
-              cardImage: SvgPicture.asset('assets/icons/profileIcon/chart-success.svg'),
-              title: '70%',
-              subtitle: 'Target Achive',
-            ),
-            ProfileCard(
               cardImage: SvgPicture.asset('assets/icons/profileIcon/user-tick.svg'),
               title: '2 Days',
               subtitle: 'Present',

@@ -98,7 +98,13 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
             child: Container(
               margin: const EdgeInsets.only(top: 20,left: 15,right: 15),
               child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
+                  Text('Filter',style: TextStyle(
+                    fontSize: 15,
+                    fontWeight: FontWeight.w500,
+                  ),),
+                  const SizedBox(height: 20,),
                   Container(
                     child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -148,7 +154,7 @@ class _SecLeaveHistoryState extends State<SecLeaveHistory> {
                       ],
                     ),
                   ),
-                  const SizedBox(height: 20,),
+                  // const SizedBox(height: 20,),
                   //LeaveListCard()
 
                   issueType=="accept"?AcceptRequest(id: widget.secId,):Text(''),

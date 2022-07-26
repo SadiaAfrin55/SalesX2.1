@@ -18,34 +18,34 @@ class NewChartComponents extends StatelessWidget {
             children: [
               ProfileCard(
                 cardImage: SvgPicture.asset('assets/icons/sales.svg'),
-                title: '1000',
+                title: '0',
                 subtitle: 'Sales',
               ),
               ProfileCard(
                 cardImage: SvgPicture.asset('assets/icons/profileIcon/chart-success.svg'),
-                title: '70%',
+                title: '0%',
                 subtitle: 'Target Achive',
               ),
               ProfileCard(
                 cardImage: SvgPicture.asset('assets/icons/profileIcon/user-tick.svg'),
-                title: '85%',
+                title: '0%',
                 subtitle: 'Present',
               ),
               ProfileCard(
                 cardImage: SvgPicture.asset('assets/icons/profileIcon/user-minus.svg'),
-                title: '2 Days',
+                title: '21 Days',
                 subtitle: 'Absent',
               ),
               ProfileCard(
                 cardImage: SvgPicture.asset('assets/icons/profileIcon/house.svg'),
-                title: '1',
+                title: '0',
                 subtitle: 'Asign shops',
               ),
-              ProfileCard(
-                cardImage: SvgPicture.asset('assets/icons/profileIcon/stock.svg'),
-                title: '1000',
-                subtitle: 'On stock',
-              ),
+              // ProfileCard(
+              //   cardImage: SvgPicture.asset('assets/icons/profileIcon/stock.svg'),
+              //   title: '1000',
+              //   subtitle: 'On stock',
+              // ),
 
             ],
             scrollDirection: Axis.vertical,

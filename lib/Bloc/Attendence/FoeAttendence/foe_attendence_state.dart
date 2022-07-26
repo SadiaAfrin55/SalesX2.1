@@ -16,17 +16,17 @@ class GiveFoeSignOffAttendance extends FoeAttendenceState{
   GiveFoeSignOffAttendance({this.status});
 }
 
-class GetFoeAttendance extends FoeAttendenceState{
-
-  final List<FoeAttendances>? foeAttendancess;
-  GetFoeAttendance({this.foeAttendancess});
-}
-
-class GetFoeAttendanceByDate extends FoeAttendenceState{
-
-  final FoeAttendanceByDateResponse? foeAttendanceByDateResponse;
-  GetFoeAttendanceByDate({this.foeAttendanceByDateResponse});
-}
+// class GetFoeAttendance extends FoeAttendenceState{
+//
+//   final List<FoeAttendances>? foeAttendancess;
+//   GetFoeAttendance({this.foeAttendancess});
+// }
+//
+// class GetFoeAttendanceByDate extends FoeAttendenceState{
+//
+//   final FoeAttendanceByDateResponse? foeAttendanceByDateResponse;
+//   GetFoeAttendanceByDate({this.foeAttendanceByDateResponse});
+// }
 
 class CheckFoeSignOffAtendance extends FoeAttendenceState{
   final String? attendance;

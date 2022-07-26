@@ -4,8 +4,6 @@ import 'package:bloc/bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
-import '../../../Data/Model/Attendance/FoeAttendance/FoeAttendanceByDateResponse.dart';
-import '../../../Data/Model/Attendance/FoeAttendance/FoeAttendances.dart';
 import '../../../Repository/Attendence/FoeAttendence/foeattendence_repository.dart';
 
 part 'foe_attendence_state.dart';
@@ -33,23 +31,23 @@ class FoeAttendenceCubit extends Cubit<FoeAttendenceState> {
     });
   }
 
-  void loadFoeAttendance(String userId) {
-    foeAttendanceRepository.loadVmAttendance(userId).then((data) => {
-      logger.d(data),
-      if(data!=null){
-        emit(GetFoeAttendance(foeAttendancess: data.attendance))
-      }
-    });
-  }
-
-  void loadFoeAttendanceByMonth(String userId, String leaveDate) {
-    foeAttendanceRepository.loadVmAttendanceByMonth(userId,leaveDate).then((data) => {
-      logger.d(data),
-      if(data!=null){
-        emit(GetFoeAttendanceByDate(foeAttendanceByDateResponse: data))
-      }
-    });
-  }
+  // void loadFoeAttendance(String userId) {
+  //   foeAttendanceRepository.loadVmAttendance(userId).then((data) => {
+  //     logger.d(data),
+  //     if(data!=null){
+  //       emit(GetFoeAttendance(foeAttendancess: data.attendance))
+  //     }
+  //   });
+  // }
+  //
+  // void loadFoeAttendanceByMonth(String userId, String leaveDate) {
+  //   foeAttendanceRepository.loadVmAttendanceByMonth(userId,leaveDate).then((data) => {
+  //     logger.d(data),
+  //     if(data!=null){
+  //       emit(GetFoeAttendanceByDate(foeAttendanceByDateResponse: data))
+  //     }
+  //   });
+  // }
 
   void chekFoeSignffAttendance(String userId) {
     foeAttendanceRepository.chekVmSignffAttendance(userId).then((value) => {

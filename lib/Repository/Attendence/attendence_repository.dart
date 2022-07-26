@@ -3,7 +3,6 @@ import 'dart:io';
 import 'package:logger/logger.dart';
 
 import '../../Data/Model/Attendance/AttendanceResponse.dart';
-import '../../Data/Model/Attendance/AttendanceResponseTwo.dart';
 import '../../Data/Model/Holiday/HolidayResponse.dart';
 import '../../Network/Attendence/attendence_network.dart';
 
@@ -90,10 +89,10 @@ class AttendanceRepository {
   }
 
 
-  Future<AttendanceResponseTwo> loadSecAttendance(String userId) async{
+  Future<AttendanceResponse> loadSecAttendance(String userId) async{
     final rawx=await AttendanceNetwork().loadSecAttendance(userId);
     logger.d(rawx);
-    return AttendanceResponseTwo.fromJson(rawx);
+    return AttendanceResponse.fromJson(rawx);
   }
 
   Future<HolidayResponse> checkHoliday(String formattedDate) async{

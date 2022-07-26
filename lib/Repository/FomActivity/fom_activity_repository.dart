@@ -6,7 +6,6 @@ import 'package:salesx_new_project/Network/FomActivity/fom_activity_network.dart
 import 'package:salesx_new_project/Network/SecActivity/sec_activity_network.dart';
 
 import '../../Data/Model/Attendance/AttendanceResponse.dart';
-import '../../Data/Model/Attendance/AttendanceResponseTwo.dart';
 import '../../Network/Attendence/attendence_network.dart';
 
 

@@ -1,24 +1,20 @@
-// ignore: file_names
+
 import 'package:json_annotation/json_annotation.dart';
 
-import 'VmAttendances.dart';
-
-
-
+import 'VmAttendance.dart';
 
 part 'VmAttendanceResponse.g.dart';
 
 @JsonSerializable()
-class VmAttendanceResponse {
+class vmAttendanceResponse{
 
   bool? success;
-  List<VmAttendances>? attendance;
+  List<vmAttendance> attendance;
 
 
-  VmAttendanceResponse(this.success, this.attendance);
+  vmAttendanceResponse(this.success, this.attendance);
 
-  factory VmAttendanceResponse.fromJson(Map<String,dynamic>json)=>
-      _$VmAttendanceResponseFromJson(json);
-  Map<String,dynamic>toJson()=>_$VmAttendanceResponseToJson(this);
-
+  factory vmAttendanceResponse.fromJson(Map<String,dynamic>json)=>
+      _$vmAttendanceResponseFromJson(json);
+  Map<String,dynamic>toJson()=>_$vmAttendanceResponseToJson(this);
 }

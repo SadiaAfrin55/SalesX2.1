@@ -6,17 +6,17 @@ part of 'VmAttendanceResponse.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-VmAttendanceResponse _$VmAttendanceResponseFromJson(
+vmAttendanceResponse _$vmAttendanceResponseFromJson(
         Map<String, dynamic> json) =>
-    VmAttendanceResponse(
+    vmAttendanceResponse(
       json['success'] as bool?,
-      (json['attendance'] as List<dynamic>?)
-          ?.map((e) => VmAttendances.fromJson(e as Map<String, dynamic>))
+      (json['attendance'] as List<dynamic>)
+          .map((e) => vmAttendance.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$VmAttendanceResponseToJson(
-        VmAttendanceResponse instance) =>
+Map<String, dynamic> _$vmAttendanceResponseToJson(
+        vmAttendanceResponse instance) =>
     <String, dynamic>{
       'success': instance.success,
       'attendance': instance.attendance,

@@ -3,10 +3,14 @@ import 'dart:io';
 import 'package:bloc/bloc.dart';
 import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
+import 'package:salesx_new_project/Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
 
-import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceByDateResponse.dart';
+import '../../../Data/Model/Attendance/VmAttendance/VmAttendance.dart';
 import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
-import '../../../Data/Model/Attendance/VmAttendance/VmAttendances.dart';
+
+import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
+import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
+import '../../../Data/Model/profile/profile.dart';
 import '../../../Repository/Attendence/VmAttendence/vm_attendence_repository.dart';
 
 part 'vm_attendence_state.dart';
@@ -33,14 +37,14 @@ class VmAttendenceCubit extends Cubit<VmAttendenceState> {
     });
   }
 
-  void loadVmAttendance(String userId) {
-    VmAttendanceRepository().loadVmAttendance(userId).then((data) => {
-      logger.d(data),
-      if(data!=null){
-        emit(GetVmAttendance(vmAttendancess: data.attendance))
-      }
-    });
-  }
+  // void loadVmAttendance(String userId) {
+  //   VmAttendanceRepository().loadVmAttendance(userId).then((data) => {
+  //     logger.d(data),
+  //     if(data!=null){
+  //       emit(GetVmAttendance(vmAttendancess: data.attendance))
+  //     }
+  //   });
+  // }
 
   // void loadVmAttendanceByMonth(String userId, String leaveDate) {
   //   print("ddddddddddd");
@@ -59,12 +63,19 @@ class VmAttendenceCubit extends Cubit<VmAttendenceState> {
     VmAttendanceRepository().loadVmAttendanceByMonth(userId).then((data) => {
       logger.d(data),
       if(data!=null){
-        emit(GetVmAttendanceByDate(vmAttendanceResponse:data))
+        emit(GetVmAttendanceByDate(vmAtdResponse:data))
       }
     });
   }
 
-
+  void profiledata(String userId) {
+    VmAttendanceRepository().profiledata(userId).then((data) => {
+      logger.d(data),
+      if(data!=null){
+        emit(getProfiledata(profile:data))
+      }
+    });
+  }
 
   void chekVmSignffAttendance(String userId) {
     VmAttendanceRepository().chekVmSignffAttendance(userId).then((value) => {
@@ -103,14 +114,14 @@ class VmAttendenceCubit extends Cubit<VmAttendenceState> {
     });
   }
 
-  void loadReAttendance(String userId) {
-    VmAttendanceRepository().loadReAttendance(userId).then((data) => {
-      logger.d(data),
-      if(data!=null){
-        emit(GetVmAttendance(vmAttendancess: data.attendance))
-      }
-    });
-  }
+  // void loadReAttendance(String userId) {
+  //   VmAttendanceRepository().loadReAttendance(userId).then((data) => {
+  //     logger.d(data),
+  //     if(data!=null){
+  //       emit(GetVmAttendance(vmAttendancess: data.attendance))
+  //     }
+  //   });
+  // }
 
 
   // void loadReAttendanceByMonth(String userId, String leaveDate) {

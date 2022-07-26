@@ -167,7 +167,7 @@ class _SalesChartState extends State<SalesChart> {
               Container(
                 margin: const EdgeInsets.only(left: 24, right: 24, top: 12),
                 child: const Text(
-                  'Sales by SaleAmount',
+                  'Sales  by Sale  Amount',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,
@@ -282,7 +282,7 @@ class _SalesChartState extends State<SalesChart> {
               Container(
                 margin: const EdgeInsets.only(left: 24, right: 24, bottom: 10),
                 child: const Text(
-                  'Sales by TotalUnit',
+                  'Sales  by Total Unit',
                   style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w700,

@@ -11,6 +11,7 @@ import 'package:hive/hive.dart';
 
 import '../../../../../../Constants/Strings/app_strings.dart';
 import '../../Profile/ProfileComponents/moreOption_components.dart';
+import '../OM/om_attendance.dart';
 import '../OM/om_training.dart';
 
 class smActivityComponents extends StatefulWidget {
@@ -32,7 +33,11 @@ class _smActivityComponentsState extends State<smActivityComponents> {
         children: [
           InkWell(
             onTap: (){
-              Navigator.pushNamed(context, SM_FOM_ATTENDANCE);
+              //Navigator.pushNamed(context, SM_FOM_ATTENDANCE);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OmAttendenceSurvey()),
+              );
             },
             child: MoreOptionsCard(
               image: SvgPicture.asset('assets/icons/cardIcon/Attendance.svg',height: 16,),

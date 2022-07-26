@@ -57,9 +57,9 @@ class GetUserAttendanceByMonth extends AttendenceState{
 }
 
 class GetSecAttendance extends AttendenceState{
-  final List<AttendanceTwo>? attendance;
+  //final List<AttendanceTwo>? attendance;
 
-  GetSecAttendance({this.attendance});
+  GetSecAttendance();
 }
 
 class StoreHolidayCheck extends AttendenceState{

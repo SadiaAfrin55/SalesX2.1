@@ -259,6 +259,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                           if (state is GiveVmAttendance) {
                             setState(() {
                               circular = false;
+                              circular==false?showAlertDialog(context):
                               Navigator.pushReplacement(context, PageTransition(MainScreen()));
                             });
                           }
@@ -422,8 +423,6 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                 ),
 
 
-
-
                                                 _image != null ? circle
                                                     ? Center(
                                                   child: CircularProgressIndicator(),)
@@ -538,69 +537,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
     );
   }
 
-  Widget topCardWidget() {
-    return Align(
-      alignment: Alignment.center,
-      child: _image==null?Text('first card'):Image.file(_image!,height: 800,),
-    );
-  }
-
-  // This widget will be passed as Bottom Card's Widget.
-  Widget bottomCardWidget() {
-    return ShadowCarveButton(pressed: (){
-      if (_globalkey.currentState!.validate()) {
-        setState(() {
-          validate = true;
-          circular = true;
-        });
-        print(note.text);
-      }},
-    );
-  }
-
   showAlertDialog(BuildContext context) {
-    // set up the button
-    Widget okButton = TextButton(
-      child: Text("OK"),
-      onPressed: () {
-        Navigator.of(context).pop();
-      },
-    );
-
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Warning"),
-      content: Text("Please Take Your Photo."),
-      actions: [
-        okButton,
-      ],
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-
-  showAlertDialogForImage(BuildContext context,String text) {
-    // set up the AlertDialog
-    AlertDialog alert = AlertDialog(
-      title: Text("Warning"),
-      content: Text(text),
-    );
-
-    // show the dialog
-    showDialog(
-      context: context,
-      builder: (BuildContext context) {
-        return alert;
-      },
-    );
-  }
-  showAlertDialogDone(BuildContext context) {
     // set up the AlertDialog
     AlertDialog alert = AlertDialog(
       content: Container(
@@ -613,9 +550,9 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Image.asset('assets/icons/check_grren.png'),
-            const Text("Done!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,),
-            const Text("You have successfully mark \n your attendance.",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,),
+            Image.asset('assets/icons/Frame.png'),
+            const Text("Done!!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,).tr(),
+            const Text("You have successfully done your survey",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,).tr(),
             Padding(
                 padding: const EdgeInsets.all(16.0),
                 child:  InkWell(
@@ -630,7 +567,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                         borderRadius: BorderRadius.circular(10),
                         color: Colors.blueAccent
                     ),
-                    child: Text("Start your work",style: TextStyle(color: Color(0XFFffffff),fontSize:16 ),textAlign: TextAlign.center,),
+                    child: Text("Star your work",style: TextStyle(color: Color(0XFFffffff),fontSize:16 ),textAlign: TextAlign.center,).tr(),
                   ),
                 )
             ),
@@ -640,6 +577,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
     );
     // show the dialog
     showDialog(
+      barrierDismissible: false,
       context: context,
       builder: (BuildContext context) {
         return alert;

@@ -19,15 +19,18 @@ class GiveVmSignOffAttendance extends VmAttendenceState{
 
 class GetVmAttendance extends VmAttendenceState{
 
-  final List<VmAttendances>? vmAttendancess;
-
-  GetVmAttendance({this.vmAttendancess});
+  final List<vmAttendance> vmAttendancess;
+  GetVmAttendance({required this.vmAttendancess});
 }
 
 class GetVmAttendanceByDate extends VmAttendenceState{
-  VmAttendanceResponse? vmAttendanceResponse;
-  //List<VmAttendances>? attendance;
-  GetVmAttendanceByDate({this.vmAttendanceResponse});
+  vmAttendanceResponse? vmAtdResponse;
+  GetVmAttendanceByDate({required this.vmAtdResponse});
+}
+
+class getProfiledata extends VmAttendenceState{
+  Profile? profile;
+  getProfiledata({required this.profile});
 }
 
 class CheckVmSignOffAtendance extends VmAttendenceState{

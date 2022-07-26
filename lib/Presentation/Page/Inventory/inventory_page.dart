@@ -21,6 +21,7 @@ class _InventoryPageState extends State<InventoryPage> {
   bool calling=false;
   bool validate = false;
   bool circular = false;
+  bool circle=false;
   Product? ProductId;
 
   TextEditingController quantity= TextEditingController();
@@ -56,8 +57,10 @@ class _InventoryPageState extends State<InventoryPage> {
       listener: (context, state) {
         if(state is InventoryCreate){
           setState(() {
-            circular = false;
+
           });
+          circular=false;
+          circular==false?showAlertDialog(context):
           Navigator.pushReplacement(context, PageTransition(MainScreen()));
         }
       },
@@ -65,9 +68,25 @@ class _InventoryPageState extends State<InventoryPage> {
           backgroundColor: Colors.white,
           appBar: AppBar(
             backgroundColor: Colors.white,
-            leading: BackButton(color: Colors.black,),
-            title: Text("Inventory Form",style: TextStyle(color: Colors.black),),
-            elevation: 0,
+            title: const Text('Inventory',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
+              ),
+            ),
+            leading: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back, color: Colors.black, size: 27,),
+              ),
+            ),
+            toolbarHeight: 60,
+            elevation: 0.5,
           ),
           body: BlocListener<ProductCubit, ProductState>(
             listener: (context, state) {
@@ -120,7 +139,7 @@ class _InventoryPageState extends State<InventoryPage> {
                   child: Container(
                     height: MediaQuery.of(context).size.height*0.8,
                     child: Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 8,vertical: 4),
+                      padding: EdgeInsets.symmetric(horizontal: 20,vertical: 4),
                       child: Form(
                         key: _globalkey,
                         child: Column(
@@ -129,6 +148,13 @@ class _InventoryPageState extends State<InventoryPage> {
                             Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
+                                const SizedBox(height: 20,),
+                                const Text('Select product',style: TextStyle(
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.w600,
+                                    color:Color(0xFF232C2E)
+                                ),),
+                                const SizedBox(height: 8,),
                                 items.isEmpty
                                     ? const Center(child: Text("No item found"),)
                                     : Container(
@@ -174,7 +200,7 @@ class _InventoryPageState extends State<InventoryPage> {
                                     BoxConstraints.tight(Size.fromHeight(350)),
                                   ),
                                 ),
-                                SizedBox(height: 14,),
+                                SizedBox(height: 20,),
                                 const Text('Quantity',style: TextStyle(
                                     fontSize: 14,
                                     fontWeight: FontWeight.w600,
@@ -220,6 +246,54 @@ class _InventoryPageState extends State<InventoryPage> {
             ),
           )
       ),
+    );
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width*0.7,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/icons/Frame.png'),
+            const Text("Done!!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,),
+            const Text("You have successfully done your inventory",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,),
+            Padding(
+                padding: const EdgeInsets.all(16.0),
+                child:  InkWell(
+                  onTap: (){
+                    Navigator.pushReplacement(context, PageTransition(MainScreen()));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blueAccent
+                    ),
+                    child: Text("Star your work",style: TextStyle(color: Color(0XFFffffff),fontSize:16 ),textAlign: TextAlign.center,),
+                  ),
+                )
+            ),
+          ],
+        ),
+      ),
+    );
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 

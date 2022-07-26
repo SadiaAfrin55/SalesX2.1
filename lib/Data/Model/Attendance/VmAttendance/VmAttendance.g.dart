@@ -1,35 +1,35 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'FoeAttendances.dart';
+part of 'VmAttendance.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
 
-FoeAttendances _$FoeAttendancesFromJson(Map<String, dynamic> json) =>
-    FoeAttendances(
+vmAttendance _$vmAttendanceFromJson(Map<String, dynamic> json) => vmAttendance(
       json['_id'] as String?,
-      json['userId'] as String?,
-      json['businessunit'] as String?,
-      json['LinemanagerId'] as String?,
-      json['dateid'] as String?,
-      json['month'] as String?,
-      VmSignOffAttendance.fromJson(json['signoffAtd'] as Map<String, dynamic>),
-      VmWorkingHourAttendance.fromJson(
-          json['workinghour'] as Map<String, dynamic>),
+      json['userId'] as String,
+      json['LinemanagerId'] as String,
+      json['businessunit'] as String,
+      json['dateid'] as String,
+      json['month'] as String,
+      json['role'] as String,
+      vmSignoff.fromJson(json['signoffAtd'] as Map<String, dynamic>),
+      vmWorkinghour.fromJson(json['workinghour'] as Map<String, dynamic>),
       (json['storeAttendance'] as List<dynamic>)
-          .map((e) => VmStoreAttendance.fromJson(e as Map<String, dynamic>))
+          .map((e) => vmStoreAtd.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$FoeAttendancesToJson(FoeAttendances instance) =>
+Map<String, dynamic> _$vmAttendanceToJson(vmAttendance instance) =>
     <String, dynamic>{
       '_id': instance.id,
       'userId': instance.userId,
-      'businessunit': instance.businessunit,
       'LinemanagerId': instance.LinemanagerId,
+      'businessunit': instance.businessunit,
       'dateid': instance.dateid,
       'month': instance.month,
+      'role': instance.role,
       'signoffAtd': instance.signoffAtd,
       'workinghour': instance.workinghour,
       'storeAttendance': instance.storeAttendance,

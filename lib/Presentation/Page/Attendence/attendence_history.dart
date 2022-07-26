@@ -11,6 +11,7 @@ import '../../../Constants/Strings/app_strings.dart';
 import '../../../Service/LocalDataBase/localdata.dart';
 import '../../Widgets/Card/Survey/phone_card.dart';
 import 'Component/attendance_list-component.dart';
+import 'Component/vm_attendance_list_component.dart';
 
 class AttendenceHistory extends StatefulWidget {
   const AttendenceHistory({Key? key}) : super(key: key);
@@ -42,8 +43,12 @@ class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProvid
     setState(() {
       userId = tokenx.get('userId');
       role = tokenx.get('role');
+      if(role=="SEC"){
+        BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
+      }
+
       BlocProvider.of<VmAttendenceCubit>(context).loadVmAttendanceByMonth(userId!);
-      BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
+      // BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
     });
   }
 
@@ -75,7 +80,7 @@ class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProvid
 
   @override
   Widget build(BuildContext context) {
-    return role=="FOE"?VmAttendenceHistory():Container(
+    return role=="SEC"?Container(
       color: Colors.white,
       child: SafeArea(
           child: Scaffold(
@@ -110,6 +115,47 @@ class _AttendenceHistoryState extends State<AttendenceHistory> with TickerProvid
                 child: Column(
                   children: [
                     AttendanceListComponenet()
+                  ],
+                ),
+              ),
+            ),
+
+          )),
+    ):Container(
+      color: Colors.white,
+      child: SafeArea(
+          child: Scaffold(
+            backgroundColor: Colors.white,
+            appBar: AppBar(
+              backgroundColor: Colors.white,
+              title: const Text('Attendance History',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: Colors.black,
+                ),
+              ),
+              leading: Container(
+                margin: const EdgeInsets.symmetric(horizontal: 10.0),
+                child: IconButton(
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
+                  icon: const Icon(
+                    Icons.arrow_back, color: Colors.black, size: 27,),
+                ),
+              ),
+              toolbarHeight: 60,
+              elevation: 0.5,
+            ),
+            body: SingleChildScrollView(
+              child: Container(
+                width: MediaQuery.of(context).size.width,
+                // height: MediaQuery.of(context).size.height,
+                margin: const EdgeInsets.symmetric(horizontal: 12),
+                child: Column(
+                  children: [
+                    VmAttendanceListComponenet()
                   ],
                 ),
               ),

@@ -12,6 +12,8 @@ import 'package:hive/hive.dart';
 import '../../../../../../Constants/Strings/app_strings.dart';
 import '../../../../Profile/ProfileComponents/moreOption_components.dart';
 import '../../../../SM/FOE/foe_training_history.dart';
+import '../../../../SM/OM/om_attendance.dart';
+import '../../../../SM/OM/om_training.dart';
 
 class FomFoeActivityComponent extends StatefulWidget {
   const   FomFoeActivityComponent({Key? key}) : super(key: key);
@@ -32,7 +34,11 @@ class _FomFoeActivityComponentState extends State<FomFoeActivityComponent> {
         children: [
           InkWell(
             onTap: (){
-              Navigator.pushNamed(context, FOM_FOE_ATTENDANCE);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OmAttendenceSurvey()),
+              );
+              //Navigator.pushNamed(context, FOM_FOE_ATTENDANCE);
             },
             child: MoreOptionsCard(
               image: SvgPicture.asset('assets/icons/cardIcon/Attendance.svg',height: 16,),
@@ -66,7 +72,7 @@ class _FomFoeActivityComponentState extends State<FomFoeActivityComponent> {
             onTap: (){
               Navigator.push(
                 context,
-                MaterialPageRoute(builder: (context) => FoeTrainingCard()),
+                MaterialPageRoute(builder: (context) => OmTrainingActivity()),
               );
             },
             child: MoreOptionsCard(

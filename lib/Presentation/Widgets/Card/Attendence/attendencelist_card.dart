@@ -3,13 +3,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class AttendencelistCard extends StatefulWidget {
+class AttendenceObjectCard extends StatefulWidget {
   final String? img;
   final String? checkIn;
   final String? checkOut;
   final String? attendenceDate;
   final String? status;
-  const AttendencelistCard({
+  const AttendenceObjectCard({
     //this.img,
     this.checkIn,
     this.checkOut,
@@ -19,10 +19,10 @@ class AttendencelistCard extends StatefulWidget {
     Key? key}) : super(key: key);
 
   @override
-  State<AttendencelistCard> createState() => _AttendencelistCardState();
+  State<AttendenceObjectCard> createState() => _AttendenceObjectCardState();
 }
 
-class _AttendencelistCardState extends State<AttendencelistCard> {
+class _AttendenceObjectCardState extends State<AttendenceObjectCard> {
   
   String? day;
   String? month;
@@ -60,8 +60,9 @@ class _AttendencelistCardState extends State<AttendencelistCard> {
             CircleAvatar(
               radius: 33,
               backgroundColor: Color(0xFFFAD6D6),
-              backgroundImage: NetworkImage('${widget.img}'),
+              //backgroundImage: NetworkImage('${widget.img}'),
               //backgroundImage: AssetImage('assets/icons/profile_user.png'),
+              child: Text('${widget.img}',style: TextStyle(fontSize: 20,color: Colors.black),),
             ),
             const SizedBox(width: 20),
 

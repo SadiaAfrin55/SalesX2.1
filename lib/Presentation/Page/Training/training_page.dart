@@ -299,7 +299,7 @@ class _TrainingPageState extends State<TrainingPage> {
                             child:  Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
-                                Text("Mark your training",style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600),).tr(),
+                                Text("Give  training  attendance",style: TextStyle(color: Colors.white,fontSize: 16,fontWeight: FontWeight.w600),).tr(),
                               ],
                             ),
                           )

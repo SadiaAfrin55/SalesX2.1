@@ -10,6 +10,7 @@ import 'package:salesx_new_project/Bloc/List/list_cubit.dart';
 import 'package:salesx_new_project/Bloc/Notification/notification_cubit.dart';
 import 'package:salesx_new_project/Bloc/Store/store_cubit.dart';
 import 'package:salesx_new_project/Presentation/Page/Visit/Bloc/visit_cubit.dart';
+import 'Bloc/Attendence/AttendanceActivity/attendance_activity_cubit.dart';
 import 'Bloc/Attendence/FoeAttendence/foe_attendence_cubit.dart';
 import 'Bloc/Attendence/attendence_cubit.dart';
 import 'Bloc/Dayoff/dayoff_cubit.dart';
@@ -84,6 +85,9 @@ class MyApp extends StatelessWidget {
         ),
         BlocProvider<VisitCubit>(
           create: (context) => VisitCubit(),
+        ),
+        BlocProvider<AttendanceActivityCubit>(
+          create: (context) => AttendanceActivityCubit(),
         ),
 
       ],

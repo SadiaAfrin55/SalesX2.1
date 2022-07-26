@@ -38,6 +38,9 @@ class _FomListState extends State<FomList> {
       if(role == "SEC"){
         BlocProvider.of<ListCubit>(context).loadSecdata(linemanageridx!);
       }
+      if(role == "OM"){
+        BlocProvider.of<ListCubit>(context).loadSecdata(linemanageridx!);
+      }
       BlocProvider.of<ListCubit>(context).loadSecdata(linemanageridx!);
     });
   }

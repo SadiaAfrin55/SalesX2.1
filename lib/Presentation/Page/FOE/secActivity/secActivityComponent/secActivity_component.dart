@@ -10,6 +10,8 @@ import 'package:geolocator/geolocator.dart';
 import 'package:hive/hive.dart';
 import '../../../../../Constants/Strings/app_strings.dart';
 import '../../../Profile/ProfileComponents/moreOption_components.dart';
+import '../../../SM/OM/om_attendance.dart';
+import '../../../SM/OM/om_training.dart';
 
 
 class SecActivityComponents extends StatefulWidget {
@@ -31,7 +33,11 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
         children: [
           InkWell(
             onTap: (){
-              Navigator.pushNamed(context, SEC_ATTENDENCE_PAGE);
+              //Navigator.pushNamed(context, SEC_ATTENDENCE_PAGE);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OmAttendenceSurvey()),
+              );
             },
             child: MoreOptionsCard(
               image: SvgPicture.asset('assets/icons/cardIcon/Attendance.svg',height: 16,),
@@ -91,7 +97,11 @@ class _SecActivityComponentsState extends State<SecActivityComponents> {
           ),
           GestureDetector(
             onTap: (){
-              Navigator.pushNamed(context, SEC_TRAINING_PAGE);
+              //Navigator.pushNamed(context, SEC_TRAINING_PAGE);
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => OmTrainingActivity()),
+              );
             },
             child: MoreOptionsCard(
               image: SvgPicture.asset('assets/icons/profileIcon/Tr Attendance.svg'),

@@ -1,12 +1,13 @@
-
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:salesx_new_project/Service/LocalDataBase/localdata.dart';
 
-import '../../../../Bloc/List/list_cubit.dart';
-import '../../FOE/Sec/SecTrainingComponents/sec_training_components.dart';
+import '../../../../Bloc/Attendence/AttendanceActivity/attendance_activity_cubit.dart';
+import '../../../../Service/LocalDataBase/localdata.dart';
+import '../../../Widgets/Card/Attendence/attendance_activity_card.dart';
+import '../../../Widgets/Card/Attendence/attendencelist_card.dart';
+import '../../../Widgets/Card/Attendence/training_activity_card.dart';
+import '../Components/attendance_object_card.dart';
+
 
 class OmTrainingActivity extends StatefulWidget {
   const OmTrainingActivity({Key? key}) : super(key: key);
@@ -16,99 +17,23 @@ class OmTrainingActivity extends StatefulWidget {
 }
 
 class _OmTrainingActivityState extends State<OmTrainingActivity> {
-  bool isClicked = true;
-  String? userId;
-  String? role;
-  String? leaveDate;
-  String? saveMonth;
-  String? showDateInfo;
-  String? month;
-  DateTime? selectedDate;
-  DateTime initialDate=DateTime.now();
-  String? Storename;
-  var dateParse;
-  int? tabPosition=0;
+  bool isVisible = true;
+  double _height = 61;
+  String? userid;
 
-
-  //storage instance
   LocalDataGet _localDataGet = LocalDataGet();
 
   getToken() async {
     var tokenx = await _localDataGet.getData();
     setState(() {
-      userId = tokenx.get('userId');
-      log('55555'+userId!);
-      role = tokenx.get('role');
-      //BlocProvider.of<ListCubit>(context).GetSecTrainingAtd(leaveDate!,userId!);
-      BlocProvider.of<ListCubit>(context).GetOmTrainingAtd(leaveDate!);
-      //BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
+      userid = tokenx.get('userId');
+      BlocProvider.of<AttendanceActivityCubit>(context).trainingActivity(
+          userid!);
     });
   }
 
-
   @override
   void initState() {
-    // TODO: implement initState
-
-    var date = new DateTime.now().toString();
-    dateParse = DateTime.parse(date);
-
-    if(dateParse.month.toString().length<2){
-      month="0"+dateParse.month.toString();
-    }else{
-      // selectedDate.month.toString().length<2 ? "0"+selectedDate.month.toString():selectedDate.month.toString()
-      month=dateParse.month.toString();
-    }
-
-    var formattedDate = "$month-${dateParse.year}";
-    var formattedmonth = "$month";
-    setState(() {
-      switch (month.toString()){
-        case "01":
-          tabPosition=0;
-          break;
-        case "02":
-          tabPosition=1;
-          break;
-        case "03":
-          tabPosition=2;
-          break;
-        case "04":
-          tabPosition=3;
-          break;
-        case "05":
-          tabPosition=4;
-          break;
-        case "06":
-          tabPosition=5;
-          break;
-        case "07":
-          tabPosition=6;
-          break;
-        case "08":
-          tabPosition=7;
-          break;
-        case "09":
-          tabPosition=8;
-          break;
-        case "10":
-          tabPosition=9;
-          break;
-        case "11":
-          tabPosition=10;
-          break;
-        case "12":
-          tabPosition=11;
-          break;
-
-      }
-
-    });
-    print(month);
-    print("xxxxxxxxx");
-    print(userId);
-    saveMonth=formattedmonth.toString();
-    leaveDate=formattedDate.toString();
     getToken();
     super.initState();
   }
@@ -118,137 +43,158 @@ class _OmTrainingActivityState extends State<OmTrainingActivity> {
     return Container(
       color: Colors.white,
       child: SafeArea(
-          child: Scaffold(
+        child: Scaffold(
+          backgroundColor: Colors.white,
+          appBar: AppBar(
             backgroundColor: Colors.white,
-            appBar: AppBar(
-              backgroundColor: Colors.white,
-              title: const Text('Training History',
-                style: TextStyle(
-                  fontSize: 18,
-                  fontWeight: FontWeight.w700,
-                  color: Colors.black,
-                ),
+            title: const Text('Training',
+              style: TextStyle(
+                fontSize: 18,
+                fontWeight: FontWeight.w700,
+                color: Colors.black,
               ),
-              leading: Container(
-                margin: const EdgeInsets.symmetric(horizontal: 10.0),
-                child: IconButton(
-                  onPressed: () {
-                    Navigator.pop(context);
-                  },
-                  icon: const Icon(
-                    Icons.arrow_back, color: Colors.black, size: 27,),
-                ),
-              ),
-              toolbarHeight: 60,
-              elevation: 0.5,
             ),
-            body: SingleChildScrollView(
-              child: Container(
-                width: MediaQuery.of(context).size.width,
-                // height: MediaQuery.of(context).size.height,
-                margin: const EdgeInsets.symmetric(horizontal: 12),
-                child: Column(
-                  children: [
-                    DefaultTabController(
-                      length: 12,
-                      initialIndex:tabPosition! ,
-                      child: Container(
-                        width: MediaQuery.of(context).size.width,
-                        margin: const EdgeInsets.only(left: 12),
-                        height: 49,
-                        child: TabBar(
-                          onTap: (index){
-                            print(index);
-                            switch(index){
-                              case 0:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("01-"+dateParse.year.toString());
+            leading: Container(
+              margin: const EdgeInsets.symmetric(horizontal: 10.0),
+              child: IconButton(
+                onPressed: () {
+                  Navigator.pop(context);
+                },
+                icon: const Icon(
+                  Icons.arrow_back, color: Colors.black, size: 27,),
+              ),
+            ),
+            toolbarHeight: 60,
+            elevation: 0.5,
+          ),
+          body: SingleChildScrollView(
+            child: Container(
+              margin: EdgeInsets.symmetric(vertical: 10,horizontal: 15),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  // Column(
+                  //   children: [
+                  //     Container(
+                  //       height: _height,
+                  //       color: const Color(0xFFE6F2FE),
+                  //       child: Padding(
+                  //         padding: const EdgeInsets.symmetric(horizontal: 12.0),
+                  //         child: Row(
+                  //           mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  //           children: [
+                  //             Expanded(
+                  //               child: Row(
+                  //                 children: [
+                  //                   Expanded(
+                  //                       flex:1,
+                  //                       child: SvgPicture.asset('assets/icons/filter_icon.svg')),
+                  //                   Expanded(
+                  //                       flex: 8,
+                  //                       child: Text('Filter',style: TextStyle(fontSize:16,fontWeight:FontWeight.w600,color: Color(0xFF0180F5),))),
+                  //                 ],
+                  //               ),
+                  //             ),
 
-                                break;
-                              case 1:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("02-"+dateParse.year.toString());
+                  //             InkWell(
+                  //               onTap: (){
+                  //                 setState(() {
+                  //                   isVisible = !isVisible;
+                  //                 });
+                  //               },
+                  //               child: Column(
+                  //                 mainAxisAlignment: MainAxisAlignment.center,
+                  //                 children: [
+                  //                   isVisible?
+                  //                   SvgPicture.asset('assets/icons/filter-side.svg'):
+                  //                   SvgPicture.asset('assets/icons/filter-back.svg'),
+                  //                 ],
+                  //               ),
+                  //             ),
 
-                                break;
-                              case 2:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("03-"+dateParse.year.toString());
+                  //           ],
+                  //         ),
+                  //       ),
+                  //     ),
+                  //     InkWell(
+                  //       onTap: (){
+                  //         setState(() {
+                  //           _height = 264;
+                  //         });
+                  //       },
+                  //       child: Visibility(
+                  //         visible: !isVisible,
+                  //         child: Align(
+                  //           alignment: Alignment.bottomCenter,
+                  //           child: AnimatedContainer(
+                  //             duration: const Duration(seconds: 1),
+                  //             curve: Curves.easeInOut,
+                  //             color: Colors.green,
+                  //             height: _height,
+                  //             child: Column(
+                  //               children: [
+                  //                 Row(
+                  //                   children: [
+                  //                     Column(
+                  //                       children: [
 
-                                break;
-                              case 3:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("04-"+dateParse.year.toString());
+                  //                       ],
+                  //                     ),
+                  //                   ],
+                  //                 ),
+                  //               ],
+                  //             ),
+                  //           ),
+                  //         ),
+                  //       ),
+                  //     ),
+                  //   ],
+                  // ),
 
-                                break;
-                              case 4:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("05-"+dateParse.year.toString());
+                  BlocBuilder<AttendanceActivityCubit, AttendanceActivityState>(
+                    builder: (context, state) {
+                      if(state is !trainingActivityData){
+                        return Center(child: CircularProgressIndicator(),);
+                      }
 
-                                break;
-                              case 5:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("06-"+dateParse.year.toString());
-
-                                break;
-                              case 6:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("07-"+dateParse.year.toString());
-
-                                break;
-                              case 7:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("08-"+dateParse.year.toString());
-
-                                break;
-                              case 8:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("09-"+dateParse.year.toString());
-
-                                break;
-                              case 9:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("10-"+dateParse.year.toString());
-
-                                break;
-                              case 10:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("11-"+dateParse.year.toString());
-
-                                break;
-                              case 11:
-                                BlocProvider.of<ListCubit>(context).GetOmTrainingAtd("12-"+dateParse.year.toString());
-
-                                break;
-
-                            }
-                            // BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
-                          },
-                          isScrollable: true,
-                          indicatorColor: Colors.blue,
-                          indicatorWeight: 2,
-                          indicatorSize: TabBarIndicatorSize.label,
-                          labelColor: Colors.blue,
-                          labelStyle: const TextStyle(
-                              fontSize: 14,
-                              fontWeight: FontWeight.w600
+                      var data = (state as trainingActivityData).trainingdata;
+                      return data!.isEmpty?Container(
+                        height: MediaQuery.of(context).size.height*0.5,
+                        child: Center(
+                          child: Column(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: [
+                              Image.asset('assets/images/nodata.png'),
+                              Text('No data available',style: TextStyle(
+                                  fontSize: 16,
+                                  fontWeight: FontWeight.w500,
+                                  color: Colors.black.withOpacity(0.8)
+                              ),),
+                            ],
                           ),
-                          unselectedLabelColor: Colors.black,
-
-                          tabs:const [
-                            Text('January'),
-                            Text('February'),
-                            Text('March'),
-                            Text('April'),
-                            Text('May'),
-                            Text('June'),
-                            Text('July'),
-                            Text('August'),
-                            Text('September'),
-                            Text('October'),
-                            Text('November'),
-                            Text('December'),
-                          ],),
-                      ),
-                    ),
-                    const SizedBox(height: 5,),
-                    //AttendanceListComponenet()
-                    //SecTrainingComponents()
-                    SecTrainingComponents()
-                  ],
-                ),
+                        ),
+                      ):ListView.builder(
+                          shrinkWrap: true,
+                          scrollDirection: Axis.vertical,
+                          physics: const NeverScrollableScrollPhysics(),
+                          itemCount: data.length,
+                          itemBuilder: (context, index) {
+                            return TrainingActivityCard(
+                              img: data[index].trainingAtd.photo,
+                              checkIn: data[index].trainingAtd.time,
+                              attendenceDate: data[index].dateid,
+                            );
+                          }
+                      );
+                    },
+                  ),
+                  const SizedBox(height: 30,)
+                ],
               ),
             ),
-
-          )),
+          ),
+        ),
+      ),
     );
   }
 }

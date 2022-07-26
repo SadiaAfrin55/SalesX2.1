@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../Widgets/Card/Attendence/attendencelist_card.dart';
 import '../../Attendence/Component/attendance_list-component.dart';
+import '../../SM/Components/attendance_object_card.dart';
 class SecAttendenceSurvey extends StatefulWidget {
   const SecAttendenceSurvey({Key? key}) : super(key: key);
 

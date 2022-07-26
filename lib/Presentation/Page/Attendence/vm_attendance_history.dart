@@ -43,6 +43,7 @@ class _VmAttendenceHistoryState extends State<VmAttendenceHistory> with TickerPr
     setState(() {
       userId = tokenx.get('userId');
       role = tokenx.get('role');
+      print("566666666"+userId!);
       BlocProvider.of<VmAttendenceCubit>(context).loadVmAttendanceByMonth(userId!);
       //BlocProvider.of<AttendenceCubit>(context).loadUserAttendanceByMonth(userId!,leaveDate!);
     });
@@ -83,7 +84,7 @@ class _VmAttendenceHistoryState extends State<VmAttendenceHistory> with TickerPr
             backgroundColor: Colors.white,
             appBar: AppBar(
               backgroundColor: Colors.white,
-              title: const Text('vm Attendance History',
+              title: const Text('Attendance History',
                 style: TextStyle(
                   fontSize: 18,
                   fontWeight: FontWeight.w700,

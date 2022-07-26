@@ -3,10 +3,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:logger/logger.dart';
-
-import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceByDateResponse.dart';
 import '../../../Data/Model/Attendance/VmAttendance/VmAttendanceResponse.dart';
-import '../../../Data/Model/Attendance/VmAttendance/VmAttendances.dart';
+import '../../../Data/Model/profile/profile.dart';
 import '../../../Network/Attendence/VmAttendence/vm_attendence_network.dart';
 
 
@@ -23,10 +21,10 @@ class VmAttendanceRepository {
     return rawx;
   }
 
-  Future<VmAttendanceResponse> loadVmAttendance(String userId) async{
+  Future<vmAttendanceResponse> loadVmAttendance(String userId) async{
     final rawx=await VmAttendanceService().loadVmAttendance(userId);
     logger.d(rawx);
-    return VmAttendanceResponse.fromJson(rawx);
+    return vmAttendanceResponse.fromJson(rawx);
   }
 
   // Future loadVmAttendanceByMonth(String userId, String leaveDate) async{
@@ -35,10 +33,16 @@ class VmAttendanceRepository {
   //   return rawx;
   // }
 
-  Future <VmAttendanceResponse>loadVmAttendanceByMonth(String userId) async{
+  Future <vmAttendanceResponse>loadVmAttendanceByMonth(String userId) async{
     final rawx=await VmAttendanceService().loadVmAttendance(userId);
     logger.d(rawx);
-    return VmAttendanceResponse.fromJson(rawx);
+    return vmAttendanceResponse.fromJson(rawx);
+  }
+
+  Future <Profile>profiledata(String userId) async{
+    final rawx=await VmAttendanceService().profileinfo(userId);
+    logger.d(rawx);
+    return Profile.fromJson(rawx);
   }
 
   Future chekVmSignffAttendance(String userId) async{
@@ -47,10 +51,10 @@ class VmAttendanceRepository {
     return rawx;
   }
 
-  Future<VmAttendanceResponse> loadVmAttendanceforSignOff(String userId) async{
+  Future<vmAttendanceResponse> loadVmAttendanceforSignOff(String userId) async{
     final rawx=await VmAttendanceService().loadVmAttendanceforSignOff(userId);
     logger.d(rawx);
-    return VmAttendanceResponse.fromJson(rawx);
+    return vmAttendanceResponse.fromJson(rawx);
   }
 
 
@@ -73,10 +77,10 @@ class VmAttendanceRepository {
     return rawx;
   }
 
-  Future<VmAttendanceResponse> loadReAttendance(String userId) async{
+  Future<vmAttendanceResponse> loadReAttendance(String userId) async{
     final rawx=await VmAttendanceService().loadReAttendance(userId);
     logger.d(rawx);
-    return VmAttendanceResponse.fromJson(rawx);
+    return vmAttendanceResponse.fromJson(rawx);
   }
 
   Future loadReAttendanceByMonth(String userId, String leaveDate) async{
@@ -86,13 +90,13 @@ class VmAttendanceRepository {
   }
 
 
-  Future<VmAttendanceByDateResponse> Vmattendancehistory(String leaveDate,String userId) async{
-    print(userId);
-    print(leaveDate);
-    final rawx=await VmAttendanceService().loadVmAttendanceByMonth(leaveDate,userId);
-    logger.d(rawx);
-    return VmAttendanceByDateResponse.fromJson(rawx);
-  }
+  // Future<VmAttendanceByDateResponse> Vmattendancehistory(String leaveDate,String userId) async{
+  //   print(userId);
+  //   print(leaveDate);
+  //   final rawx=await VmAttendanceService().loadVmAttendanceByMonth(leaveDate,userId);
+  //   logger.d(rawx);
+  //   return VmAttendanceByDateResponse.fromJson(rawx);
+  // }
 
 
 

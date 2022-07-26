@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 import '../../../../../Widgets/Card/Attendence/attendencelist_card.dart';
+import '../../../../SM/Components/attendance_object_card.dart';
 
 class FomAttendenceSurvey extends StatefulWidget {
   const FomAttendenceSurvey({Key? key}) : super(key: key);

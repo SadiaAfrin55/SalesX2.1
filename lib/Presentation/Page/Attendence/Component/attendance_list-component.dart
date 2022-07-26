@@ -5,6 +5,7 @@ import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cu
 import '../../../../Bloc/Attendence/attendence_cubit.dart';
 import '../../../../Service/LocalDataBase/localdata.dart';
 import '../../../Widgets/Card/Attendence/attendencelist_card.dart';
+import '../../SM/Components/attendance_object_card.dart';
 import '../../Survey/survey_noData.dart';
 
 class AttendanceListComponenet extends StatefulWidget {

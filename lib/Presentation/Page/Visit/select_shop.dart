@@ -98,8 +98,7 @@ class _SelectShopState extends State<SelectShop> {
                   height: 12,
                 ),
                 OnChangeTextField(
-                  hintText: 'Quantity',
-                  lable: 'Quantity',
+                  hintText: 'Type Shop Name',
                   controller: searchController,
                   readOnly: false,
                   tap: (String name) {

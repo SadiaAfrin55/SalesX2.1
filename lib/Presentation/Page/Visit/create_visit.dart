@@ -83,7 +83,8 @@ class _CreateShopState extends State<CreateShop> {
         if (state is MarkVisit) {
           final data = (state as MarkVisit).attendance;
           if (data=="success") {
-            Navigator.pushReplacement(context, PageTransition(MainScreen()));
+            showAlertDialog(context);
+            //Navigator.pushReplacement(context, PageTransition(MainScreen()));
           }
         } else {
           circle = false;
@@ -248,7 +249,7 @@ class _CreateShopState extends State<CreateShop> {
                               .center,
                           children: [
                             Text(
-                              "Mark your attendance",
+                              "Submit",
                               style: TextStyle(
                                   color: Colors
                                       .white,
@@ -266,6 +267,53 @@ class _CreateShopState extends State<CreateShop> {
           ),
         ),
       ),
+    );
+  }
+  showAlertDialog(BuildContext context) {
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width*0.7,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/icons/Frame.png'),
+            const Text("Done!!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,).tr(),
+            const Text("You have successfully done your visit",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,).tr(),
+            Padding(
+                padding: const EdgeInsets.all(16.0),
+                child:  InkWell(
+                  onTap: (){
+                    Navigator.pushReplacement(context, PageTransition(MainScreen()));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blueAccent
+                    ),
+                    child: Text("Star your work",style: TextStyle(color: Color(0XFFffffff),fontSize:16 ),textAlign: TextAlign.center,).tr(),
+                  ),
+                )
+            ),
+          ],
+        ),
+      ),
+    );
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
     );
   }
 }

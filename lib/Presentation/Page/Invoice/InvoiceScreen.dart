@@ -52,6 +52,7 @@ class _InvoicePageState extends State<InvoicePage> {
   final String dateIn=formate.format(now);
   String name="";
   late String userId;
+  bool circul = false;
   late String storeName;
   late String storeId;
   late String linmanagerid;
@@ -101,6 +102,8 @@ class _InvoicePageState extends State<InvoicePage> {
       listener: (context, state) {
         // TODO: implement listener}
         if(state is SalesCreated){
+          circul=false;
+          circul==false?showAlertDialog(context):
           Navigator.pushReplacement(context, PageTransition(MainScreen()));
         }
       },
@@ -318,4 +321,53 @@ class _InvoicePageState extends State<InvoicePage> {
       ),
     );
   }
+
+  showAlertDialog(BuildContext context) {
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width*0.7,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/icons/Frame.png'),
+            const Text("Done!!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,),
+            const Text("You have successfully done your sales",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,),
+            Padding(
+                padding: const EdgeInsets.all(16.0),
+                child:  InkWell(
+                  onTap: (){
+                    Navigator.pushReplacement(context, PageTransition(MainScreen()));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blueAccent
+                    ),
+                    child: Text("Star your work",style: TextStyle(color: Color(0XFFffffff),fontSize:16 ),textAlign: TextAlign.center,),
+                  ),
+                )
+            ),
+          ],
+        ),
+      ),
+    );
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
+  }
+
 }

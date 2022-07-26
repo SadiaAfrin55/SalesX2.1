@@ -71,13 +71,28 @@ class _SalesCreateState extends State<SalesCreate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        backgroundColor: whiteBackground,
+        backgroundColor: Colors.white,
         appBar: AppBar(
           backgroundColor: Colors.white,
-          leading: BackButton(color: Colors.black,),
-          title: Text("Sales Form",style: TextStyle(color: Colors.black),),
-          elevation: 0.5,
+          title: const Text('Sales',
+            style: TextStyle(
+              fontSize: 18,
+              fontWeight: FontWeight.w700,
+              color: Colors.black,
+            ),
+          ),
+          leading: Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 10.0),
+            child: IconButton(
+              onPressed: () {
+                Navigator.pop(context);
+              },
+              icon: const Icon(
+                Icons.arrow_back, color: Colors.black, size: 27,),
+            ),
+          ),
           toolbarHeight: 60,
+          elevation: 0.5,
         ),
         body: BlocListener<ProductCubit, ProductState>(
           listener: (context, state) {
@@ -152,55 +167,89 @@ class _SalesCreateState extends State<SalesCreate> {
                                   child: Column(
                                     crossAxisAlignment: CrossAxisAlignment.start,
                                     children: [
-                                      SizedBox(height: 10,),
-                                      SalesCreateTextfield(lable: "Name",controller: name,hintText: "Customer Name", readOnly: false, isNumber: false,),
-                                      SizedBox(height: 14,),
-
-                                      MaterialBackgroundTextField(lable: "Number",controller: contactNumber,hintText: "Customer Number", readOnly: false, isNumber: true,),
-
-                                      SizedBox(height: 14,),
-                                      Row(
-                                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                                        children: [
-                                          Expanded(
-                                              flex: 2,
-                                              child:MaterialBackgroundTextField(lable: "Age",controller: age,hintText: "Enter Age", readOnly: false, isNumber: true,),
-                                          ),
-                                          SizedBox(width: 8,),
-                                          Expanded(
-                                            flex: 4,
-                                            child:TextFormField(
-                                              validator: (val) => val!.isEmpty || !val.contains("@")
-                                                  ? "enter a valid eamil"
-                                                  : null,
-                                              controller: email,
-                                              decoration: const InputDecoration(
-                                                hintText: "Email",
-                                                hintStyle: TextStyle(color: Colors.grey),
-                                                labelText: "Please Enter Email",
-                                                fillColor: Color(0xFFF5F7F8),
-                                                filled: true,
-                                                contentPadding:
-                                                EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
-                                                border: OutlineInputBorder(
-                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                ),
-                                                enabledBorder: OutlineInputBorder(
-                                                  borderSide:
-                                                  BorderSide(color:Colors.white, width: 1.0),
-                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                ),
-                                                focusedBorder: OutlineInputBorder(
-                                                  borderSide:
-                                                  BorderSide(color: Colors.white, width: 2.0),
-                                                  borderRadius: BorderRadius.all(Radius.circular(10.0)),
-                                                ),
-                                              ),
-                                            ),
-                                          ),
-                                        ],
+                                      const SizedBox(height: 10,),
+                                      const Text(
+                                        'Name',
+                                        style: TextStyle(
+                                          fontSize: 14,
+                                          fontWeight: FontWeight.w600
+                                        ),
                                       ),
-                                      SizedBox(height: 14,),
+                                      const SizedBox(height: 8,),
+                                      SalesCreateTextfield(lable: "Type Name",controller: name,hintText: "Customer Name", readOnly: false, isNumber: false,),
+                                      const SizedBox(height: 20,),
+                                      const Text(
+                                        'Contact number',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8,),
+                                      MaterialBackgroundTextField(lable: "Type Contact number",controller: contactNumber,hintText: "Customer Number", readOnly: false, isNumber: true,),
+
+                                      const SizedBox(height: 20,),
+                                      const Text(
+                                        'Age',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8,),
+
+                                      MaterialBackgroundTextField(lable: "Type Age",controller: age,hintText: "Enter Age", readOnly: false, isNumber: true,),
+
+
+                                      const SizedBox(height: 20,),
+                                      const Text(
+                                        'Email',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8,),
+                                      TextFormField(
+                                        validator: (val) => val!.isEmpty || !val.contains("@")
+                                            ? "enter a valid eamil"
+                                            : null,
+                                        controller: email,
+                                        decoration: const InputDecoration(
+                                          hintText: "Email",
+                                          hintStyle: TextStyle(color: Colors.grey),
+                                          labelText: "Type Email",
+                                          fillColor: Color(0xFFF5F7F8),
+                                          filled: true,
+                                          contentPadding:
+                                          EdgeInsets.symmetric(vertical: 20.0, horizontal: 12.0),
+                                          border: OutlineInputBorder(
+                                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                          ),
+                                          enabledBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color:Colors.white, width: 1.0),
+                                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                          ),
+                                          focusedBorder: OutlineInputBorder(
+                                            borderSide:
+                                            BorderSide(color: Colors.white, width: 2.0),
+                                            borderRadius: BorderRadius.all(Radius.circular(10.0)),
+                                          ),
+                                        ),
+                                      ),
+
+                                      const SizedBox(height: 20,),
+
+                                      const Text(
+                                        'Select products',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8,),
+
                                       items.isEmpty
                                           ? const Center(child: Text("No item found"),)
                                           : Container(
@@ -301,8 +350,17 @@ class _SalesCreateState extends State<SalesCreate> {
                                             }
                                           }
                                       ):Container(),
-                                      SizedBox(height: 14,),
-                                      SalesCreateRemarkTextfield(lable: "Remark(S)",controller: remarks,hintText: "Enter Remarks(optional)", readOnly: false, isNumber: false,),
+                                      //const SizedBox(height: 20,),
+
+                                      const Text(
+                                        'Remarks',
+                                        style: TextStyle(
+                                            fontSize: 14,
+                                            fontWeight: FontWeight.w600
+                                        ),
+                                      ),
+                                      const SizedBox(height: 8,),
+                                      SalesCreateRemarkTextfield(lable: "Type Remark",controller: remarks,hintText: "Enter Remarks(optional)", readOnly: false, isNumber: false,),
                                       SizedBox(height: 34,),
                                       productId==""?Container(): FutureBuilder(
                                           future: lastcall(storeId,productId),
@@ -346,8 +404,8 @@ class _SalesCreateState extends State<SalesCreate> {
                                               return Container();
                                             }
                                           }
-                                      )
-
+                                      ),
+                                      SizedBox(height: 24,),
                                     ],
                                   ),
                                 ),

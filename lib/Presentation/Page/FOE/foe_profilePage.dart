@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 
+import '../../Widgets/Card/ProfileCard/profile_Card.dart';
 import '../Profile/ProfileComponents/chart_components.dart';
 import '../Profile/ProfileComponents/header_components.dart';
 import '../Profile/ProfileComponents/more_components.dart';
@@ -22,9 +23,24 @@ class _FoeProfilePageState extends State<FoeProfilePage> {
       child: Scaffold(
         body: SingleChildScrollView(
           child: Column(
-            children: const [
+            children:  [
               HeaderComponents(),
-              FoeChartComponents(),
+              //FoeChartComponents(),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                children: [
+                  ProfileCard(
+                    cardImage: SvgPicture.asset('assets/icons/profileIcon/user-tick.svg'),
+                    title: '10 Days',
+                    subtitle: 'Present',
+                  ),
+                  ProfileCard(
+                    cardImage: SvgPicture.asset('assets/icons/profileIcon/user-minus.svg'),
+                    title: '20%',
+                    subtitle: 'Absent',
+                  ),
+                ],
+              ),
               FoeMoreComponents(),
             ],
           ),

@@ -5,7 +5,6 @@ import 'package:logger/logger.dart';
 import 'package:meta/meta.dart';
 
 import '../../Data/Model/Attendance/Attendance.dart';
-import '../../Data/Model/Attendance/VmAttendance/AttendanceTwo.dart';
 import '../../Repository/Attendence/attendence_repository.dart';
 import '../../Repository/Store/store_repository.dart';
 
@@ -108,7 +107,7 @@ class AttendenceCubit extends Cubit<AttendenceState> {
     AttendanceRepository().loadSecAttendance(userId).then((value) => {
       logger.d(value),
       if(value!=null){
-        emit(GetSecAttendance(attendance: value.attendance))
+        //emit(GetSecAttendance(attendance: value.attendance))
       }
     });
   }

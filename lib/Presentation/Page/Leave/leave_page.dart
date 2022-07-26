@@ -58,9 +58,11 @@ class _ApplyLeaveState extends State<ApplyLeave> {
             final leave=(state as LeaveCreate).response;
             Logger().d(leave);
             setState(() {
-              circular = false;
+              //circular = false;
             });
             //Navigator.pushReplacementNamed(context, MY_LEAVE_PAGE);
+            circular=false;
+            circular==false?showAlertDialog(context):
             Navigator.pushReplacement(context, PageTransition(MainScreen()));
           }
         },
@@ -478,5 +480,53 @@ class _ApplyLeaveState extends State<ApplyLeave> {
   void showReasonDialog() {
 
 
+  }
+
+  showAlertDialog(BuildContext context) {
+    // set up the AlertDialog
+    AlertDialog alert = AlertDialog(
+      content: Container(
+        height: 300,
+        width: MediaQuery.of(context).size.width*0.7,
+        decoration: BoxDecoration(
+            borderRadius: BorderRadius.circular(30)
+        ),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Image.asset('assets/icons/Frame.png'),
+            const Text("Done!!",style: TextStyle(color: Color(0XFF000000),fontSize:30,fontWeight: FontWeight.w800 ),textAlign: TextAlign.center,),
+            const Text("You have successfully done your leave",style: TextStyle(color: Color(0XFF000000),fontSize:16,fontWeight: FontWeight.w400 ),textAlign: TextAlign.center,),
+            Padding(
+                padding: const EdgeInsets.all(16.0),
+                child:  InkWell(
+                  onTap: (){
+                    Navigator.pushReplacement(context, PageTransition(MainScreen()));
+                  },
+                  child: Container(
+                    padding: EdgeInsets.all(16),
+                    height: 50,
+                    width: MediaQuery.of(context).size.width,
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(10),
+                        color: Colors.blueAccent
+                    ),
+                    child: Text("Star your work",style: TextStyle(color: Color(0XFFffffff),fontSize:16 ),textAlign: TextAlign.center,),
+                  ),
+                )
+            ),
+          ],
+        ),
+      ),
+    );
+    // show the dialog
+    showDialog(
+      barrierDismissible: false,
+      context: context,
+      builder: (BuildContext context) {
+        return alert;
+      },
+    );
   }
 }

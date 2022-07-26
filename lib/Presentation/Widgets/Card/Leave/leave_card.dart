@@ -51,7 +51,7 @@ class _LeaveListCardState extends State<LeaveListCard> {
         border: Border.all(color:Color(0xFFEEEFEF),width: 1)
       ),
       child: Container(
-        margin: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 20),
+        padding: const EdgeInsets.symmetric(horizontal: 20.0,vertical: 20),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [

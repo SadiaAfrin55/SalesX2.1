@@ -6,6 +6,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:logger/logger.dart';
+import 'package:syncfusion_flutter_datepicker/datepicker.dart';
 
 
 import '../../../../Bloc/Attendence/attendence_cubit.dart';
@@ -250,6 +251,7 @@ class _SecTrainingHistoryState extends State<SecTrainingHistory> with TickerProv
                     //AttendanceListComponenet()
                     //SecTrainingComponents()
                     SecTrainingComponents()
+
                   ],
                 ),
               ),

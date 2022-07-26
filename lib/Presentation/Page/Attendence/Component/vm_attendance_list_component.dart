@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cubit.dart';
@@ -5,6 +7,7 @@ import 'package:salesx_new_project/Bloc/Attendence/VmAttendence/vm_attendence_cu
 import '../../../../Bloc/Attendence/attendence_cubit.dart';
 import '../../../../Service/LocalDataBase/localdata.dart';
 import '../../../Widgets/Card/Attendence/attendencelist_card.dart';
+import '../../SM/Components/attendance_object_card.dart';
 import '../../Survey/survey_noData.dart';
 
 class VmAttendanceListComponenet extends StatefulWidget {
@@ -48,10 +51,11 @@ class _VmAttendanceListComponenetState extends State<VmAttendanceListComponenet>
           if(state is !GetVmAttendanceByDate){
             return Center(child: CircularProgressIndicator(),);
           }
-          final data = (state as GetVmAttendanceByDate).vmAttendanceResponse;
+          final data = (state as GetVmAttendanceByDate).vmAtdResponse;
+          log('555 data $data');
           return Column(
             children: [
-              data!.attendance!.isEmpty?
+              data!.attendance.isEmpty?
               Container(
                 height: MediaQuery.of(context).size.height*0.5,
                 child: Column(
@@ -69,13 +73,13 @@ class _VmAttendanceListComponenetState extends State<VmAttendanceListComponenet>
               ListView.builder(
                 shrinkWrap: true,
                 physics: const NeverScrollableScrollPhysics(),
-                itemCount: data.attendance!.length,
+                itemCount: data.attendance.length,
                 itemBuilder: (context, index) {
                   return AttendencelistCard(
-                    img: data.attendance![index].storeAttendance!.photo,
-                    checkIn: data.attendance![index].workinghour!.intime,
-                    checkOut: data.attendance![index].workinghour!.outtime,
-                    attendenceDate: data.attendance![index].dateid,
+                    img: data.attendance[index].storeAttendance[0].photo,
+                    checkIn: data.attendance[index].workinghour.intime,
+                    checkOut: data.attendance[index].workinghour.outtime,
+                    attendenceDate: data.attendance[index].dateid,
                     status: '',
                   );
                 },

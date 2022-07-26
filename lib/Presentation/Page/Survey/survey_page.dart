@@ -257,7 +257,7 @@ class _SurveyPageState extends State<SurveyPage> {
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text('Current Used Phone', style: TextStyle(
+                          Text('Current Used Phone Model', style: TextStyle(
                               fontSize: 14,
                               fontWeight: FontWeight.w600,
                               color: Color(0xFF232C2E)
@@ -265,7 +265,7 @@ class _SurveyPageState extends State<SurveyPage> {
                           ),),
                           const SizedBox(height: 8,),
                           FilledTextField(
-                            hintText: 'Current phone',
+                            hintText: 'Current phone model',
                             readOnly: false,
                             controller: currentPhone,
                           ),

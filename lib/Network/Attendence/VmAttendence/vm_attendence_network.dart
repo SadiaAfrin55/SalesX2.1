@@ -72,6 +72,20 @@ class VmAttendanceService {
     }
   }
 
+
+
+  Future profileinfo(String userId) async{
+    logger.d(userId);
+    try{
+      final response=await get(Uri.parse(BASE_URL+'users/get-user-profile/'+userId));
+      // logger.d(response.body);
+      return json.decode(response.body);
+    }catch(e){
+      logger.d(e);
+      return null;
+    }
+  }
+
   Future loadVmAttendanceByMonth(String userId, String leaveDate) async{
     print('vm userid'+userId);
     print('vm date'+leaveDate);

@@ -12,22 +12,10 @@ class MaterialBackgroundTextField extends StatelessWidget {
 
     return TextFormField(
       validator: (value) {
-        Pattern pattern =
-            r'^[0-9]';
-        RegExp regex = RegExp(pattern.toString());
-
-        if (value == null || value.isEmpty) {
-          return 'Please fillup';
-        }
-        else if(value.length <= 0){
+        if (value!.length != 11)
           return 'Enter valid number';
-        }
-        else if(!regex.hasMatch(value)){
-          return 'Enter integer number';
-        }else{
+        else
           return null;
-        }
-
       },
       keyboardType: isNumber?TextInputType.number:TextInputType.text,
       readOnly: readOnly,

@@ -25,11 +25,15 @@ class TargetCard extends StatelessWidget {
               backgroundColor: Colors.transparent,
               child: Center(child: cardImage,)),
           const SizedBox(height: 8),
-          Text('$title',style: const TextStyle(
-              fontSize: 14,
-              fontWeight: FontWeight.w600,
-              fontFamily: 'Manrope'
-          ),),
+          Expanded(
+            child: Text('$title',
+              textAlign: TextAlign.center,
+              style: const TextStyle(
+                fontSize: 14,
+                fontWeight: FontWeight.w600,
+                fontFamily: 'Manrope'
+            ),),
+          ),
           const SizedBox(height: 4),
           Row(
             mainAxisAlignment: MainAxisAlignment.center,

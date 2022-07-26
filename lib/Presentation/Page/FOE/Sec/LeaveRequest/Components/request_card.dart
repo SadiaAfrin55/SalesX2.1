@@ -7,6 +7,7 @@ import 'package:salesx_new_project/Presentation/main_screen.dart';
 
 import '../../../../../Screens/SplashScreen/splash_screen.dart';
 class RequestCard extends StatefulWidget {
+  String? img;
   String? name;
   String? fromDate;
   String? toDate;
@@ -15,6 +16,7 @@ class RequestCard extends StatefulWidget {
   String? id;
   bool? approve;
    RequestCard({
+    this.img,
     this.name,
     this.fromDate,
     this.toDate,
@@ -45,7 +47,17 @@ class _RequestCardState extends State<RequestCard> {
         children: [
           Row(
             children:  [
-              CircleAvatar(backgroundImage: AssetImage('assets/images/secimg.png'),radius: 35,),
+              CircleAvatar(
+                radius: 30,
+                backgroundColor: Color(0xFFFAD6D6),
+                child: Text('${widget.img}',
+                style: TextStyle(
+                  fontSize: 27,
+                  fontWeight: FontWeight.w500,
+                  color: Colors.pink
+                ),
+                ),
+              ),
                SizedBox(width: 16,),
                Expanded(
                  child: Row(
