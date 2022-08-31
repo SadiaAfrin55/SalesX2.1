@@ -330,6 +330,7 @@ class _OmAttendencePageState extends State<OmAttendencePage> {
                                                         ),
                                                         items: data!.stores!.map((
                                                             item) {
+
                                                           return DropdownMenuItem<Store>(
                                                               child: Text(item.storename!),
                                                               value: item);
